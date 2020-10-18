@@ -23,6 +23,6 @@
 	
 	<context:component-scan base-package="au.usyd.elec5619" />
 	
-	
+	<beans:bean name="/hello.htm" class="au.usyd.elec5619.HelloController"/>
 	
 </beans:beans>
