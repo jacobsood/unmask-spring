@@ -25,3 +25,8 @@ hs_err_pid*
 # IntelliJ files
 .idea
 .iml
+
+# Ignore build files
+/target/
+*/target/**
+**/META-INF/
