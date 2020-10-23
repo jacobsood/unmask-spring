@@ -11,6 +11,12 @@ plugins {
 
     // To generate IntelliJ IDEA project files
     id 'idea'
+
+    // Apply the Jacoco plugin to provide a testing interface
+    id 'jacoco'
+
+    // Apply the Application plugin for Jacoco Support
+    id 'application'
 }
 
 repositories {
@@ -56,4 +62,38 @@ war {
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()
+
+    // generate jacoco report after every test
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+
+    reports {
+        html.enabled true
+        csv.enabled true
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.5"
+    reportsDir = file("$buildDir/reports/jacoco")
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            // Tests must have a minimum of 75% code coverage
+            limit {
+                minimum = 0.75
+            }
+        }
+    }
+}
+
+task applicationCodeCoverageReport(type: JacocoReport) {
+    executionData run
+    sourceSets sourceSets.main
 }
