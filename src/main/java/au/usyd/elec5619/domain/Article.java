@@ -2,11 +2,9 @@ package au.usyd.elec5619.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "Article")
@@ -14,20 +12,27 @@ public class Article implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name = "Id")
+    @Column(name = "id")
     private long id;
 
-    @Column(name = "Title", nullable = false)
+    @Column(name = "title")
+    @NotNull
     private String title;
 
-    @Column(name = "Source")
+    @Column(name = "source")
     private String source;
 
-    @Column(name = "Text")
+    @Column(name = "text")
     private String text;
 
-    @Column(name = "AudioUrl", nullable = false)
+    @Column(name = "audio_url")
+    @NotNull
     private String audioUrl;
+
+    @Column(name = "country")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_country", nullable = false)
+    private Country country;
 
     public long getId() {
         return id;
@@ -49,6 +54,10 @@ public class Article implements Serializable {
         return audioUrl;
     }
 
+    public Country getCountry() {
+        return country;
+    }
+
     public void setId(long id) {
         this.id = id;
     } 
@@ -67,5 +76,9 @@ public class Article implements Serializable {
 
     public void setAudioUrl(String audioUrl) {
         this.audioUrl = audioUrl;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 }

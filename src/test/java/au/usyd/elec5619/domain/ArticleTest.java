@@ -51,4 +51,13 @@ class ArticleTest {
         article.setAudioUrl(testAudioUrl);
         assertEquals(testAudioUrl, article.getAudioUrl(), "Article audio url is not being set correctly");
     }
+
+    @Test
+    void testSetAndGetCountry() {
+        Country country = new Country();
+        country.setCountry("Egypt");
+        assertNull(article.getCountry());
+        article.setCountry(country);
+        assertEquals(country, article.getCountry(), "Country is not being set correctly");
+    }
 }
