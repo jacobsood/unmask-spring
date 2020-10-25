@@ -55,7 +55,7 @@ class ArticleTest {
     @Test
     void testSetAndGetCountry() {
         Country country = new Country();
-        country.setCountry("Egypt");
+        country.setId("Egypt");
         assertNull(article.getCountry());
         article.setCountry(country);
         assertEquals(country, article.getCountry(), "Country is not being set correctly");

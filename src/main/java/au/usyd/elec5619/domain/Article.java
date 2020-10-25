@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import java.util.List;
 
 @Entity
 @Table(name = "Article")
@@ -33,7 +34,7 @@ public class Article implements Serializable {
     @JoinTable(
         name = "article_tag",
         joinColumns = @JoinColumn(name = "article_id"),
-        inverseJoinColumns = @JoinColumn(name = "tag_id"))
+        inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private List<Tag> tags;
 
