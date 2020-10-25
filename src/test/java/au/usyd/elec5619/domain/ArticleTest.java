@@ -13,6 +13,13 @@ class ArticleTest {
     }
 
     @Test
+    void testSetAndGetId() {
+        long testId = 23112241;
+        article.setId(testId);
+        assertEquals(testId, article.getId(), "Article id is not being set correctly");
+    }
+
+    @Test
     void testSetAndGetTitle() {
         String testTitle = "Illegal Gold Mining in Peru";
         assertNull(article.getTitle());
