@@ -12,27 +12,25 @@ public class Article implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name = "id")
     private long id;
 
-    @Column(name = "title")
     @NotNull
     private String title;
 
-    @Column(name = "source")
     private String source;
 
-    @Column(name = "text")
     private String text;
 
     @Column(name = "audio_url")
     @NotNull
     private String audioUrl;
 
-    @Column(name = "country")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_country", nullable = false)
     private Country country;
+
+    @ManyToMany
+    List<Tag> tags;
 
     public long getId() {
         return id;

@@ -2,7 +2,12 @@ package au.usyd.elec5619.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import javax.validation.constraints.NotNull;
 
 
@@ -11,7 +16,6 @@ import javax.validation.constraints.NotNull;
 public class Country implements Serializable {
 
     @Id
-    @Column(name = "country")
     @OneToMany(mappedBy = "country")
     private String country;
 

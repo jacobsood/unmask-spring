@@ -12,8 +12,10 @@ import javax.persistence.Table;
 public class Tag implements Serializable {
 
     @Id
-    @Column(name = "tag")
     private String tag;
+
+    @ManyToMany
+    List<Article> articles;
 
     public String getTag() {
         return tag;
