@@ -16,19 +16,19 @@ import javax.persistence.Id;
 public class Comment implements Serializable {
     @Id
     @GeneratedValue
-    @Column(name="CommentID")
+    @Column(name="comment_id")
     private String commentID;
 
-    @Column(name="ArticleID")
+    @Column(name="article_id")
     private String articleID;
 
-    @Column(name="AuthorID")
+    @Column(name="author_id")
     private String authorID;
 
-    @Column(name="CommentContent")
+    @Column(name="comment_content")
     private String commentContent;
 
-    @Column(name="UpVoteCount")
+    @Column(name="up_vote_count")
     private int upVoteCount;
 
     public String getCommentID() {
