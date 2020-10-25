@@ -29,6 +29,9 @@ dependencies {
     implementation 'org.springframework:spring-webmvc:5.2.9.RELEASE'
     implementation 'org.springframework:spring-orm:5.2.9.RELEASE'
 
+    // Hibernate
+    implementation 'org.hibernate:hibernate-core:5.4.22.Final'
+
     implementation 'org.slf4j:slf4j-api:1.6.6'
     implementation 'org.aspectj:aspectjrt:1.6.10'
     implementation 'javax.inject:javax.inject:1'
