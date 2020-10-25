@@ -17,13 +17,13 @@ public class Country implements Serializable {
 
     @Id
     @OneToMany(mappedBy = "country")
-    private String country;
+    private String id;
 
-    public String getCountry() {
-        return country;
+    public String getId() {
+        return id;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -15,8 +15,8 @@ class CountryTest {
     @Test
     void testSetAndGetCountry() {
         String testCountry = "Australia";
-        assertNull(country.getCountry());
-        country.setCountry(testCountry);
-        assertEquals(testCountry, country.getCountry(), "Country is not being set correctly");
+        assertNull(country.getId());
+        country.setId(testCountry);
+        assertEquals(testCountry, country.getId(), "Country is not being set correctly");
     }
 }

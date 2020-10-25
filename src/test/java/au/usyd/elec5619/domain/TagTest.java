@@ -15,8 +15,8 @@ class TagTest {
     @Test
     void testSetAndGetTag() {
         String testTag = "Money Laundering";
-        assertNull(tag.getTag());
-        tag.setTag(testTag);
-        assertEquals(testTag, tag.getTag(), "Tag is not being set correctly");
+        assertNull(tag.getId());
+        tag.setId(testTag);
+        assertEquals(testTag, tag.getId(), "Tag is not being set correctly");
     }
 }
