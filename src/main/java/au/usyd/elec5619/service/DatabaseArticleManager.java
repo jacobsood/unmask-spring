@@ -46,12 +46,9 @@ public class DatabaseArticleManager implements ArticleManager {
     @Override
     public List<Article> getArticlesByTag(String tag) {
         String sqlQuery =
-                    "SELECT a.* FROM Article AS a " +
-                    "INNER JOIN ArticleTag AS at " +
-                        "ON a.id = at.article_id " +
-                    "INNER JOIN Tag AS t " +
-                        "ON at.tag_id = t.id " +
-                    "WHERE t.id = :tag";
+                    "FROM Article as a" +
+                    "JOIN a.tags AS at" +
+                    "WHERE at.id = :tag";
         Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
         return query.setParameter("tag", tag).list();
     }
@@ -62,7 +59,7 @@ public class DatabaseArticleManager implements ArticleManager {
         String sqlQuery = 
                         "SELECT a.* FROM Article AS a " +
                         "JOIN a.country AS c " +
-                        "WHERE c.country = :country";
+                        "WHERE c.id = :country";
         Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
         return query.setParameter("country", country).list();
     }

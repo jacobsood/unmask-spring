@@ -30,7 +30,12 @@ public class Article implements Serializable {
     private Country country;
 
     @ManyToMany
-    List<Tag> tags;
+    @JoinTable(
+        name = "article_tag",
+        joinColumns = @JoinColumn(name = "article_id"),
+        inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    )
+    private List<Tag> tags;
 
     public long getId() {
         return id;

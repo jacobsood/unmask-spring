@@ -10,18 +10,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Tag")
 public class Tag implements Serializable {
-
+    
     @Id
-    private String tag;
+    private String id;
 
-    @ManyToMany
-    List<Article> articles;
+    @ManyToMany(mappedBy = "tags")
+    private List<Article> articles;
 
-    public String getTag() {
-        return tag;
+    public String getId() {
+        return id;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setId(String id) {
+        this.id = id;
     } 
 }
