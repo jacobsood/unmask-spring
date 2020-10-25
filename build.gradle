@@ -108,3 +108,8 @@ task applicationCodeCoverageReport(type: JacocoReport) {
     executionData run
     sourceSets sourceSets.main
 }
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-Xlint:unchecked'
+    options.deprecation = true
+}
