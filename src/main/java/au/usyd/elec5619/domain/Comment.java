@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
 import javax.persistence.Id;
 
-@Component("comment")
 @Entity
 @Table(name = "Comment")
 public class Comment implements Serializable {
