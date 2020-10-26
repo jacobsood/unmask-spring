@@ -27,6 +27,8 @@ hs_err_pid*
 *.iml
 
 # Ignore build files
+.gradle/
+build/
 /target/
 */target/**
 **/META-INF/

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="keywords" content="Money Laundering, Tax Evasion, Corruption, Politics, Injustices, Greed">
+    <title>Unmask - Stories Untold</title>
+  </head>
+  <body>
+      <player-card></player-card>
+    <div class="landing-page">
+        <h1 :style="hoverStyle" @mouseover="mouseover" @mouseleave="mouseleave">Unmask</h1>
+    </div>
+    <div class="container-fluid">
+        <h3 class="display-3">This is an example Vue.js application developed with Spring Boot</h3>
+        <p class="lead">This file is rendered by a Spring built-in default controller for index.html (/) using
+            Spring's built-in
+            Thymeleaf templating engine.
+            Although we don't need it per se, we customized the information passed to this
+            view from thymeleaf by adding a controller method for "/" route to demonstrate how to pass information from
+            Thymeleaf to this page.
+            The combination of template engine and frontend framework like Vue can make this a powerful approach to build
+            more complex applications while leveraging the benefits of a framework like Vue.js.
+            You can use thymeleaf features too but this project focuses mainly on using Vue.js on the
+            frontend as the framework and makes minimal use of Thymeleaf.
+            Also we don't use any routing and multiple components in this example, so what you see is technically a
+            Single Page Application (SPA) without any routes configured.
+        </p>
+    
+        <div id="contents-main">
+            <div class="lead">
+                <strong>Name of Event:</strong>
+            </div>
+            <div id="contents">
+                <ul>
+                    <li style="list-style-type:none" v-for="player in players">
+                        <player-card
+                                v-bind:player="player" v-bind:key="player.id">
+                        </player-card>
+                    </li>
+                </ul>   
+            </div>
+        </div>
+    </div>
+
+    <!-- include Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <!-- include Vue router -->
+    <script src="https://unpkg.com/vue-router@2.0.0"></script>
+    <!-- include babel js to write ES6 code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+    <!-- include axios for REST API consumption -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src = "./index.vue.js"></script>
+
+    <script type="text/babel">
+        Vue.component('player-card', Content);
+        alert(window.location.pathname);
+        var app = new Vue({
+            el: '#contents',
+            data: {
+                players: [
+                    {id: "1", name: "Lionel Messi", description: "Argentina's superstar"},
+                    {id: "2", name: "Christiano Ronaldo", description: "Portugal top-ranked player"}
+                ]
+            }
+        });
+    
+    </script>
+  </body>
+</html>
