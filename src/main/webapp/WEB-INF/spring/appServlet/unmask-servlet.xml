@@ -18,7 +18,9 @@
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/view/" />
-    </beans:bean> 
+        <beans:property name="suffix" value=".jsp" />
+    </beans:bean>
+    <resources mapping = "/vue/**" location = "/WEB-INF/view/vue/" />
 
     <context:component-scan base-package="au.usyd.elec5619" />
 </beans:beans>
