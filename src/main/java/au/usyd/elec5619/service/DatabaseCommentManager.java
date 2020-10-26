@@ -32,7 +32,7 @@ public class DatabaseCommentManager implements CommentManager{
     public List<Comment> getCommentsByArticle(long articleID) {
         Session currentSession = this.sessionFactory.getCurrentSession();
         String hql = "FROM Comment AS C WHERE C.article_id = :articleID";
-        Query query = currentSession.createQuery(hql);
+        Query<Comment> query = currentSession.createQuery(hql, Comment.class);
         query.setParameter("articleID", articleID);
         return query.list();
     }
@@ -41,7 +41,7 @@ public class DatabaseCommentManager implements CommentManager{
     public List<Comment> getCommentsByAuthor(long authorID) {
         Session currentSession = this.sessionFactory.getCurrentSession();
         String hql = "FROM Comment AS C WHERE C.author_id = :authorID";
-        Query query = currentSession.createQuery(hql);
+        Query<Comment> query = currentSession.createQuery(hql, Comment.class);
         query.setParameter("authorID", authorID);
         return query.list();
     }
