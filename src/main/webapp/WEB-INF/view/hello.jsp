@@ -4,6 +4,6 @@
     <title>Hello World!</title>
 </head>
 <body>
-    <h2>${message}</h2>
+    <h2>Welcome to JSP</h2>
 </body>
 </html>
