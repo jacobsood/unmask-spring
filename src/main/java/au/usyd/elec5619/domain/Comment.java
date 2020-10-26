@@ -17,13 +17,13 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue
     @Column(name="comment_id")
-    private String commentID;
+    private long commentID;
 
     @Column(name="article_id")
-    private String articleID;
+    private long articleID;
 
     @Column(name="author_id")
-    private String authorID;
+    private long authorID;
 
     @Column(name="comment_content")
     private String commentContent;
@@ -31,24 +31,24 @@ public class Comment implements Serializable {
     @Column(name="up_vote_count")
     private int upVoteCount;
 
-    public String getCommentID() {
+    public long getCommentID() {
         return commentID;
     }
-    public void setCommentID(String commentID) {
+    public void setCommentID(long commentID) {
         this.commentID = commentID;
     }
 
-    public String getArticleID() {
+    public long getArticleID() {
         return articleID;
     }
-    public void setArticleID(String articleID) {
+    public void setArticleID(long articleID) {
         this.articleID = articleID;
     }
 
-    public String getAuthorID() {
+    public long getAuthorID() {
         return authorID;
     }
-    public void setAuthorID(String authorID) {
+    public void setAuthorID(long authorID) {
         this.authorID = authorID;
     }
 
