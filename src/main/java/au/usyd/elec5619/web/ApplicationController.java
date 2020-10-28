@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HelloController {
+public class ApplicationController {
     @GetMapping("/") 
     public String home(ModelMap model) {
         return "/vue/main.html";
     }
 
-    @GetMapping("login") 
+    @GetMapping("/login") 
     public String login(ModelMap model) {
         return "/WEB-INF/view/hello.jsp";
     }
