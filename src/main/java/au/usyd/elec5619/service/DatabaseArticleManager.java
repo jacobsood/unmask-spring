@@ -11,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-// @Service(value = "articleManager")
+@Service("articleManager")
 @Transactional
 public class DatabaseArticleManager implements ArticleManager {
 
