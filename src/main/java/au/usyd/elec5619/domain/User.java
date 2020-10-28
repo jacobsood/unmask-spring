@@ -1,38 +1,64 @@
 package au.usyd.elec5619.domain;
 
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
 @Table(name = "User")
 public class User implements Serializable {
+    @GeneratedValue
+    private long id;
 
     @Id
-    @GeneratedValue
     private String username;
 
     @NotNull
     private String salt;
 
     @NotNull
-    private String name ;
-
-    @NotNull
     private String password ;
 
+    @NotNull
+    private Boolean freeze;
 
     private String email;
 
+    @NotNull
     private Boolean loginStatus;
 
+    @ManyToMany(mappedBy = "likes")
+    private List<Article> likedArticle;
+
+    @ManyToMany(mappedBy = "wasRead")
+    private List<Article> readHistory;
+
+
+
+    public User(){
+
+    }
+    public User(String username, String salt, String password,String email){
+        super();
+        this.username = username;
+        this.salt = salt;
+        this.password = password;
+        this.freeze = false;
+        this.email = email;
+        this.loginStatus = false;
+    }
+
+    public List<Article> getLikedArticle() {
+        return likedArticle;
+    }
+
+
+    public void setLikedArticle(List<Article> likedArticle) {
+        this.likedArticle = likedArticle;
+    }
 
     public String getSalt() {
         return salt;
@@ -40,14 +66,6 @@ public class User implements Serializable {
 
     public void setSalt(String salt) {
         this.salt = salt;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPassword() {
@@ -81,4 +99,30 @@ public class User implements Serializable {
     public void setLoginStatus(Boolean loginStatus) {
         this.loginStatus = loginStatus;
     }
+
+    public Boolean getFreeze() {
+        return freeze;
+    }
+
+    public void setFreeze(Boolean freeze) {
+        this.freeze = freeze;
+    }
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public List<Article> getReadHistory() {
+        return readHistory;
+    }
+
+    public void setReadHistory(List<Article> readHistory) {
+        this.readHistory = readHistory;
+    }
+
 }

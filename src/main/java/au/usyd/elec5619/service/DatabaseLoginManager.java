@@ -1,23 +1,15 @@
 package au.usyd.elec5619.service;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
 import au.usyd.elec5619.domain.Login;
 import au.usyd.elec5619.domain.User;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.rmi.runtime.Log;
 
+@Service(value = "LoginManager")
+@Transactional
 public class DatabaseLoginManager implements LoginManager{
     private SessionFactory sessionFactory;
 

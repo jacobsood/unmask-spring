@@ -17,16 +17,17 @@
 		http://www.springframework.org/schema/tx 
         http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
        ">
-
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<bean id="dataSource"
+		  class="org.apache.commons.dbcp2.BasicDataSource"
+		  destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="jacobsood" />
-		<property name="password" value="unmaskelec5619" />
+		<property name="url" value="jdbc:mysql://localhost:3306/springapp" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
 	</bean>
-<!-- 
+
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="au.usyd.elec5619" />
 		<property name="hibernateProperties">
@@ -37,11 +38,12 @@
 			</props>
 		</property>
 	</bean>
-	
+
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
-	<tx:annotation-driven proxy-target-class="true"/> -->
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<tx:annotation-driven proxy-target-class="true"/>
 </beans>

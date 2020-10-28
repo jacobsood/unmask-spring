@@ -1,15 +1,13 @@
 package au.usyd.elec5619.service;
 
 import au.usyd.elec5619.domain.Article;
-
-import java.util.List;
-
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 // @Service(value = "articleManager")
@@ -46,8 +44,8 @@ public class DatabaseArticleManager implements ArticleManager {
     @Override
     public List<Article> getArticlesByTag(String tag) {
         String sqlQuery =
-                    "FROM Article as a" +
-                    "JOIN a.tags AS at" +
+                    "FROM Article as a " +
+                    "JOIN a.tags AS at " +
                     "WHERE at.id = :tag";
         Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
         return query.setParameter("tag", tag).list();
@@ -57,7 +55,7 @@ public class DatabaseArticleManager implements ArticleManager {
     @Override
     public List<Article> getArticlesByCountry(String country) {
         String sqlQuery = 
-                        "SELECT a.* FROM Article AS a " +
+                        "FROM Article AS a " +
                         "JOIN a.country AS c " +
                         "WHERE c.id = :country";
         Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);

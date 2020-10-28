@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public class Country implements Serializable {
 
     @Id
-    @OneToMany(mappedBy = "country")
+    //@OneToMany(mappedBy = "country")
     private String id;
 
     public String getId() {

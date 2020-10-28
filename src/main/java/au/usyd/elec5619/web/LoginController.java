@@ -1,42 +1,57 @@
 package au.usyd.elec5619.web;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import au.usyd.elec5619.service.DatabaseUserManager;
 import au.usyd.elec5619.service.UserManager;
+import au.usyd.elec5619.utils.DigestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import au.usyd.elec5619.domain.Login;
 import au.usyd.elec5619.domain.User;
-import au.usyd.elec5619.utils.DigestUtils;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class LoginController {
-	private UserManager userManager = new DatabaseUserManager();
+
+	@Resource(name = "UserManager")
+	private UserManager userManager;
 
 	@RequestMapping(value="/Login",method = RequestMethod.POST)
 	@ResponseBody
-	protected String doGet(HttpServletRequest request) throws UnsupportedEncodingException {
+	protected void loginHandler(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("utf-8");
-		String name=request.getParameter("username");
-		String pwd=request.getParameter("password");
+		String username=request.getParameter("username");
+		String password=request.getParameter("password");
+		PrintWriter out=response.getWriter();
 
-		Login login = new Login(name,pwd);
-		User user = userManager.getUserByUsername(name);
-
+		User user = this.userManager.getUserByUsername(username);
+		if (user == null){
+			response.getWriter().print("register");
+		}
 		// the password in the database is encrypted by salt
-		String realPwd = user.getPassword();
-		// get salt
 		String salt = user.getSalt();
-		String encryptedPWD = DigestUtils.digest(salt,pwd);
+		String encryptedPWD = DigestUtils.sha256Digest(salt+password);
+		// checkinfo
 
-		if (realPwd.equals(encryptedPWD)){
-			return "Yes";
-		}else{
-			return "No";
+		if( user.getUsername().equals(username) && user.getPassword().equals(encryptedPWD)){
+			// if info is correct
+			Login loginInfo = new Login(username,encryptedPWD);
+			request.getSession().setAttribute("loginInfo", loginInfo);
+			response.getWriter().print("login success");
+		}
+		else{
+			response.getWriter().print("login fail");
 		}
 	}
+
+
 
 }
