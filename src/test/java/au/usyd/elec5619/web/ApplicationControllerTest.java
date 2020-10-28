@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterAll;
 import static org.junit.jupiter.api.Assertions.*;
 
-class HelloControllerTest {
+class ApplicationControllerTest {
     @Test
     void TestExample() {
         assertEquals(1, 1, "Yes");
