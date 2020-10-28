@@ -20,7 +20,7 @@
 
 	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jbdc:mysql://my-rds-database.c2dr8slcio43.us-east-1.rds.amazonaws.com/unmask" />
+		<property name="url" value="jdbc:mysql://database-1.c2dr8slcio43.us-east-1.rds.amazonaws.com" />
 		<property name="username" value="jacobsood" />
 		<property name="password" value="unmaskelec5619" />
 	</bean>

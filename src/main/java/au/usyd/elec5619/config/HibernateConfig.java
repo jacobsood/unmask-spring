@@ -4,7 +4,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -29,7 +29,7 @@ public class HibernateConfig {
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jbdc:mysql://my-rds-database.c2dr8slcio43.us-east-1.rds.amazonaws.com/unmask");
+        dataSource.setUrl("jdbc:mysql://database-1.c2dr8slcio43.us-east-1.rds.amazonaws.com");
         dataSource.setUsername("jacobsood");
         dataSource.setPassword("unmaskelec5619");
         return dataSource;
