@@ -28,6 +28,7 @@ dependencies {
     implementation 'org.springframework:spring-context:5.2.9.RELEASE'
     implementation 'org.springframework:spring-webmvc:5.2.9.RELEASE'
     implementation 'org.springframework:spring-orm:5.2.9.RELEASE'
+    implementation 'org.springframework:spring-jdbc:5.2.9.RELEASE'
 
     implementation 'org.slf4j:slf4j-api:1.6.6'
     implementation 'org.aspectj:aspectjrt:1.6.10'
@@ -47,6 +48,9 @@ dependencies {
     implementation 'org.hibernate:hibernate-annotations:3.5.6-Final'
     implementation 'org.hibernate.validator:hibernate-validator:6.1.6.Final'
     implementation 'org.apache.commons:commons-dbcp2:2.8.0'
+
+    // Prodution Datasource
+    implementation 'org.apache.tomcat:tomcat-dbcp:9.0.39'
 
     // MySQL Backend
     implementation "mysql:mysql-connector-java:8.0.21"
