@@ -1,7 +1,5 @@
-alert("hi");
-// const Content = {
-//     template: 
-//         <div>
-//             <h1>Hi there!</h1>
-//         </div>
-// };
+const Content = {
+    template: "<div>" +
+        "<h1>Hi there!</h1>" +
+        "</div>"
+};
