@@ -20,11 +20,8 @@ public class Story implements Serializable {
 
     private String author;
 
-    private String text;
-
-    @Column(name = "audio_url")
     @NotNull
-    private String audioUrl;
+    private String text;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_country", nullable = false)
@@ -54,10 +51,6 @@ public class Story implements Serializable {
         return text;
     }
 
-    public String getAudioUrl() {
-        return audioUrl;
-    }
-
     public Country getCountry() {
         return country;
     }
@@ -76,10 +69,6 @@ public class Story implements Serializable {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public void setAudioUrl(String audioUrl) {
-        this.audioUrl = audioUrl;
     }
 
     public void setCountry(Country country) {

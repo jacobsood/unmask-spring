@@ -44,14 +44,6 @@ class StoryTest {
         assertEquals(testText, story.getText(), "Story text is not being set correctly");
     }
 
-    @Test 
-    void testSetAndGetAudioUrl() {
-        String testAudioUrl = "https://hrithviksood.s3-ap-southeast-2.amazonaws.com/unmask/audio/articles/sample1.mp3";
-        assertNull(story.getAudioUrl());
-        story.setAudioUrl(testAudioUrl);
-        assertEquals(testAudioUrl, story.getAudioUrl(), "Story audio url is not being set correctly");
-    }
-
     @Test
     void testSetAndGetCountry() {
         Country country = new Country();
