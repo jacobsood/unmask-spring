@@ -15,3 +15,20 @@
     Ensure tests are also being written for all methods
 
 */
+package au.usyd.elec5619.domain;
+
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+public class User {
+
+    public User() {}
+}
