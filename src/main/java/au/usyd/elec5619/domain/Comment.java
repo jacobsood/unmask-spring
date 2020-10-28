@@ -13,6 +13,11 @@ import javax.persistence.Id;
 @Entity
 @Table(name = "Comment")
 public class Comment implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 7977502097515134800L;
+
     @Id
     @GeneratedValue
     @Column(name="comment_id")
