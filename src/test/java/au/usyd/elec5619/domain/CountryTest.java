@@ -13,10 +13,17 @@ class CountryTest {
     }
 
     @Test
-    void testSetAndGetCountry() {
-        String testCountry = "Australia";
+    void testSetAndGetId() {
+        Long testId = 45498415L;
         assertNull(country.getId());
-        country.setId(testCountry);
-        assertEquals(testCountry, country.getId(), "Country is not being set correctly");
+        country.setId(testId);
+        assertEquals(testId, country.getId(), "Country Id is not being set correctly.");
+    }
+
+    void testSetAndGetCountry() {
+        String testCountry = "Peru";
+        assertNull(country.getCountry());
+        country.setCountry(testCountry);
+        assertEquals(testCountry, country.getCountry(), "Country is not being set correctly.");
     }
 }

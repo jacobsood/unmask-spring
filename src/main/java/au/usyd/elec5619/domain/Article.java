@@ -11,6 +11,11 @@ import java.util.List;
 @Table(name = "Article")
 public class Article implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4688762465122251377L;
+
     @Id
     @GeneratedValue
     private long id;
@@ -24,7 +29,6 @@ public class Article implements Serializable {
     private String text;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_country", nullable = false)
     private Country country;
 
     @ManyToMany

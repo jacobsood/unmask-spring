@@ -10,6 +10,11 @@ import java.util.List;
 @Table(name = "Tag")
 public class Tag implements Serializable {
     
+    /**
+     *
+     */
+    private static final long serialVersionUID = 507208535532864149L;
+
     @Id
     private String id;
 

@@ -11,19 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("articleManager")
-@Transactional
+@Service
 public class DatabaseArticleManager implements ArticleManager {
 
-    private SessionFactory sessionFactory;
-
     @Autowired
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    private SessionFactory sessionFactory;
 
     // CREATE
 
+    @Transactional
     @Override
     public void addArticle(Article article) {
         this.sessionFactory.getCurrentSession().save(article);
@@ -31,17 +27,20 @@ public class DatabaseArticleManager implements ArticleManager {
 
     // READ
 
+    @Transactional
     @Override
     public List<Article> getArticles() {
         return this.sessionFactory.getCurrentSession().createQuery("FROM Article").list();
     }
 
+    @Transactional
     @Override
     public Article getArticleById(long id) {
         return (Article) this.sessionFactory.getCurrentSession().get(Article.class, id);
     }
 
     // Many to many relationship
+    @Transactional
     @Override
     public List<Article> getArticlesByTag(String tag) {
         String sqlQuery =
@@ -53,6 +52,7 @@ public class DatabaseArticleManager implements ArticleManager {
     }
 
     // Many to one relationship
+    @Transactional
     @Override
     public List<Article> getArticlesByCountry(String country) {
         String sqlQuery = 
@@ -63,6 +63,7 @@ public class DatabaseArticleManager implements ArticleManager {
         return query.setParameter("country", country).list();
     }
 
+    @Transactional
     @Override
     public List<Article> getArticlesByTitle(String title) {
         String sqlQuery = 
@@ -72,6 +73,7 @@ public class DatabaseArticleManager implements ArticleManager {
         return query.setParameter("title", title).list();
     }
 
+    @Transactional
     @Override
     public List<Article> getArticlesBySource(String source) {
         String sqlQuery = 
@@ -83,6 +85,7 @@ public class DatabaseArticleManager implements ArticleManager {
 
     // UPDATE
 
+    @Transactional
     @Override
     public void updateArticle(Article article) {
         this.sessionFactory.getCurrentSession().merge(article);
@@ -90,6 +93,7 @@ public class DatabaseArticleManager implements ArticleManager {
 
     // DELETE
 
+    @Transactional
     @Override
     public void deleteArticle(long id) {
         Session currentSession = this.sessionFactory.getCurrentSession();
