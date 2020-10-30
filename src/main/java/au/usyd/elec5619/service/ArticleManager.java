@@ -11,7 +11,7 @@ public interface ArticleManager {
     
     // READ
 
-    public List<Article> getArticles();
+    public List getArticles();
 
     public Article getArticleById(long id);
 

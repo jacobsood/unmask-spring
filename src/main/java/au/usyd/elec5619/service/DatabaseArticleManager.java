@@ -29,7 +29,7 @@ public class DatabaseArticleManager implements ArticleManager {
 
     @Transactional
     @Override
-    public List<Article> getArticles() {
+    public List getArticles() {
         return this.sessionFactory.getCurrentSession().createQuery("FROM Article").list();
     }
 
