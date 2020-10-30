@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="keywords" content="Money Laundering, Tax Evasion, Corruption, Politics, Injustices, Greed">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/comment.css">
     <script src = "js/index.vue.js"></script>
     <title>Unmask - Stories Untold</title>
   </head>
@@ -34,7 +35,16 @@
                 ]
             }
         });
-    
+    var commentDialog = new Vue({
+    el: 'comment-dialog',
+    data: {
+        showDialog: false,
+    },
+});
     </script>
+
+    <script src = "js/comment-dialog.js"></script>
+    <comment-dialog v-show="showDialog"></comment-dialog>
+
   </body>
 </html>
