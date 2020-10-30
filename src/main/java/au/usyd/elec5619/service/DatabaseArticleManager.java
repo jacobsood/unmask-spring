@@ -44,8 +44,8 @@ public class DatabaseArticleManager implements ArticleManager {
     @Override
     public List<Article> getArticlesByTag(String tag) {
         String sqlQuery =
-                    "FROM Article as a" +
-                    "JOIN a.tags AS at" +
+                    "FROM Article as a " +
+                    "JOIN a.tags AS at " +
                     "WHERE at.id = :tag";
         Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
         return query.setParameter("tag", tag).list();
