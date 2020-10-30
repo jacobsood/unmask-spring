@@ -2,6 +2,7 @@ package au.usyd.elec5619.service;
 
 import au.usyd.elec5619.domain.Article;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -29,8 +30,13 @@ public class DatabaseArticleManager implements ArticleManager {
 
     @Transactional
     @Override
-    public List getArticles() {
-        return this.sessionFactory.getCurrentSession().createQuery("FROM Article").list();
+    public List<Article> getArticles() {
+        Query query = this.sessionFactory.getCurrentSession().createQuery("FROM Article");
+        final List<Article> list = new ArrayList<>();
+        for (final Object o : query.list()) {
+            list.add((Article) o);
+        }
+        return list;
     }
 
     @Transactional
@@ -70,7 +76,7 @@ public class DatabaseArticleManager implements ArticleManager {
                         "FROM Article as a " +
                         "WHERE a.title = :title";
         Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
-        return query.setParameter("title", title).list();
+        return (List<Article>) query.setParameter("title", title).list();
     }
 
     @Transactional
