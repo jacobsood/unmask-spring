@@ -1,0 +1,74 @@
+.c-title, .c-author {
+   font-family:Verdana, Geneva, Tahoma, sans-serif;
+   color: white;
+}
+
+.dialog-mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1110;
+    text-align: center;
+    opacity: 1;
+    transform: scale(1);
+    background: rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.c-window {
+    width: 500px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -250px;
+}
+
+.c-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: -10px;
+}
+
+.c-container {
+    padding: 10px;
+    width: 100%;
+    border-radius: 25px;
+    background-color: #dbdbdb;
+    opacity: 0.7;
+}
+
+.c-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.c-content {
+    height: 200px;
+    width: 85%;
+    text-align: center;
+    overflow: scroll;
+    margin: 10px;
+}
+
+.c-content p {
+    font-family: 'Courier New', Courier, monospace;
+    word-break: break-all;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}
+
+.button-up-vote {
+    width: 8%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
