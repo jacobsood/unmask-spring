@@ -1,6 +1,5 @@
 package au.usyd.elec5619.domain;
 
-import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 

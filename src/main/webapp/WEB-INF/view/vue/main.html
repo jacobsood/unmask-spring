@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="keywords" content="Money Laundering, Tax Evasion, Corruption, Politics, Injustices, Greed">
+<<<<<<< HEAD
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/comment.css">
     <script src = "js/index.vue.js"></script>
     <title>Unmask</title>
   </head>
@@ -14,6 +16,47 @@
         <h1 :style="hoverStyle" @mouseover="mouseover" @mouseleave="mouseleave">Unmask</h1>
     </div>
     <player-card></player-card>
+=======
+    <title>Unmask - Stories Untold</title>
+  </head>
+  <body>
+      <player-card></player-card>
+    <div class="landing-page">
+        <h1 :style="hoverStyle" @mouseover="mouseover" @mouseleave="mouseleave">Unmask</h1>
+    </div>
+    <div class="container-fluid">
+        <h3 class="display-3">This is an example Vue.js application developed with Spring Boot</h3>
+        <p class="lead">This file is rendered by a Spring built-in default controller for index.html (/) using
+            Spring's built-in
+            Thymeleaf templating engine.
+            Although we don't need it per se, we customized the information passed to this
+            view from thymeleaf by adding a controller method for "/" route to demonstrate how to pass information from
+            Thymeleaf to this page.
+            The combination of template engine and frontend framework like Vue can make this a powerful approach to build
+            more complex applications while leveraging the benefits of a framework like Vue.js.
+            You can use thymeleaf features too but this project focuses mainly on using Vue.js on the
+            frontend as the framework and makes minimal use of Thymeleaf.
+            Also we don't use any routing and multiple components in this example, so what you see is technically a
+            Single Page Application (SPA) without any routes configured.
+        </p>
+    
+        <div id="contents-main">
+            <div class="lead">
+                <strong>Name of Event:</strong>
+            </div>
+            <div id="contents">
+                <ul>
+                    <li style="list-style-type:none" v-for="player in players">
+                        <player-card
+                                v-bind:player="player" v-bind:key="player.id">
+                        </player-card>
+                    </li>
+                </ul>   
+            </div>
+        </div>
+    </div>
+
+>>>>>>> d8627c877a8ccb138748dc943de72655804373cd
     <!-- include Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <!-- include Vue router -->
@@ -23,8 +66,16 @@
     <!-- include axios for REST API consumption -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+<<<<<<< HEAD
     <script type="text/babel">
         Vue.component('player-card', Content);
+=======
+    <script src = "./index.vue.js"></script>
+
+    <script type="text/babel">
+        Vue.component('player-card', Content);
+        alert(window.location.pathname);
+>>>>>>> d8627c877a8ccb138748dc943de72655804373cd
         var app = new Vue({
             el: '#contents',
             data: {
@@ -34,7 +85,23 @@
                 ]
             }
         });
+<<<<<<< HEAD
+    </script>
+
+    <div id="comment-div">
+      <transition name="fade">
+      <comment-dialog v-show="showDialog"
+                      v-bind:author="currentComment.authorID"
+                      v-bind:content="currentComment.content"
+                      @prev-comment="previousComment"
+                      @next-comment="nextComment"></comment-dialog>
+      </transition>
+    </div>
+    <script src = "js/comment-dialog.js"></script>
+
+=======
     
     </script>
+>>>>>>> d8627c877a8ccb138748dc943de72655804373cd
   </body>
 </html>

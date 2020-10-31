@@ -28,6 +28,14 @@ class ArticleTest {
     }
 
     @Test
+    void testSetAndGetCreatedByAdmin() {
+        boolean testCreatedByAdmin = true;
+        assertFalse(article.getCreatedByAdmin());
+        article.setCreatedByAdmin(testCreatedByAdmin);
+        assertTrue(article.getCreatedByAdmin());
+    }
+
+    @Test
     void testSetAndGetSource() {
         String testSource = "SBS";
         assertNull(article.getSource());
@@ -46,10 +54,9 @@ class ArticleTest {
 
     @Test
     void testSetAndGetCountry() {
-        Country country = new Country();
-        country.setCountry("Egypt");
+        String testCountry = "Egypt";
         assertNull(article.getCountry());
-        article.setCountry(country);
-        assertEquals(country, article.getCountry(), "Country is not being set correctly");
+        article.setCountry(testCountry);
+        assertEquals(testCountry, article.getCountry(), "Country is not being set correctly");
     }
 }

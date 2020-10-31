@@ -1,4 +1,10 @@
-/* 
+package au.usyd.elec5619.domain;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+/*
 
     Define what's being stored. Look at Article.java, Country.java or Tag.java for assistance
 
@@ -10,3 +16,16 @@
     Ensure tests are also being written for all methods
 
 */
+
+@Table(name = "ArticleFavourite")
+public class ArticleFavourite implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2350611056725644359L;
+
+    // This part is added to User and Article as many-to-many
+
+
+}

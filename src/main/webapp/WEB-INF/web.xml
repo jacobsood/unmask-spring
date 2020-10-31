@@ -24,7 +24,11 @@
       <param-name>contextConfigLocation</param-name>
       <param-value>
         /WEB-INF/spring/appServlet/unmask-servlet.xml
+<<<<<<< HEAD
         <!-- /WEB-INF/spring/appServlet/persistence-context.xml -->
+=======
+        /WEB-INF/spring/appServlet/persistence-context.xml
+>>>>>>> d8627c877a8ccb138748dc943de72655804373cd
       </param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
@@ -34,4 +38,8 @@
     <servlet-name>UnmaskServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d8627c877a8ccb138748dc943de72655804373cd
 </web-app>
