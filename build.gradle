@@ -45,6 +45,7 @@ dependencies {
     // Hibernate 
     implementation 'org.hibernate:hibernate-core:5.4.22.Final'
     implementation 'org.hibernate:hibernate-entitymanager:5.4.22.Final'
+
     implementation 'org.hibernate.validator:hibernate-validator:6.1.6.Final'
     implementation 'org.apache.commons:commons-dbcp2:2.8.0'
 

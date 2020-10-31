@@ -17,22 +17,13 @@
 		http://www.springframework.org/schema/tx 
         http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
        ">
-<<<<<<< HEAD
 
 	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://mydatabase.c2dr8slcio43.us-east-1.rds.amazonaws.com/unmask" />
 		<property name="username" value="jacobsood" />
 		<property name="password" value="unmaskelec" />
-=======
-	<bean id="dataSource"
-		  class="org.apache.commons.dbcp2.BasicDataSource"
-		  destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/springapp" />
-		<property name="username" value="root" />
-		<property name="password" value="root" />
->>>>>>> d8627c877a8ccb138748dc943de72655804373cd
+
 	</bean>
 
 	<bean id="sessionFactory"
@@ -42,30 +33,16 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-<<<<<<< HEAD
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
 			</props>
 		</property>
 	</bean>
-	
-=======
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
-				<prop key="hibernate.show_sql">false</prop>
-			</props>
-		</property>
-	</bean>
-
->>>>>>> d8627c877a8ccb138748dc943de72655804373cd
+  
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-<<<<<<< HEAD
-	
-	<tx:annotation-driven proxy-target-class="true"/> 
-=======
 
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<tx:annotation-driven proxy-target-class="true"/>
->>>>>>> d8627c877a8ccb138748dc943de72655804373cd
 </beans>

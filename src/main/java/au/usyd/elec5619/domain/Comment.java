@@ -1,6 +1,5 @@
 package au.usyd.elec5619.domain;
 
-
 import java.io.Serializable;
 
 import javax.persistence.Entity;

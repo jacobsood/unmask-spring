@@ -15,7 +15,7 @@ public class Article implements Serializable {
      *
      */
     private static final long serialVersionUID = -4688762465122251377L;
-
+  
     @Id
     @GeneratedValue
     private long id;
@@ -77,7 +77,7 @@ public class Article implements Serializable {
     public boolean getCreatedByAdmin() {
         return created_by_admin;
     }
-
+  
     public String getSource() {
         return source;
     }
@@ -101,7 +101,7 @@ public class Article implements Serializable {
     public void setCreatedByAdmin(boolean createdByAdmin) {
         this.created_by_admin = createdByAdmin;
     }
-
+  
     public void setSource(String source) {
         this.source = source;
     }
