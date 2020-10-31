@@ -28,8 +28,7 @@ public class Story implements Serializable {
     @NotNull
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Country country;
+    private String country;
 
     @ManyToMany
     @JoinTable(
@@ -55,7 +54,7 @@ public class Story implements Serializable {
         return text;
     }
 
-    public Country getCountry() {
+    public String getCountry() {
         return country;
     }
 
@@ -75,7 +74,7 @@ public class Story implements Serializable {
         this.text = text;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(String country) {
         this.country = country;
     }
 }

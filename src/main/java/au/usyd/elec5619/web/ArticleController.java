@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import au.usyd.elec5619.service.ArticleManager;
-import au.usyd.elec5619.service.CountryManager;
 import au.usyd.elec5619.domain.Article;
 import java.util.List;
 
@@ -21,8 +20,6 @@ public class ArticleController {
 
     @Autowired
     private ArticleManager articleManager;
-
-    @Autowired CountryManager countryManager;
     
     @GetMapping
     public List<Article> getAll() {

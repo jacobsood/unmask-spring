@@ -46,10 +46,9 @@ class StoryTest {
 
     @Test
     void testSetAndGetCountry() {
-        Country country = new Country();
-        country.setCountry("Egypt");
+        String testCountry = "Egypt";
         assertNull(story.getCountry());
-        story.setCountry(country);
-        assertEquals(country, story.getCountry(), "Country is not being set correctly");
+        story.setCountry(testCountry);
+        assertEquals(testCountry, story.getCountry(), "Country is not being set correctly");
     }
 }
