@@ -5,6 +5,8 @@ import au.usyd.elec5619.domain.Article;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
@@ -31,12 +33,9 @@ public class DatabaseArticleManager implements ArticleManager {
     @Transactional
     @Override
     public List<Article> getArticles() {
-        Query query = this.sessionFactory.getCurrentSession().createQuery("FROM Article");
-        final List<Article> list = new ArrayList<>();
-        for (final Object o : query.list()) {
-            list.add((Article) o);
-        }
-        return list;
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery("FROM Article", Article.class);
+        List<Article> articleList = queryList.getResultList();
+        return articleList;
     }
 
     @Transactional
@@ -49,44 +48,48 @@ public class DatabaseArticleManager implements ArticleManager {
     @Transactional
     @Override
     public List<Article> getArticlesByTag(String tag) {
-        String sqlQuery =
+        String hql =
                     "FROM Article as a " +
                     "JOIN a.tags AS at " +
                     "WHERE at.id = :tag";
-        Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
-        return query.setParameter("tag", tag).list();
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("tag", tag);
+        List<Article> articleList = queryList.getResultList();
+        return articleList;
     }
 
     // Many to one relationship
     @Transactional
     @Override
     public List<Article> getArticlesByCountry(String country) {
-        String sqlQuery = 
+        String hql = 
                         "SELECT a.* FROM Article AS a " +
                         "JOIN a.country AS c " +
                         "WHERE c.id = :country";
-        Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
-        return query.setParameter("country", country).list();
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("country", country);
+        List<Article> articleList = queryList.getResultList();
+        return articleList;
     }
 
     @Transactional
     @Override
     public List<Article> getArticlesByTitle(String title) {
-        String sqlQuery = 
+        String hql = 
                         "FROM Article as a " +
                         "WHERE a.title = :title";
-        Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
-        return (List<Article>) query.setParameter("title", title).list();
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("title", title);
+        List<Article> articleList = queryList.getResultList();
+        return articleList;
     }
 
     @Transactional
     @Override
     public List<Article> getArticlesBySource(String source) {
-        String sqlQuery = 
+        String hql = 
                         "FROM Article as a + " + 
                         "WHERE a.source = :source";
-        Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
-        return query.setParameter("source", source).list();
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("source", source);
+        List<Article> articleList = queryList.getResultList();
+        return articleList;
     }
 
     // UPDATE

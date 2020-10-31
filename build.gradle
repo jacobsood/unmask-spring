@@ -48,6 +48,9 @@ dependencies {
     implementation 'org.hibernate.validator:hibernate-validator:6.1.6.Final'
     implementation 'org.apache.commons:commons-dbcp2:2.8.0'
 
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.11.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.3'
+
     // Prodution Datasource
     implementation 'org.apache.tomcat:tomcat-dbcp:9.0.39'
 
