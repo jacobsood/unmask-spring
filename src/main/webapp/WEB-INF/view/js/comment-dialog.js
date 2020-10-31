@@ -7,13 +7,13 @@ Vue.component('comment-dialog',{
                        '</div>' +
                        '<div class="c-container">' +
                            '<div class="c-box">' +
-                               '<button class="button-previous-comment" @click="$emit(\'prev-comment\')"><</button>' +
+                               '<button id="button-previous-comment" @click="$emit(\'prev-comment\')"><</button>' +
                                '<div class="c-content">' +
                                    '<p>{{content}}</p>' +
                                '</div>' +
-                               '<button class="button-next-comment" @click="$emit(\'next-comment\')">></button>' +
+                               '<button id="button-next-comment" @click="$emit(\'next-comment\')">></button>' +
                            '</div>' +
-                           '<img class="button-up-vote" src="https://www.flaticon.com/svg/static/icons/svg/1152/1152935.svg" />' +
+                           '<img id="button-up-vote" src="https://www.flaticon.com/svg/static/icons/svg/1152/1152935.svg" />' +
                        '</div>' +
                        '<button style="font-size: xx-large; color: white;" @click="commentDiv.showDialog=false">×</button>' +
                    '</div>',
