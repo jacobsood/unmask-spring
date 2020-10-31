@@ -46,7 +46,17 @@ public class ArticleController {
         return articleManager.getArticlesByTitle(title);
     }
 
-    @GetMapping(value = "/source/{source}")
+    @GetMapping(value = "/by/admin")
+    public List<Article> getArticlesCreatedByAdmin() {
+        return articleManager.getArticlesByAdmin();
+    }
+
+    @GetMapping(value = "/by/users")
+    public List<Article> getArticlesCreatedByUsers() {
+        return articleManager.getArticlesByUsers();
+    }
+
+    @GetMapping(value = "/by/{source}")
     public List<Article> getArticlesBySource(@PathVariable("source") String source) {
         return articleManager.getArticlesBySource(source);
     }
