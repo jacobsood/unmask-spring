@@ -35,16 +35,16 @@
                 ]
             }
         });
-    var commentDialog = new Vue({
-    el: 'comment-dialog',
-    data: {
-        showDialog: false,
-    },
-});
     </script>
 
+    <div v-show="showDialog"
+         id="comment-div">
+      <comment-dialog v-bind:author="currentComment.authorID"
+                      v-bind:content="currentComment.content"
+                      @prev-comment="previousComment"
+                      @next-comment="nextComment"></comment-dialog>
+    </div>
     <script src = "js/comment-dialog.js"></script>
-    <comment-dialog v-show="showDialog"></comment-dialog>
 
   </body>
 </html>
