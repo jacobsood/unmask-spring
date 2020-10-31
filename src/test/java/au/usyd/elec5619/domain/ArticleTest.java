@@ -28,6 +28,14 @@ class ArticleTest {
     }
 
     @Test
+    void testSetAndGetCreatedByAdmin() {
+        boolean testCreatedByAdmin = true;
+        assertFalse(article.getCreatedByAdmin());
+        article.setCreatedByAdmin(testCreatedByAdmin);
+        assertTrue(article.getCreatedByAdmin());
+    }
+
+    @Test
     void testSetAndGetSource() {
         String testSource = "SBS";
         assertNull(article.getSource());

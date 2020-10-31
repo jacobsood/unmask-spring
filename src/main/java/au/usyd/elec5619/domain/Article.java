@@ -26,6 +26,9 @@ public class Article implements Serializable {
     private String source;
 
     @NotNull
+    private boolean created_by_admin;
+
+    @NotNull
     private String text;
 
     private String country;
@@ -46,6 +49,10 @@ public class Article implements Serializable {
         return title;
     }
 
+    public boolean getCreatedByAdmin() {
+        return created_by_admin;
+    }
+
     public String getSource() {
         return source;
     }
@@ -64,6 +71,10 @@ public class Article implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setCreatedByAdmin(boolean createdByAdmin) {
+        this.created_by_admin = createdByAdmin;
     }
 
     public void setSource(String source) {
