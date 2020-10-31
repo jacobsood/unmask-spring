@@ -2,11 +2,12 @@ package au.usyd.elec5619.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import au.usyd.elec5619.service.UserManager;
 import au.usyd.elec5619.utils.DigestUtils;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,14 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import au.usyd.elec5619.domain.Login;
 import au.usyd.elec5619.domain.User;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
 
-	@Resource(name = "UserManager")
+	@Autowired
 	private UserManager userManager;
 
 	@RequestMapping(value="/Login",method = RequestMethod.POST)

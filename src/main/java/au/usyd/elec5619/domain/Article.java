@@ -5,14 +5,17 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "Article")
 public class Article implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4688762465122251377L;
+  
     @Id
     @GeneratedValue
     private long id;
@@ -22,15 +25,13 @@ public class Article implements Serializable {
 
     private String source;
 
+    @NotNull
+    private boolean created_by_admin;
+
+    @NotNull
     private String text;
 
-    @Column(name = "audio_url")
-    @NotNull
-    private String audioUrl;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_country", nullable = false)
-    private Country country;
+    private String country;
 
     @ManyToMany
     @JoinTable(
@@ -73,6 +74,10 @@ public class Article implements Serializable {
         return title;
     }
 
+    public boolean getCreatedByAdmin() {
+        return created_by_admin;
+    }
+  
     public String getSource() {
         return source;
     }
@@ -81,11 +86,7 @@ public class Article implements Serializable {
         return text;
     }
 
-    public String getAudioUrl() {
-        return audioUrl;
-    }
-
-    public Country getCountry() {
+    public String getCountry() {
         return country;
     }
 
@@ -97,6 +98,10 @@ public class Article implements Serializable {
         this.title = title;
     }
 
+    public void setCreatedByAdmin(boolean createdByAdmin) {
+        this.created_by_admin = createdByAdmin;
+    }
+  
     public void setSource(String source) {
         this.source = source;
     }
@@ -105,11 +110,7 @@ public class Article implements Serializable {
         this.text = text;
     }
 
-    public void setAudioUrl(String audioUrl) {
-        this.audioUrl = audioUrl;
-    }
-
-    public void setCountry(Country country) {
+    public void setCountry(String country) {
         this.country = country;
     }
 

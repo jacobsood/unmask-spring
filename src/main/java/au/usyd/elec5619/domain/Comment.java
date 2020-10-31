@@ -1,7 +1,5 @@
 package au.usyd.elec5619.domain;
 
-import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -13,6 +11,11 @@ import javax.persistence.Id;
 @Entity
 @Table(name = "Comment")
 public class Comment implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 7977502097515134800L;
+
     @Id
     @GeneratedValue
     @Column(name="comment_id")

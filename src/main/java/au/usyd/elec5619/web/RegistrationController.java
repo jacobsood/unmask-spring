@@ -6,13 +6,15 @@ import au.usyd.elec5619.service.DatabaseRegistrationManager;
 import au.usyd.elec5619.service.RegistrationManager;
 import au.usyd.elec5619.service.UserManager;
 import au.usyd.elec5619.utils.DigestUtils;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import au.usyd.elec5619.utils.DigestUtils;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
@@ -20,7 +22,7 @@ import java.util.Random;
 @Controller
 public class RegistrationController {
 
-    @Resource(name = "RegistrationManager")
+    @Autowired
     private RegistrationManager registrationmanager;
     private int saltLength = 16;
 

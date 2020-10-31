@@ -10,6 +10,11 @@ import java.util.List;
 @Entity
 @Table(name = "User")
 public class User implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2485483117804868283L;
+
     @GeneratedValue
     private long id;
 

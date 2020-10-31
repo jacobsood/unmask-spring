@@ -26,9 +26,17 @@ hs_err_pid*
 .idea
 *.iml
 
+# VSCode files
+.classpath
+.project
+.settings
+.vscode
+
 # Ignore build files
 .gradle/
 build/
 /target/
 */target/**
 **/META-INF/
+
+bin

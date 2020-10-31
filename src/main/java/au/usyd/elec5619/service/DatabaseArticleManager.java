@@ -1,25 +1,23 @@
 package au.usyd.elec5619.service;
 
 import au.usyd.elec5619.domain.Article;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
 
-// @Service(value = "articleManager")
+import org.hibernate.SessionFactory;
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
 @Transactional
 public class DatabaseArticleManager implements ArticleManager {
 
-    private SessionFactory sessionFactory;
-
     @Autowired
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    private SessionFactory sessionFactory;
 
     // CREATE
 
@@ -32,7 +30,9 @@ public class DatabaseArticleManager implements ArticleManager {
 
     @Override
     public List<Article> getArticles() {
-        return this.sessionFactory.getCurrentSession().createQuery("FROM Article").list();
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery("FROM Article", Article.class);
+        List<Article> articleList = queryList.getResultList();
+        return articleList;
     }
 
     @Override
@@ -43,41 +43,43 @@ public class DatabaseArticleManager implements ArticleManager {
     // Many to many relationship
     @Override
     public List<Article> getArticlesByTag(String tag) {
-        String sqlQuery =
+        String hql =
                     "FROM Article as a " +
                     "JOIN a.tags AS at " +
                     "WHERE at.id = :tag";
-        Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
-        return query.setParameter("tag", tag).list();
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("tag", tag);
+        List<Article> articleList = queryList.getResultList();
+        return articleList;
     }
 
-    // Many to one relationship
     @Override
     public List<Article> getArticlesByCountry(String country) {
-        String sqlQuery = 
-                        "FROM Article AS a " +
-                        "JOIN a.country AS c " +
-                        "WHERE c.id = :country";
-        Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
-        return query.setParameter("country", country).list();
+        String hql = 
+                    "FROM Article  " +
+                    "WHERE country = :country";
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("country", country);
+        List<Article> articleList = queryList.getResultList();
+        return articleList;
     }
 
     @Override
     public List<Article> getArticlesByTitle(String title) {
-        String sqlQuery = 
-                        "FROM Article as a " +
-                        "WHERE a.title = :title";
-        Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
-        return query.setParameter("title", title).list();
+        String hql = 
+                    "FROM Article " +
+                    "WHERE title = :title";
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("title", title);
+        List<Article> articleList = queryList.getResultList();
+        return articleList;
     }
 
     @Override
     public List<Article> getArticlesBySource(String source) {
-        String sqlQuery = 
-                        "FROM Article as a + " + 
-                        "WHERE a.source = :source";
-        Query query = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
-        return query.setParameter("source", source).list();
+        String hql = 
+                    "FROM Article " + 
+                    "WHERE source = :source";
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("source", source);
+        List<Article> articleList = queryList.getResultList();
+        return articleList;
     }
 
     // UPDATE
@@ -95,4 +97,25 @@ public class DatabaseArticleManager implements ArticleManager {
         Article article = (Article) currentSession.get(Article.class, id);
         currentSession.delete(article);
     }
+
+    @Override
+    public List<Article> getArticlesByAdmin() {
+        String hql = 
+                    "FROM Article " +
+                    "WHERE created_by_admin";
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class);
+        List<Article> articleList = queryList.getResultList();
+        return articleList;
+    }
+
+    @Override
+    public List<Article> getArticlesByUsers() {
+        String hql = 
+                    "FROM Article " +
+                    "WHERE NOT created_by_admin";
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class);
+        List<Article> articleList = queryList.getResultList();
+        return articleList;
+    }
+  
 }

@@ -5,7 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="keywords" content="Money Laundering, Tax Evasion, Corruption, Politics, Injustices, Greed">
-    <title>Unmask - Stories Untold</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/comment.css">
+    <script src = "js/index.vue.js"></script>
+    <title>Unmask</title>
+  </head>
+  <body>
+    <div class="container justify-content align-content">
+        <h1 :style="hoverStyle" @mouseover="mouseover" @mouseleave="mouseleave">Unmask</h1>
+    </div>
+    <player-card></player-card>
+    
   </head>
   <body>
       <player-card></player-card>
@@ -53,11 +64,8 @@
     <!-- include axios for REST API consumption -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <script src = "./index.vue.js"></script>
-
     <script type="text/babel">
         Vue.component('player-card', Content);
-        alert(window.location.pathname);
         var app = new Vue({
             el: '#contents',
             data: {
@@ -67,6 +75,17 @@
                 ]
             }
         });
+
+    <div id="comment-div">
+      <transition name="fade">
+      <comment-dialog v-show="showDialog"
+                      v-bind:author="currentComment.authorID"
+                      v-bind:content="currentComment.content"
+                      @prev-comment="previousComment"
+                      @next-comment="nextComment"></comment-dialog>
+      </transition>
+    </div>
+    <script src = "js/comment-dialog.js"></script>
     
     </script>
   </body>

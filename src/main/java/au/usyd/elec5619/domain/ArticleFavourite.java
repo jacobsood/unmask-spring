@@ -19,6 +19,10 @@ import java.time.LocalDateTime;
 
 @Table(name = "ArticleFavourite")
 public class ArticleFavourite implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2350611056725644359L;
 
     // This part is added to User and Article as many-to-many
 
