@@ -16,8 +16,6 @@ public class JDBCUtlTool {
 
     public static Connection getConnection(){
 
-        String driver="com.mysql.jdbc.Driver";
-
         String url="jdbc:mysql://localhost:3306/springapp";
 
         String name="root";

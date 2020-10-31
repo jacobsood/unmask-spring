@@ -41,11 +41,7 @@ public class User implements Serializable {
     @ManyToMany(mappedBy = "wasRead")
     private List<Article> readHistory;
 
-
-
-    public User(){
-
-    }
+    public User() { }
     public User(String username, String salt, String password,String email){
         super();
         this.username = username;
@@ -59,7 +55,6 @@ public class User implements Serializable {
     public List<Article> getLikedArticle() {
         return likedArticle;
     }
-
 
     public void setLikedArticle(List<Article> likedArticle) {
         this.likedArticle = likedArticle;
