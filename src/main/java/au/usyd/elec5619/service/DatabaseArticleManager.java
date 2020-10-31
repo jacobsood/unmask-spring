@@ -62,9 +62,8 @@ public class DatabaseArticleManager implements ArticleManager {
     @Override
     public List<Article> getArticlesByCountry(String country) {
         String hql = 
-                        "SELECT a.* FROM Article AS a " +
-                        "JOIN a.country AS c " +
-                        "WHERE c.id = :country";
+                        "FROM Article  " +
+                        "WHERE country = :country";
         TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("country", country);
         List<Article> articleList = queryList.getResultList();
         return articleList;
