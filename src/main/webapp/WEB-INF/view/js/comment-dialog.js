@@ -15,6 +15,7 @@ Vue.component('comment-dialog',{
                            '</div>' +
                            '<img class="button-up-vote" src="https://www.flaticon.com/svg/static/icons/svg/1152/1152935.svg" />' +
                        '</div>' +
+                       '<p style="font-size: xx-large; color: white;">×</p>' +
                    '</div>',
     props: ['author', 'content']
 });

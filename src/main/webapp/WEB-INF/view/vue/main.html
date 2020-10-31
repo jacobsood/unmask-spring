@@ -37,12 +37,14 @@
         });
     </script>
 
-    <div v-show="showDialog"
-         id="comment-div">
-      <comment-dialog v-bind:author="currentComment.authorID"
+    <div id="comment-div">
+      <transition name="fade">
+      <comment-dialog v-show="showDialog"
+                      v-bind:author="currentComment.authorID"
                       v-bind:content="currentComment.content"
                       @prev-comment="previousComment"
                       @next-comment="nextComment"></comment-dialog>
+      </transition>
     </div>
     <script src = "js/comment-dialog.js"></script>
 
