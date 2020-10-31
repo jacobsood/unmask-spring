@@ -74,8 +74,8 @@ public class DatabaseArticleManager implements ArticleManager {
     @Override
     public List<Article> getArticlesByTitle(String title) {
         String hql = 
-                        "FROM Article as a " +
-                        "WHERE a.title = :title";
+                        "FROM Article " +
+                        "WHERE title = :title";
         TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("title", title);
         List<Article> articleList = queryList.getResultList();
         return articleList;
@@ -85,8 +85,8 @@ public class DatabaseArticleManager implements ArticleManager {
     @Override
     public List<Article> getArticlesBySource(String source) {
         String hql = 
-                        "FROM Article as a + " + 
-                        "WHERE a.source = :source";
+                        "FROM Article " + 
+                        "WHERE source = :source";
         TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("source", source);
         List<Article> articleList = queryList.getResultList();
         return articleList;
