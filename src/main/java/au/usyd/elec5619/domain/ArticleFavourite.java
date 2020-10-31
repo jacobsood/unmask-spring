@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 
 @Table(name = "ArticleFavourite")
 public class ArticleFavourite implements Serializable {
-
     /**
      *
      */

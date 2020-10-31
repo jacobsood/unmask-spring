@@ -9,7 +9,6 @@ import java.util.List;
 @Entity
 @Table(name = "Tag")
 public class Tag implements Serializable {
-    
     /**
      *
      */

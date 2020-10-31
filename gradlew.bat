@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 @rem
 @rem Copyright 2015 the original author or authors.
 @rem
@@ -88,7 +88,7 @@ exit /b 1
 if "%OS%"=="Windows_NT" endlocal
 
 :omega
-=======
+
 @rem
 @rem Copyright 2015 the original author or authors.
 @rem
@@ -178,4 +178,3 @@ exit /b 1
 if "%OS%"=="Windows_NT" endlocal
 
 :omega
->>>>>>> d8627c877a8ccb138748dc943de72655804373cd

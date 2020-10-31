@@ -117,4 +117,5 @@ public class DatabaseArticleManager implements ArticleManager {
         List<Article> articleList = queryList.getResultList();
         return articleList;
     }
+  
 }

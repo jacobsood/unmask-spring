@@ -14,6 +14,7 @@ public class DatabaseCommentManager implements CommentManager{
      *
      */
     private static final long serialVersionUID = 6035265428964387779L;
+  
     private SessionFactory sessionFactory;
 
     @Autowired
