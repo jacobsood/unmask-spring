@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="keywords" content="Money Laundering, Tax Evasion, Corruption, Politics, Injustices, Greed">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/comment.css">
     <script src = "js/index.vue.js"></script>
     <title>Unmask</title>
   </head>
@@ -34,7 +35,18 @@
                 ]
             }
         });
-    
     </script>
+
+    <div id="comment-div">
+      <transition name="fade">
+      <comment-dialog v-show="showDialog"
+                      v-bind:author="currentComment.authorID"
+                      v-bind:content="currentComment.content"
+                      @prev-comment="previousComment"
+                      @next-comment="nextComment"></comment-dialog>
+      </transition>
+    </div>
+    <script src = "js/comment-dialog.js"></script>
+
   </body>
 </html>
