@@ -2,9 +2,8 @@ package au.usyd.elec5619.web;
 
 import au.usyd.elec5619.domain.Login;
 import au.usyd.elec5619.domain.User;
-import au.usyd.elec5619.service.DatabaseRegistrationManager;
-import au.usyd.elec5619.service.RegistrationManager;
-import au.usyd.elec5619.service.UserManager;
+import au.usyd.elec5619.service.Idatabase.RegistrationManager;
+import au.usyd.elec5619.service.Idatabase.UserManager;
 import au.usyd.elec5619.utils.DigestUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;

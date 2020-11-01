@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import au.usyd.elec5619.service.ArticleManager;
+import au.usyd.elec5619.service.Idatabase.ArticleManager;
 import au.usyd.elec5619.domain.Article;
 import java.util.List;
 

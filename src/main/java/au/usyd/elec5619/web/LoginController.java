@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 
-import au.usyd.elec5619.service.UserManager;
+import au.usyd.elec5619.service.Idatabase.UserManager;
 import au.usyd.elec5619.utils.DigestUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +23,13 @@ public class LoginController {
 	@Autowired
 	private UserManager userManager;
 
-	@RequestMapping(value="/Login",method = RequestMethod.POST)
+	@RequestMapping(value="/login",method = RequestMethod.POST)
 	@ResponseBody
 	protected void loginHandler(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
-		PrintWriter out=response.getWriter();
-
+		
 		User user = this.userManager.getUserByUsername(username);
 		if (user == null){
 			response.getWriter().print("register");
