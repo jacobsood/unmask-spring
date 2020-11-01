@@ -29,10 +29,10 @@ class ArticleTest {
 
     @Test
     void testSetAndGetCreatedByAdmin() {
-        boolean testCreatedByAdmin = true;
-        assertFalse(article.getCreatedByAdmin());
-        article.setCreatedByAdmin(testCreatedByAdmin);
+        boolean testCreatedByAdmin = false;
         assertTrue(article.getCreatedByAdmin());
+        article.setCreatedByAdmin(testCreatedByAdmin);
+        assertFalse(article.getCreatedByAdmin());
     }
 
     @Test
