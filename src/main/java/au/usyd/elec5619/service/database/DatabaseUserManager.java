@@ -44,7 +44,7 @@ public class DatabaseUserManager implements UserManager {
     @Override
     public List<Article> getFavouriteArticlesByUserId(Long id) {
         String hql = 
-                    "SELECT a.* " +
+                    "SELECT a " +
                     "FROM User AS u " +
                     "JOIN UserFavourite AS uf " +
                         "ON u.id = uf.user_id " +
@@ -59,7 +59,7 @@ public class DatabaseUserManager implements UserManager {
     @Override
     public List<Article> getViewedArticlesByUserId(Long id) {
         String hql = 
-                    "SELECT a.* " +
+                    "SELECT a " +
                     "FROM User AS u " +
                     "JOIN UserHistory AS uh " +
                         "ON u.id = uh.user_id " +
