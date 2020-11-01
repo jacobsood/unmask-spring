@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import au.usyd.elec5619.service.Idatabase.ArticleManager;
 import au.usyd.elec5619.domain.Article;
+import au.usyd.elec5619.domain.Comment;
+
 import java.util.List;
 
 @RestController
@@ -29,6 +31,11 @@ public class ArticleController {
     @GetMapping(value = "/id/{id}")
     public Article findById(@PathVariable("id") Long id) {
         return articleManager.getArticleById(id);
+    }
+
+    @GetMapping(value = "/id/{id}/comments")
+    public List<Comment> getArticleComments(@PathVariable("id") Long id) {
+        return articleManager.getArticleComments(id);
     }
 
     @GetMapping(value = "/tag/{tag}")
