@@ -50,7 +50,7 @@ public class DatabaseUserManager implements UserManager {
                 //        "ON User.id = UserFavourite.user_id " +
                 //    "JOIN Article " +
                 //        "ON Article.id = UserFavourite.article_id " +
-                //    "WHERE User.id = :id";
+                    "WHERE User.id = :id";
         TypedQuery<User> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, User.class);
         List<User> articleList = queryList.setParameter("id", id).getResultList();
         return articleList;
