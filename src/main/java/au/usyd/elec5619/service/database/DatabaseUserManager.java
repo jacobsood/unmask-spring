@@ -23,16 +23,16 @@ public class DatabaseUserManager implements UserManager {
 
     @Override
     public User getUserById(Long id) {
-        return this.sessionFactory.getCurrentSession().get(User.class, id);
+        String hql = "FROM User WHERE id = :id";
+        TypedQuery<User> userList = this.sessionFactory.getCurrentSession().createQuery(hql, User.class)
+                .setParameter("username", id);
+        User user = userList.getSingleResult();
+        return user;
     }
 
     @Override
     public User getUserByUsername(String username) {
-        String hql = "FROM User WHERE username = :username";
-        TypedQuery<User> userList = this.sessionFactory.getCurrentSession().createQuery(hql, User.class)
-                .setParameter("username", username);
-        User user = userList.getSingleResult();
-        return user;
+        return this.sessionFactory.getCurrentSession().get(User.class, username);
     }
 
     @Override
