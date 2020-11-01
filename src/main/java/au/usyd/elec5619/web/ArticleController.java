@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import au.usyd.elec5619.service.ArticleManager;
+import au.usyd.elec5619.service.Idatabase.ArticleManager;
 import au.usyd.elec5619.domain.Article;
 import java.util.List;
 
@@ -46,7 +46,17 @@ public class ArticleController {
         return articleManager.getArticlesByTitle(title);
     }
 
-    @GetMapping(value = "/source/{source}")
+    @GetMapping(value = "/by/admin")
+    public List<Article> getArticlesCreatedByAdmin() {
+        return articleManager.getArticlesByAdmin();
+    }
+
+    @GetMapping(value = "/by/users")
+    public List<Article> getArticlesCreatedByUsers() {
+        return articleManager.getArticlesByUsers();
+    }
+
+    @GetMapping(value = "/by/{source}")
     public List<Article> getArticlesBySource(@PathVariable("source") String source) {
         return articleManager.getArticlesBySource(source);
     }

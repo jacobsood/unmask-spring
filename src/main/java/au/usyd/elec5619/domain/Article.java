@@ -15,7 +15,7 @@ public class Article implements Serializable {
      *
      */
     private static final long serialVersionUID = -4688762465122251377L;
-
+  
     @Id
     @GeneratedValue
     private long id;
@@ -26,10 +26,13 @@ public class Article implements Serializable {
     private String source;
 
     @NotNull
+    @Column(name = "created_by_admin")
+    private boolean createdByAdmin;
+
+    @NotNull
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Country country;
+    private String country;
 
     @ManyToMany
     @JoinTable(
@@ -39,6 +42,19 @@ public class Article implements Serializable {
     )
     private List<Tag> tags;
 
+    @ManyToMany(mappedBy = "user_favourite")
+    @Column(name = "favourited_by")
+    private List<User> favouritedBy;
+
+    @ManyToMany(mappedBy = "user_history")
+    @Column(name = "viewed_by")
+    private List<User> viewedBy;
+
+
+    public List<User> getUsersFavouritedBy() {
+        return favouritedBy;
+    }
+
     public long getId() {
         return id;
     }
@@ -47,6 +63,10 @@ public class Article implements Serializable {
         return title;
     }
 
+    public boolean getCreatedByAdmin() {
+        return createdByAdmin;
+    }
+  
     public String getSource() {
         return source;
     }
@@ -55,8 +75,16 @@ public class Article implements Serializable {
         return text;
     }
 
-    public Country getCountry() {
+    public String getCountry() {
         return country;
+    }
+
+    public List<User> getUsersViewedBy() {
+        return viewedBy;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
     }
 
     public void setId(long id) {
@@ -67,6 +95,10 @@ public class Article implements Serializable {
         this.title = title;
     }
 
+    public void setCreatedByAdmin(boolean createdByAdmin) {
+        this.createdByAdmin = createdByAdmin;
+    }
+  
     public void setSource(String source) {
         this.source = source;
     }
@@ -75,7 +107,20 @@ public class Article implements Serializable {
         this.text = text;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(String country) {
         this.country = country;
     }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public void setUsersViewedBy(List<User> viewedBy) {
+        this.viewedBy = viewedBy;
+    }
+
+    public void setUsersFavouritedBy(List<User> favouritedBy) {
+        this.favouritedBy = favouritedBy;
+    }
+    
 }

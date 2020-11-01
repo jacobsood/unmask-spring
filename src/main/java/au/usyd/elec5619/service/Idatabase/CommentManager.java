@@ -1,4 +1,5 @@
-package au.usyd.elec5619.service;
+package au.usyd.elec5619.service.Idatabase;
+
 import au.usyd.elec5619.domain.Comment;
 
 import java.io.Serializable;

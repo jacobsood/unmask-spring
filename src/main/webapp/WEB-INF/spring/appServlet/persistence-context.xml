@@ -23,6 +23,7 @@
 		<property name="url" value="jdbc:mysql://mydatabase.c2dr8slcio43.us-east-1.rds.amazonaws.com/unmask" />
 		<property name="username" value="jacobsood" />
 		<property name="password" value="unmaskelec" />
+
 	</bean>
 
 	<bean id="sessionFactory"
@@ -36,11 +37,12 @@
 			</props>
 		</property>
 	</bean>
-	
+  
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
-	<tx:annotation-driven proxy-target-class="true"/> 
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<tx:annotation-driven proxy-target-class="true"/>
 </beans>
