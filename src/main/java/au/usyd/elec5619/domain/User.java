@@ -39,16 +39,16 @@ public class User implements Serializable {
     @ManyToMany
     @JoinTable(
         name = "UserFavourite",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "article_id")
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "u_id"),
+        inverseJoinColumns = @JoinColumn(name = "article_id", referencedColumnName = "a_id")
     )
     private List<Article> favouriteArticles;
 
     @ManyToMany
     @JoinTable(
         name = "UserHistory",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "article_id")
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "u_id"),
+        inverseJoinColumns = @JoinColumn(name = "article_id", referencedColumnName = "a_id")
     )
     private List<Article> history;
 

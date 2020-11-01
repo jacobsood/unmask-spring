@@ -42,11 +42,11 @@ public class Article implements Serializable {
     )
     private List<Tag> tags;
 
-    @ManyToMany(mappedBy = "user_favourite")
+    @ManyToMany(mappedBy = "favouriteArticles")
     @Column(name = "favourited_by")
     private List<User> favouritedBy;
 
-    @ManyToMany(mappedBy = "user_history")
+    @ManyToMany(mappedBy = "history")
     @Column(name = "viewed_by")
     private List<User> viewedBy;
 

@@ -23,16 +23,16 @@ public class DatabaseUserManager implements UserManager {
 
     @Override
     public User getUserById(Long id) {
-        return this.sessionFactory.getCurrentSession().get(User.class, id);
+        String hql = "FROM User WHERE id = :id";
+        TypedQuery<User> userList = this.sessionFactory.getCurrentSession().createQuery(hql, User.class)
+                .setParameter("id", id);
+        User user = userList.getSingleResult();
+        return user;
     }
 
     @Override
     public User getUserByUsername(String username) {
-        String hql = "FROM User WHERE username = :username";
-        TypedQuery<User> userList = this.sessionFactory.getCurrentSession().createQuery(hql, User.class)
-                .setParameter("username", username);
-        User user = userList.getSingleResult();
-        return user;
+        return this.sessionFactory.getCurrentSession().get(User.class, username);
     }
 
     @Override
@@ -43,36 +43,26 @@ public class DatabaseUserManager implements UserManager {
 
     @Override
     public List<Article> getFavouriteArticlesByUserId(Long id) {
-        User user = getUserById(id);
-        return user.getFavouriteArticle();
-        // String hql = 
-        //             "SELECT a.*" +
-        //             "FROM User AS u " +
-        //             "JOIN UserFavourite AS uf " +
-        //                 "ON u.id = uf.user_id " +
-        //             "JOIN Article AS a " +
-        //                 "ON a.id = uf.article_id " +
-        //             "WHERE u.id = :id";
-        // TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class);
-        // List<Article> articleList = queryList.setParameter("id", id).getResultList();
-        // return articleList;
+        String hql = 
+                    "Select a " +
+                    "FROM User u, Article a " +
+                    "JOIN u.favouriteArticles fa " +
+                    "WHERE fa.u_id = :id";
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class);
+        List<Article> articleList = queryList.setParameter("id", id).getResultList();
+        return articleList;
     }
 
     @Override
     public List<Article> getViewedArticlesByUserId(Long id) {
-        User user = getUserById(id);
-        return user.getViewedArticles();
-        // String hql = 
-        //             "SELECT a.*" +
-        //             "FROM User AS u " +
-        //             "JOIN UserHistory AS uh " +
-        //                 "ON u.id = uh.user_id " +
-        //             "JOIN Article AS a " +
-        //                 "ON a.id = uh.article_id " +
-        //             "WHERE u.id = :id";
-        // TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class);
-        // List<Article> articleList = queryList.setParameter("id", id).getResultList();
-        // return articleList;
+        String hql = 
+                    "SELECT a " +
+                    "FROM Article a " +
+                    "JOIN a.viewedBy vb " +
+                    "WHERE vb.u_id = :id";
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class);
+        List<Article> articleList = queryList.setParameter("id", id).getResultList();
+        return articleList;
     }
 
     @Override
