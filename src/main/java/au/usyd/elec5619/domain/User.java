@@ -33,17 +33,27 @@ public class User implements Serializable {
     private String email;
 
     @NotNull
+    @Column(name = "login_status")
     private Boolean loginStatus;
 
-    @ManyToMany(mappedBy = "likes")
-    private List<Article> likedArticle;
+    @ManyToMany
+    @JoinTable(
+        name = "UserFavourite",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "article_id")
+    )
+    private List<Article> favouriteArticles;
 
-    @ManyToMany(mappedBy = "wasRead")
-    private List<Article> readHistory;
+    @ManyToMany
+    @JoinTable(
+        name = "UserHistory",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "article_id")
+    )
+    private List<Article> history;
 
     public User() { }
     public User(String username, String salt, String password,String email){
-        super();
         this.username = username;
         this.salt = salt;
         this.password = password;
@@ -52,12 +62,12 @@ public class User implements Serializable {
         this.loginStatus = false;
     }
 
-    public List<Article> getLikedArticle() {
-        return likedArticle;
+    public List<Article> getFavouriteArticle() {
+        return favouriteArticles;
     }
 
-    public void setLikedArticle(List<Article> likedArticle) {
-        this.likedArticle = likedArticle;
+    public void setFavouriteArticle(List<Article> favouriteArticles) {
+        this.favouriteArticles = favouriteArticles;
     }
 
     public String getSalt() {
@@ -117,12 +127,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public List<Article> getReadHistory() {
-        return readHistory;
+    public List<Article> getViewedArticles() {
+        return history;
     }
 
-    public void setReadHistory(List<Article> readHistory) {
-        this.readHistory = readHistory;
+    public void setViewedArticles(List<Article> history) {
+        this.history = history;
     }
 
 }

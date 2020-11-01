@@ -26,7 +26,8 @@ public class Article implements Serializable {
     private String source;
 
     @NotNull
-    private boolean created_by_admin;
+    @Column(name = "created_by_admin")
+    private boolean createdByAdmin;
 
     @NotNull
     private String text;
@@ -41,29 +42,17 @@ public class Article implements Serializable {
     )
     private List<Tag> tags;
 
-    @ManyToMany
-    @JoinColumn(
-            name = "article_user"
-            //joinColumns = @JoinColumn(name = "article_id"),
-            //inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> likes;
+    @ManyToMany(mappedBy = "user_favourite")
+    @Column(name = "favourited_by")
+    private List<User> favouritedBy;
 
-    @ManyToMany
-    @JoinColumn(
-            name = "article_history"
-            //joinColumns = @JoinColumn(name = "article_id"),
-            //inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> wasRead;
+    @ManyToMany(mappedBy = "user_history")
+    @Column(name = "viewed_by")
+    private List<User> viewedBy;
 
 
-    public List<User> getLikes() {
-        return likes;
-    }
-
-    public void setLikes(List<User> likes) {
-        this.likes = likes;
+    public List<User> getUsersFavouritedBy() {
+        return favouritedBy;
     }
 
     public long getId() {
@@ -75,7 +64,7 @@ public class Article implements Serializable {
     }
 
     public boolean getCreatedByAdmin() {
-        return created_by_admin;
+        return createdByAdmin;
     }
   
     public String getSource() {
@@ -90,6 +79,14 @@ public class Article implements Serializable {
         return country;
     }
 
+    public List<User> getUsersViewedBy() {
+        return viewedBy;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
     public void setId(long id) {
         this.id = id;
     } 
@@ -99,7 +96,7 @@ public class Article implements Serializable {
     }
 
     public void setCreatedByAdmin(boolean createdByAdmin) {
-        this.created_by_admin = createdByAdmin;
+        this.createdByAdmin = createdByAdmin;
     }
   
     public void setSource(String source) {
@@ -114,19 +111,16 @@ public class Article implements Serializable {
         this.country = country;
     }
 
-    public List<Tag> getTags() {
-        return tags;
-    }
-
     public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
 
-    public List<User> getWasRead() {
-        return wasRead;
+    public void setUsersViewedBy(List<User> viewedBy) {
+        this.viewedBy = viewedBy;
     }
 
-    public void setWasRead(List<User> wasRead) {
-        this.wasRead = wasRead;
+    public void setUsersFavouritedBy(List<User> favouritedBy) {
+        this.favouritedBy = favouritedBy;
     }
+    
 }
