@@ -47,7 +47,7 @@ public class DatabaseUserManager implements UserManager {
                     "Select a " +
                     "FROM Article a " +
                     "JOIN a.favouritedBy fb " +
-                    "WHERE fb.u_id = :id";
+                    "WHERE fb.user_id = :id";
         TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class);
         List<Article> articleList = queryList.setParameter("id", id).getResultList();
         return articleList;
@@ -59,7 +59,7 @@ public class DatabaseUserManager implements UserManager {
                     "SELECT a " +
                     "FROM Article a " +
                     "JOIN a.viewedBy vb " +
-                    "WHERE vb.u_id = :id";
+                    "WHERE vb.user_id = :id";
         TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class);
         List<Article> articleList = queryList.setParameter("id", id).getResultList();
         return articleList;
