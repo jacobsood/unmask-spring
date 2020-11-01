@@ -27,9 +27,9 @@ public class CommentTest{
     }
     public void testSetAndGetCommentContent(){
         String testCommentContent = "Comment 78468374 by User 95837154 on Article 95837154";
-        assertNull(comment.getCommentContent());
-        comment.setCommentContent(testCommentContent);
-        assertEquals(testCommentContent, comment.getCommentContent(), "Comment content not set correctly");
+        assertNull(comment.getText());
+        comment.setText(testCommentContent);
+        assertEquals(testCommentContent, comment.getText(), "Comment content not set correctly");
     }
     public void testSetAndGetUpVoteCount(){
         int testUpVoteCount = 33;

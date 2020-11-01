@@ -35,7 +35,8 @@ public class Article implements Serializable {
 
     private String country;
 
-    @OneToMany(mappedBy = "articleID")
+    @OneToMany
+    @JoinColumn(name = "article_id")
     private List<Comment> comments = new ArrayList<Comment>();
 
     @ManyToMany

@@ -21,47 +21,42 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue
     @Column(name="comment_id")
-    private long commentId;
+    private long comment_id;
 
-    @ManyToOne
-    @JoinColumn(name = "article_id")
-    private long articleId;
+    @Column(name="user_id")
+    private long user_id;
 
-    @Column(name="author_id")
-    private long authorId;
-
-    @Column(name="comment_content")
-    private String commentContent;
+    private String text;
 
     @Column(name="up_vote_count")
     private int upVoteCount;
 
     public long getCommentID() {
-        return commentId;
+        return comment_id;
     }
-    public void setCommentID(long commentId) {
-        this.commentId = commentId;
+    public void setCommentID(long comment_id) {
+        this.comment_id = comment_id;
     }
 
     public long getArticleID() {
-        return articleId;
+        return article_id;
     }
-    public void setArticleID(long articleId) {
-        this.articleId = articleId;
+    public void setArticleID(long article_id) {
+        this.article_id = article_id;
     }
 
     public long getAuthorID() {
-        return authorId;
+        return user_id;
     }
-    public void setAuthorID(long authorId) {
-        this.authorId = authorId;
+    public void setAuthorID(long user_id) {
+        this.user_id = user_id;
     }
 
-    public String getCommentContent() {
-        return commentContent;
+    public String getText() {
+        return text;
     }
-    public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public int getUpVoteCount() {
