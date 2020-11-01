@@ -18,7 +18,7 @@ public class Article implements Serializable {
   
     @Id
     @GeneratedValue
-    private long id;
+    private long article_id;
 
     @NotNull
     private String title;
@@ -64,7 +64,7 @@ public class Article implements Serializable {
     }
 
     public long getId() {
-        return id;
+        return article_id;
     }
     
     public String getTitle() {
@@ -96,7 +96,7 @@ public class Article implements Serializable {
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.article_id = id;
     } 
 
     public void setTitle(String title) {
