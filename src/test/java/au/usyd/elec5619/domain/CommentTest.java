@@ -15,11 +15,6 @@ public class CommentTest{
         comment.setCommentID(testCommentID);
         assertEquals(testCommentID, comment.getCommentID(), "Comment ID not set correctly");
     }
-    public void testSetAndGetArticleID(){
-        long testArticleID = 42257421;
-        comment.setCommentID(testArticleID);
-        assertEquals(testArticleID, comment.getArticleID(),"Article ID not set correctly");
-    }
     public void testSetAndGetAuthorID(){
         long testAuthorID = 95837154;
         comment.setCommentID(testAuthorID);

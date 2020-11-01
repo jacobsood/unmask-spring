@@ -38,13 +38,6 @@ public class Comment implements Serializable {
         this.comment_id = comment_id;
     }
 
-    public long getArticleID() {
-        return article_id;
-    }
-    public void setArticleID(long article_id) {
-        this.article_id = article_id;
-    }
-
     public long getAuthorID() {
         return user_id;
     }
