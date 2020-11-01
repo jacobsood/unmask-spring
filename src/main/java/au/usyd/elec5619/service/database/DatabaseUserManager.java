@@ -25,7 +25,7 @@ public class DatabaseUserManager implements UserManager {
     public User getUserById(Long id) {
         String hql = "FROM User WHERE id = :id";
         TypedQuery<User> userList = this.sessionFactory.getCurrentSession().createQuery(hql, User.class)
-                .setParameter("username", id);
+                .setParameter("id", id);
         User user = userList.getSingleResult();
         return user;
     }
