@@ -44,15 +44,15 @@ public class DatabaseUserManager implements UserManager {
     @Override
     public List<Article> getFavouriteArticlesByUserId(Long id) {
         String hql = 
-                    "SELECT Article " +
+                    "SELECT User " +
                     "FROM User " +
-                    "JOIN UserFavourite " +
-                        "ON User.id = UserFavourite.user_id " +
-                    "JOIN Article " +
-                        "ON Article.id = UserFavourite.article_id " +
-                    "WHERE User.id = :id";
-        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class);
-        List<Article> articleList = queryList.setParameter("id", id).getResultList();
+                //    "JOIN UserFavourite " +
+                //        "ON User.id = UserFavourite.user_id " +
+                //    "JOIN Article " +
+                //        "ON Article.id = UserFavourite.article_id " +
+                //    "WHERE User.id = :id";
+        TypedQuery<User> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, User.class);
+        List<User> articleList = queryList.setParameter("id", id).getResultList();
         return articleList;
     }
 
