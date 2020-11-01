@@ -25,7 +25,6 @@ public class Comment implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "article_id")
-    @Column(name="article_id")
     private long articleId;
 
     @Column(name="author_id")
