@@ -33,11 +33,6 @@ public class ArticleController {
         return articleManager.getArticleById(id);
     }
 
-    @GetMapping(value = "/id/{id}/comments")
-    public List<Comment> getArticleComments(@PathVariable("id") Long id) {
-        return articleManager.getArticleComments(id);
-    }
-
     @GetMapping(value = "/tag/{tag}")
     public List<Article> getArticlesByTag(@PathVariable("tag") String tag) {
         return articleManager.getArticlesByTag(tag);
@@ -76,6 +71,11 @@ public class ArticleController {
     @PutMapping
     public void updateArticle(@RequestBody Article article) {
         articleManager.updateArticle(article);
+    }
+
+    @PutMapping(value = "/id/{id}/add_comment")
+    public void addCommentToArticle(@PathVariable("id") Long id, @RequestBody Comment comment) {
+        articleManager.addCommentToArticle(id, comment);
     }
 
     @DeleteMapping(value = "/id/{id}")

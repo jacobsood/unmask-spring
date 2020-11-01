@@ -28,7 +28,7 @@ public interface ArticleManager {
 
     public List<Article> getArticlesBySource(String source);
 
-    public List<Comment> getArticleComments(long id);
+    public void addCommentToArticle(long id, Comment comment);
 
     // UPDATE
 
