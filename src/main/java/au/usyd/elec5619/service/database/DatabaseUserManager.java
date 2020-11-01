@@ -45,9 +45,9 @@ public class DatabaseUserManager implements UserManager {
     public List<Article> getFavouriteArticlesByUserId(Long id) {
         String hql = 
                     "Select a " +
-                    "FROM User u, Article a " +
-                    "JOIN u.favouriteArticles fa " +
-                    "WHERE fa.u_id = :id";
+                    "FROM Article a " +
+                    "JOIN a.favouritedBy fb " +
+                    "WHERE fb.u_id = :id";
         TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class);
         List<Article> articleList = queryList.setParameter("id", id).getResultList();
         return articleList;

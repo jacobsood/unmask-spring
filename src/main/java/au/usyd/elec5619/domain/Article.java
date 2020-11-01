@@ -42,12 +42,20 @@ public class Article implements Serializable {
     )
     private List<Tag> tags;
 
-    @ManyToMany(mappedBy = "favouriteArticles")
-    @Column(name = "favourited_by")
+    @ManyToMany
+    @JoinTable(
+        name = "UserFavourite",
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "u_id"),
+        inverseJoinColumns = @JoinColumn(name = "article_id", referencedColumnName = "a_id")
+    )
     private List<User> favouritedBy;
 
-    @ManyToMany(mappedBy = "history")
-    @Column(name = "viewed_by")
+    @ManyToMany
+    @JoinTable(
+        name = "UserHistory",
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "u_id"),
+        inverseJoinColumns = @JoinColumn(name = "article_id", referencedColumnName = "a_id")
+    )
     private List<User> viewedBy;
 
 

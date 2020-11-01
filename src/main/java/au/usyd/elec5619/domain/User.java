@@ -36,20 +36,10 @@ public class User implements Serializable {
     @Column(name = "login_status")
     private Boolean loginStatus;
 
-    @ManyToMany
-    @JoinTable(
-        name = "UserFavourite",
-        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "u_id"),
-        inverseJoinColumns = @JoinColumn(name = "article_id", referencedColumnName = "a_id")
-    )
+    @ManyToMany(mappedBy = "favouritedBy")
     private List<Article> favouriteArticles;
 
-    @ManyToMany
-    @JoinTable(
-        name = "UserHistory",
-        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "u_id"),
-        inverseJoinColumns = @JoinColumn(name = "article_id", referencedColumnName = "a_id")
-    )
+    @ManyToMany(mappedBy = "viewedBy")
     private List<Article> history;
 
     public User() { }
