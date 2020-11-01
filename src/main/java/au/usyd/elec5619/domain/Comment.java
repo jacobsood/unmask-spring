@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name = "Comment")
@@ -19,13 +21,15 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue
     @Column(name="comment_id")
-    private long commentID;
+    private long commentId;
 
+    @ManyToOne
+    @JoinColumn(name = "article_id")
     @Column(name="article_id")
-    private long articleID;
+    private long articleId;
 
     @Column(name="author_id")
-    private long authorID;
+    private long authorId;
 
     @Column(name="comment_content")
     private String commentContent;
@@ -34,24 +38,24 @@ public class Comment implements Serializable {
     private int upVoteCount;
 
     public long getCommentID() {
-        return commentID;
+        return commentId;
     }
-    public void setCommentID(long commentID) {
-        this.commentID = commentID;
+    public void setCommentID(long commentId) {
+        this.commentId = commentId;
     }
 
     public long getArticleID() {
-        return articleID;
+        return articleId;
     }
-    public void setArticleID(long articleID) {
-        this.articleID = articleID;
+    public void setArticleID(long articleId) {
+        this.articleId = articleId;
     }
 
     public long getAuthorID() {
-        return authorID;
+        return authorId;
     }
-    public void setAuthorID(long authorID) {
-        this.authorID = authorID;
+    public void setAuthorID(long authorId) {
+        this.authorId = authorId;
     }
 
     public String getCommentContent() {

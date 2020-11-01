@@ -1,6 +1,7 @@
 package au.usyd.elec5619.service.database;
 
 import au.usyd.elec5619.domain.Article;
+import au.usyd.elec5619.domain.Comment;
 import au.usyd.elec5619.service.Idatabase.ArticleManager;
 
 import java.util.List;
@@ -82,6 +83,17 @@ public class DatabaseArticleManager implements ArticleManager {
         TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("source", source);
         List<Article> articleList = queryList.getResultList();
         return articleList;
+    }
+
+    @Override
+    public List<Comment> getArticleComments(long id) {
+        String hql = 
+                    "SELECT a.comments " +
+                    "FROM Article a " +
+                    "JOIN a.comments ac " +
+                    "WHERE ac.article_id = :article_id";
+        TypedQuery<Comment> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Comment.class).setParameter("article_id", id);
+        return queryList.getResultList();
     }
 
     // UPDATE

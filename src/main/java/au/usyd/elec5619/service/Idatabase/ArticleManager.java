@@ -2,6 +2,7 @@ package au.usyd.elec5619.service.Idatabase;
 
 import java.util.List;
 import au.usyd.elec5619.domain.Article;
+import au.usyd.elec5619.domain.Comment;
 
 public interface ArticleManager {
 
@@ -26,6 +27,8 @@ public interface ArticleManager {
     public List<Article> getArticlesByUsers();
 
     public List<Article> getArticlesBySource(String source);
+
+    public List<Comment> getArticleComments(long id);
 
     // UPDATE
 
