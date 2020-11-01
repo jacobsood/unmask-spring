@@ -36,9 +36,9 @@ public class Article implements Serializable {
 
     @ManyToMany
     @JoinTable(
-        name = "article_tag",
-        joinColumns = @JoinColumn(name = "article_id"),
-        inverseJoinColumns = @JoinColumn(name = "tag_id")
+        name = "ArticleTag",
+        joinColumns = @JoinColumn(name = "tag_id"),
+        inverseJoinColumns = @JoinColumn(name = "article_id")
     )
     private List<Tag> tags;
 
