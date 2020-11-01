@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,7 +28,7 @@ public class Article implements Serializable {
 
     @NotNull
     @Column(name = "created_by_admin")
-    private boolean createdByAdmin;
+    private boolean createdByAdmin = true;
 
     @NotNull
     private String text;
@@ -40,7 +41,7 @@ public class Article implements Serializable {
         joinColumns = @JoinColumn(name = "tag_id"),
         inverseJoinColumns = @JoinColumn(name = "article_id")
     )
-    private List<Tag> tags;
+    private List<Tag> tags = new ArrayList<Tag>();
 
     @ManyToMany
     @JoinTable(
@@ -48,7 +49,7 @@ public class Article implements Serializable {
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "article_id")
     )
-    private List<User> favouritedBy;
+    private List<User> favouritedBy = new ArrayList<User>();
 
     @ManyToMany
     @JoinTable(
@@ -56,7 +57,7 @@ public class Article implements Serializable {
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "article_id")
     )
-    private List<User> viewedBy;
+    private List<User> viewedBy = new ArrayList<User>();
 
 
     public List<User> getUsersFavouritedBy() {

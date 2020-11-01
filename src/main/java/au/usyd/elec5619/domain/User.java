@@ -1,9 +1,9 @@
 package au.usyd.elec5619.domain;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,10 +37,10 @@ public class User implements Serializable {
     private Boolean loginStatus;
 
     @ManyToMany(mappedBy = "favouritedBy")
-    private List<Article> favouriteArticles;
+    private List<Article> favouriteArticles = new ArrayList<Article>();
 
     @ManyToMany(mappedBy = "viewedBy")
-    private List<Article> history;
+    private List<Article> history = new ArrayList<Article>();
 
     public User() { }
     public User(String username, String salt, String password,String email){
