@@ -38,3 +38,5 @@ build/
 /target/
 */target/**
 **/META-INF/
+
+bin

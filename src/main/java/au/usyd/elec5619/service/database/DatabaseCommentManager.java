@@ -1,6 +1,8 @@
-package au.usyd.elec5619.service;
+package au.usyd.elec5619.service.database;
 
 import au.usyd.elec5619.domain.Comment;
+import au.usyd.elec5619.service.Idatabase.CommentManager;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -10,6 +12,11 @@ import java.util.List;
 
 public class DatabaseCommentManager implements CommentManager{
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 6035265428964387779L;
+  
     private SessionFactory sessionFactory;
 
     @Autowired

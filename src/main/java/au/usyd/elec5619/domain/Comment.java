@@ -1,7 +1,5 @@
 package au.usyd.elec5619.domain;
 
-import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -9,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name = "Comment")
@@ -21,46 +21,35 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue
     @Column(name="comment_id")
-    private long commentID;
+    private long comment_id;
 
-    @Column(name="article_id")
-    private long articleID;
+    @Column(name="user_id")
+    private long user_id;
 
-    @Column(name="author_id")
-    private long authorID;
-
-    @Column(name="comment_content")
-    private String commentContent;
+    private String text;
 
     @Column(name="up_vote_count")
     private int upVoteCount;
 
     public long getCommentID() {
-        return commentID;
+        return comment_id;
     }
-    public void setCommentID(long commentID) {
-        this.commentID = commentID;
-    }
-
-    public long getArticleID() {
-        return articleID;
-    }
-    public void setArticleID(long articleID) {
-        this.articleID = articleID;
+    public void setCommentID(long comment_id) {
+        this.comment_id = comment_id;
     }
 
     public long getAuthorID() {
-        return authorID;
+        return user_id;
     }
-    public void setAuthorID(long authorID) {
-        this.authorID = authorID;
+    public void setAuthorID(long user_id) {
+        this.user_id = user_id;
     }
 
-    public String getCommentContent() {
-        return commentContent;
+    public String getText() {
+        return text;
     }
-    public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public int getUpVoteCount() {

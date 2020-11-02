@@ -1,34 +1,128 @@
-/* 
-
-    Define what's being stored. Look at Article.java, Country.java or Tag.java for assistance
-
-    Relationship:
-
-    1. Many-To-Many relationship with Articles and stories favourties list (implement in StoryFavourite.java and ArticleFavourite.java) (Refer to #4 in the link below)
-        
-    2. Many-To-Many relationship with articles and stories (History list) (implement here) (reference to #2 in the link below or in Article.java and Tag.java)
-    
-    3. Include the user's own posted stories 
-
-    https://www.baeldung.com/jpa-many-to-many
-
-    Ensure tests are also being written for all methods
-
-*/
 package au.usyd.elec5619.domain;
 
-import org.springframework.stereotype.Component;
-
-import java.io.Serializable;
-
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class User {
 
-    public User() {}
+@Entity
+@Table(name = "User")
+public class User implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2485483117804868283L;
+
+    @GeneratedValue
+    private long user_id;
+
+    @Id
+    private String username;
+
+    @NotNull
+    private String salt;
+
+    @NotNull
+    private String password ;
+
+    @NotNull
+    private Boolean freeze;
+
+    private String email;
+
+    @NotNull
+    @Column(name = "login_status")
+    private Boolean loginStatus;
+
+    @ManyToMany(mappedBy = "favouritedBy")
+    private List<Article> favouriteArticles = new ArrayList<Article>();
+
+    @ManyToMany(mappedBy = "viewedBy")
+    private List<Article> history = new ArrayList<Article>();
+
+    public User() { }
+    public User(String username, String salt, String password,String email){
+        this.username = username;
+        this.salt = salt;
+        this.password = password;
+        this.freeze = false;
+        this.email = email;
+        this.loginStatus = false;
+    }
+
+    public List<Article> getFavouriteArticle() {
+        return favouriteArticles;
+    }
+
+    public void setFavouriteArticle(List<Article> favouriteArticles) {
+        this.favouriteArticles = favouriteArticles;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Boolean getLoginStatus() {
+        return loginStatus;
+    }
+
+    public void setLoginStatus(Boolean loginStatus) {
+        this.loginStatus = loginStatus;
+    }
+
+    public Boolean getFreeze() {
+        return freeze;
+    }
+
+    public void setFreeze(Boolean freeze) {
+        this.freeze = freeze;
+    }
+
+
+    public long getId() {
+        return user_id;
+    }
+
+    public void setId(long id) {
+        this.user_id = id;
+    }
+
+    public List<Article> getViewedArticles() {
+        return history;
+    }
+
+    public void setViewedArticles(List<Article> history) {
+        this.history = history;
+    }
+
 }

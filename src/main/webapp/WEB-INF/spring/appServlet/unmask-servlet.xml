@@ -25,5 +25,6 @@
     <resources mapping = "/js/**" location = "/WEB-INF/view/js/" />
     <resources mapping = "/fonts/**" location = "/WEB-INF/view/fonts/" />
     <resources mapping = "/jsp/**" location = "/WEB-INF/view/" />
+
     <context:component-scan base-package="au.usyd.elec5619" />
 </beans:beans>

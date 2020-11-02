@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,10 +16,10 @@ public class Article implements Serializable {
      *
      */
     private static final long serialVersionUID = -4688762465122251377L;
-
+  
     @Id
     @GeneratedValue
-    private long id;
+    private long article_id;
 
     @NotNull
     private String title;
@@ -26,27 +27,59 @@ public class Article implements Serializable {
     private String source;
 
     @NotNull
+    @Column(name = "created_by_admin")
+    private boolean createdByAdmin = true;
+
+    @NotNull
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Country country;
+    private String country;
+
+    @OneToMany
+    @JoinColumn(name = "article_id")
+    private List<Comment> comments = new ArrayList<Comment>();
 
     @ManyToMany
     @JoinTable(
-        name = "article_tag",
-        joinColumns = @JoinColumn(name = "article_id"),
-        inverseJoinColumns = @JoinColumn(name = "tag_id")
+        name = "ArticleTag",
+        joinColumns = @JoinColumn(name = "tag_id"),
+        inverseJoinColumns = @JoinColumn(name = "article_id")
     )
-    private List<Tag> tags;
+    private List<Tag> tags = new ArrayList<Tag>();
+
+    @ManyToMany
+    @JoinTable(
+        name = "UserFavourite",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "article_id")
+    )
+    private List<User> favouritedBy = new ArrayList<User>();
+
+    @ManyToMany
+    @JoinTable(
+        name = "UserHistory",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "article_id")
+    )
+    private List<User> viewedBy = new ArrayList<User>();
+
+
+    public List<User> getUsersFavouritedBy() {
+        return favouritedBy;
+    }
 
     public long getId() {
-        return id;
+        return article_id;
     }
     
     public String getTitle() {
         return title;
     }
 
+    public boolean getCreatedByAdmin() {
+        return createdByAdmin;
+    }
+  
     public String getSource() {
         return source;
     }
@@ -55,18 +88,34 @@ public class Article implements Serializable {
         return text;
     }
 
-    public Country getCountry() {
+    public String getCountry() {
         return country;
     }
 
+    public List<User> getUsersViewedBy() {
+        return viewedBy;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
     public void setId(long id) {
-        this.id = id;
+        this.article_id = id;
     } 
 
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public void setCreatedByAdmin(boolean createdByAdmin) {
+        this.createdByAdmin = createdByAdmin;
+    }
+  
     public void setSource(String source) {
         this.source = source;
     }
@@ -75,7 +124,23 @@ public class Article implements Serializable {
         this.text = text;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(String country) {
         this.country = country;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public void setUsersViewedBy(List<User> viewedBy) {
+        this.viewedBy = viewedBy;
+    }
+
+    public void setUsersFavouritedBy(List<User> favouritedBy) {
+        this.favouritedBy = favouritedBy;
+    }
+    
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
