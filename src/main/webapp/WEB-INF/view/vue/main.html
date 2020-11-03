@@ -16,9 +16,7 @@
         <h1 :style="hoverStyle" @mouseover="mouseover" @mouseleave="mouseleave">Unmask</h1>
     </div>
     <player-card></player-card>
-    
-  </head>
-  <body>
+
       <player-card></player-card>
     <div class="landing-page">
         <h1 :style="hoverStyle" @mouseover="mouseover" @mouseleave="mouseleave">Unmask</h1>
@@ -55,6 +53,16 @@
         </div>
     </div>
 
+    <div id="comment-div">
+        <transition name="fade">
+            <comment-dialog v-show="showDialog"
+                            v-bind:author="currentComment.authorID"
+                            v-bind:content="currentComment.content"
+                            @prev-comment="previousComment"
+                            @next-comment="nextComment"></comment-dialog>
+        </transition>
+    </div>
+
     <!-- include Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <!-- include Vue router -->
@@ -75,18 +83,9 @@
                 ]
             }
         });
-
-    <div id="comment-div">
-      <transition name="fade">
-      <comment-dialog v-show="showDialog"
-                      v-bind:author="currentComment.authorID"
-                      v-bind:content="currentComment.content"
-                      @prev-comment="previousComment"
-                      @next-comment="nextComment"></comment-dialog>
-      </transition>
-    </div>
-    <script src = "js/comment-dialog.js"></script>
-    
     </script>
+
+    <script src = "js/comment-dialog.js"></script>
+
   </body>
 </html>
