@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="article-container">
     <PollyAudio></PollyAudio>
-    <h1>{{ articles.title }}</h1>
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.text }}</p>
   </div>
 </template>
 
@@ -13,7 +14,7 @@ export default {
     PollyAudio,
   },
   props: {
-    articles: {
+    article: {
       type: Object,
     }
   }
@@ -29,11 +30,14 @@ export default {
   margin-right: 5%;
 }
 
-div {
-  border: 1px solid blue;
+.article-container {
+  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   h1 {
-    font-size: 5em;
+    font-size: 2em;
   }
 }
 </style>

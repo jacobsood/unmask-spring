@@ -1,11 +1,36 @@
 <template>
   <div id="list" class="home-page">
+    <header>
+      <router-link :to="{ name: 'landing'}">
+        <h4>Unmask - Stories Untold</h4>  
+      </router-link>
+    </header>
+    <div class="left-side-bar side-bar">
+      <router-link :to="{ name: 'landing'}">
+        Preference
+      </router-link>
+      <router-link :to="{ name: 'landing'}">
+        History
+      </router-link>
+    </div>
+    <div class="right-side-bar side-bar">
+      <router-link :to="{ name: 'landing'}">
+        Stories
+      </router-link>
+      <router-link :to="{ name: 'landing'}">
+        Search
+      </router-link>
+      <router-link :to="{ name: 'landing'}">
+        Articles
+      </router-link>
+    </div>
     <template v-for="repeat in infiniteCounter">
-    <div :key="repeat">
+    <div :key="repeat" class="article">
       <IndividualArticle
         v-for="article in articles"
         v-bind:key="`${article.id}_${repeat}`"
         v-bind:article="article"
+        class="individual-article"
       ></IndividualArticle>
     </div>
     </template>
@@ -44,21 +69,62 @@ export default {
 <style scoped lang='scss'>
 @import "~@/assets/scss/_typo.scss";
 
+a {
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  padding: 5px 0 5px 0;
+  top: 0;
+  width: 100%;
+}
+
+.side-bar {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow: hidden;
+  text-orientation: upright;
+  writing-mode: vertical-lr;
+
+  display: flex;
+  align-content: space-around;
+  justify-content: space-around;
+
+  padding: 0 3px 0 3px;
+
+  a {
+    color: red;
+  }
+}
+
+.left-side-bar {
+  left: 0;
+}
+
+.right-side-bar {
+  right: 0;
+}
+
 .home-page {
   font-family: "CustomY78";
   width: 100%;
-  margin-left: 5%;
-  margin-right: 5%;
 }
 
-ul {
-  background: none;
-  list-style: none;
-  font-size: 2em;
+.article {
   display: flex;
-  justify-content: space-around;
-  flex-flow: row wrap;
-  position: relative;
+  justify-content: center;
+  align-content: center;
+  font-size: 2em;
+}
+
+.individual-article {
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 </style>
