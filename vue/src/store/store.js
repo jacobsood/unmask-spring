@@ -6,7 +6,89 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    articles: [],
+    articles: [
+      {
+        id: 1,
+        title: "Hello",
+        source: "Abc",
+        text: "Hello one two three",
+        country: "Australia",
+        comments: [
+          {
+            id: 1,
+            
+          },
+          {
+            id: 2,
+
+          }
+        ],
+        tags: [
+          {
+            id: 1,
+            tag: "Money Laundering",
+          },
+          {
+            id: 2,
+            tag: "Illegal Gold Mining",
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: "Hi there",
+        source: "Abc",
+        text: "Hello one two three",
+        country: "Australia",
+        comments: [
+          {
+            id: 1,
+            
+          },
+          {
+            id: 2,
+
+          }
+        ],
+        tags: [
+          {
+            id: 1,
+            tag: "Money Laundering",
+          },
+          {
+            id: 2,
+            tag: "Illegal Gold Mining",
+          }
+        ],
+      },
+      {
+        id: 3,
+        title: "Wow",
+        source: "Abc",
+        text: "Hello one two three",
+        country: "Australia",
+        comments: [
+          {
+            id: 1,
+            
+          },
+          {
+            id: 2,
+
+          }
+        ],
+        tags: [
+          {
+            id: 1,
+            tag: "Money Laundering",
+          },
+          {
+            id: 2,
+            tag: "Illegal Gold Mining",
+          }
+        ],
+      }
+    ],
   },
   
   getters: {
