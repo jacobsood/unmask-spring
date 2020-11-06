@@ -16,8 +16,6 @@ public interface ArticleManager {
 
     public Article getArticleById(long id);
 
-    public List<Article> getArticlesByTag(String tag);
-
     public List<Article> getArticlesByCountry(String country);
 
     public List<Article> getArticlesByTitle(String title);
