@@ -5,6 +5,9 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,9 +39,11 @@ public class Article implements Serializable {
     private String country;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "article")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Comment> comments = new ArrayList<Comment>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(
         name = "Article_Tag",
         joinColumns = @JoinColumn(name = "article_id"),
@@ -47,6 +52,7 @@ public class Article implements Serializable {
     private List<Tag> tags = new ArrayList<Tag>();
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(
         name = "UserFavourite",
         joinColumns = @JoinColumn(name = "user_id"),
@@ -55,6 +61,7 @@ public class Article implements Serializable {
     private List<User> favouritedBy = new ArrayList<User>();
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(
         name = "UserHistory",
         joinColumns = @JoinColumn(name = "user_id"),
