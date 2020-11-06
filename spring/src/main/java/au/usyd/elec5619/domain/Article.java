@@ -35,10 +35,6 @@ public class Article implements Serializable {
 
     private String country;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "article_id")
-    private List<Comment> comments = new ArrayList<Comment>();
-
     @ManyToMany
     @JoinTable(
         name = "ArticleTag",
@@ -100,10 +96,6 @@ public class Article implements Serializable {
         return tags;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
     public void setId(long id) {
         this.article_id = id;
     } 
@@ -139,8 +131,5 @@ public class Article implements Serializable {
     public void setUsersFavouritedBy(List<User> favouritedBy) {
         this.favouritedBy = favouritedBy;
     }
-    
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
+
 }

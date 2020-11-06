@@ -28,8 +28,6 @@ public interface ArticleManager {
 
     public List<Article> getArticlesBySource(String source);
 
-    public void addCommentToArticle(long id, Comment comment);
-
     // UPDATE
 
     public void updateArticle(Article article);
