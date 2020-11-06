@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LandingPage from './components/LandingPage.vue'
-import TagPage from './components/TagPage.vue'
+import HomePage from './components/HomePage.vue'
 import IndividualArticle from './components/IndividualArticle.vue'
 
 Vue.use(VueRouter)
@@ -9,11 +9,11 @@ Vue.use(VueRouter)
 export const router = new VueRouter({
     mode: 'history',
     routes: [
-        { name: 'home', path: '/', component: LandingPage },
-        { name: 'tags', path: '/tags', component: TagPage },
-        { name: 'tag', path: '/tags/:tag', component: TagPage },
-        { name: 'country', path: '/tags/:country', component: TagPage },
-        { name: 'article', path: '/tags/:tag/:article', component: IndividualArticle },
-        { path: '*', redirect: { name: 'home' } },
+        { name: 'landing', path: '/', component: LandingPage },
+        { name: 'home', path: '/home', component: HomePage },
+        { name: 'tag', path: '/home/:tag', component: HomePage },
+        { name: 'country', path: '/home/:country', component: HomePage },
+        { name: 'article', path: '/home/:tag/:article', component: IndividualArticle },
+        { path: '*', redirect: { name: 'landing' } },
     ]
 });

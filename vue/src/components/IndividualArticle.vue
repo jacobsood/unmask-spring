@@ -1,21 +1,21 @@
 <template>
-  <PollyAudio></PollyAudio>
   <div>
-    <!-- implement here -->
+    <PollyAudio></PollyAudio>
+    <h1>{{ articles.title }}</h1>
   </div>
 </template>
 
 <script>
-import { router } from '../routes.js'
 import PollyAudio from './PollyAudio';
 export default {
   name: 'IndividualArticle',
   components: {
     PollyAudio,
   },
-  methods: {
-  },
-  computed: {
+  props: {
+    articles: {
+      type: Object,
+    }
   }
 }
 </script>
