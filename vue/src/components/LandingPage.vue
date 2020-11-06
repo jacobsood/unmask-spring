@@ -28,7 +28,7 @@ export default {
       audio.play();
       audio.onended = () => {
         this.clicked = false;
-        router.push({ name: 'tags' });
+        router.push({ name: 'home' });
       };
     },
   }, 
