@@ -38,11 +38,11 @@ public class Article implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "article")
     private List<Comment> comments = new ArrayList<Comment>();
 
-    @ManyToMany
+    @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-        name = "ArticleTag",
-        joinColumns = @JoinColumn(name = "tag_id"),
-        inverseJoinColumns = @JoinColumn(name = "article_id")
+        name = "Article_Tag",
+        joinColumns = @JoinColumn(name = "article_id"),
+        inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private List<Tag> tags = new ArrayList<Tag>();
 
