@@ -35,7 +35,7 @@ public class Article implements Serializable {
 
     private String country;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "article_id")
     private List<Comment> comments = new ArrayList<Comment>();
 
