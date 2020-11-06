@@ -40,3 +40,6 @@ build/
 **/META-INF/
 
 bin
+
+# Ignore NPM files
+node_modules
