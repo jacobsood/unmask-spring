@@ -38,7 +38,7 @@ public class Article implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "article")
     private List<Comment> comments = new ArrayList<Comment>();
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
     @JoinTable(
         name = "Article_Tag",
         joinColumns = @JoinColumn(name = "article_id"),
@@ -46,7 +46,7 @@ public class Article implements Serializable {
     )
     private List<Tag> tags = new ArrayList<Tag>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "UserFavourite",
         joinColumns = @JoinColumn(name = "user_id"),
@@ -54,7 +54,7 @@ public class Article implements Serializable {
     )
     private List<User> favouritedBy = new ArrayList<User>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "UserHistory",
         joinColumns = @JoinColumn(name = "user_id"),
