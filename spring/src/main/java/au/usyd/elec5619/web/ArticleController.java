@@ -73,10 +73,10 @@ public class ArticleController {
         articleManager.updateArticle(article);
     }
 
-    // @PutMapping(value = "/id/{id}/add_comment")
-    // public void addCommentToArticle(@PathVariable("id") Long id, @RequestBody Comment comment) {
-    //     articleManager.addCommentToArticle(id, comment);
-    // }
+    @PutMapping(value = "/id/{id}/add_comment")
+    public void addCommentToArticle(@PathVariable("id") Long id, @RequestBody Comment comment) {
+        articleManager.addCommentToArticle(id, comment);
+    }
 
     @DeleteMapping(value = "/id/{id}")
     public void deleteArticle(@PathVariable("id") Long id) {

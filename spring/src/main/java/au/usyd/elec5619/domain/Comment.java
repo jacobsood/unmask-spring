@@ -23,6 +23,10 @@ public class Comment implements Serializable {
     @Column(name="comment_id")
     private long comment_id;
 
+    @ManyToOne
+    @JoinColumn(name="article_id")
+    private Article article;
+
     @Column(name="user_id")
     private long user_id;
 

@@ -28,6 +28,15 @@ public class DatabaseArticleManager implements ArticleManager {
         this.sessionFactory.getCurrentSession().save(article);
     }
 
+    @Override
+    public void addCommentToArticle(long id, Comment comment) {
+        Article article = getArticleById(id);
+        List<Comment> comments = article.getComments();
+        comments.add(comment);
+        article.setComments(comments);
+        updateArticle(article);
+    }
+
     // READ
 
     @Override
