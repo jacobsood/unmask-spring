@@ -17,6 +17,8 @@
             this.observer = new IntersectionObserver(([entry]) => {
                 if (entry && entry.isIntersecting) {
                     this.$emit('intersect');
+                } else {
+                    this.$emit('no-intersect')
                 }
             }, option);
             
