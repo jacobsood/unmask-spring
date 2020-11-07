@@ -1,98 +1,34 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import _ from 'lodash'
-import axios from '../assets/javascript/articleAPI.js'
+import axios from '../assets/javascript/articleAPI'
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    articles: [
+    articles: null,
+    test_articles: [
       {
-        id: 1,
-        title: "Hello",
-        source: "Abc",
-        text: "Hello one two three",
+        id: 213412,
+        title: "hello",
+        tags: ["Tag1", "Tag2", "Tag3"],
         country: "Australia",
-        comments: [
-          {
-            id: 1,
-            
-          },
-          {
-            id: 2,
-
-          }
-        ],
-        tags: [
-          {
-            id: 1,
-            tag: "Money Laundering",
-          },
-          {
-            id: 2,
-            tag: "Illegal Gold Mining",
-          }
-        ]
+        source: "ABC", 
+        text: "Hello everybody, how are we?"
       },
       {
-        id: 2,
-        title: "Hi there",
-        source: "Abc",
-        text: "Hello one two three",
-        country: "Australia",
-        comments: [
-          {
-            id: 1,
-            
-          },
-          {
-            id: 2,
-
-          }
-        ],
-        tags: [
-          {
-            id: 1,
-            tag: "Money Laundering",
-          },
-          {
-            id: 2,
-            tag: "Illegal Gold Mining",
-          }
-        ],
-      },
-      {
-        id: 3,
-        title: "Wow",
-        source: "Abc",
-        text: "Hello one two three",
-        country: "Australia",
-        comments: [
-          {
-            id: 1,
-            
-          },
-          {
-            id: 2,
-
-          }
-        ],
-        tags: [
-          {
-            id: 1,
-            tag: "Money Laundering",
-          },
-          {
-            id: 2,
-            tag: "Illegal Gold Mining",
-          }
-        ],
+        id: 412,
+        title: "bye",
+        tags: ["Tag5", "Tag2", "Tag6"],
+        country: "Peru",
+        source: "Telemundo",
+        text: "Goodbye everyone!",
       }
     ],
   },
   
   getters: {
-    getArticles: state  => state.articles.sort(),
+    getArticles: state  => state.test_articles,
     
     getArticlesByTag: state => tag => _.find(state.tags, { tag: clean(tag) }).articles,
     
@@ -103,6 +39,7 @@ export const store = new Vuex.Store({
   
   mutations: {    
     setArticles(state, axiosResponse) {
+      console.log(axiosResponse);
       state.articles = axiosResponse;
     },
   },
