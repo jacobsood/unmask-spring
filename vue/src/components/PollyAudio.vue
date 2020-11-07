@@ -1,7 +1,6 @@
 <template>
     <div>
-      <play-observer @intersect="play"></play-observer>
-      <stop-observer @intersect="pause"></stop-observer>
+      <play-observer @no-intersect="pause" @intersect="play"></play-observer>
     </div>
 </template>
 
@@ -9,7 +8,6 @@
 import axios from 'axios'
 import AWS from 'aws-sdk'
 import PlayObserver from './PollyPlayObserver';
-import StopObserver from './PollyStopObserver';
 
 export default {
   name: 'PollyAudio',
@@ -36,7 +34,6 @@ export default {
   },
   components: {
     PlayObserver,
-    StopObserver
   },
   props: {
     text: {
@@ -46,13 +43,8 @@ export default {
   methods: {
 
     play: function() {
-      if (typeof this.audioContext !== 'undefined') {
-        this.audioContext.resume();
-        return;
-      }
-
-      this.audioContext = this.createAudioCtx();
-      this.createListener();
+      this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      this.gainNode = this.audioContext.createGain();
 
       // Initialize the Amazon Cognito credentials provider
       AWS.config.region = 'ap-southeast-2'; 
@@ -67,27 +59,14 @@ export default {
     },
 
     pause: function() {
-      this.gainNode.gain.exponentialRampToValueAtTime(0.00001, 1.3);
-      // this.audioContext.suspend();
+      if (typeof this.gainNode !== 'undefined') {
+        this.gainNode.gain.exponentialRampToValueAtTime(0.000001, 0.6);
+        window.setTimeout(this.suspend, 1800);
+      }
     },
-    
-    createListener: function() {
-      const listener = this.audioContext.listener;
-      const posX = 0;
-      const posY = 0;
-      const posZ = 0;
-      listener.setPosition(posX, posY, posZ);
-      
-      listener.forwardX.value = 0;
-      listener.forwardY.value = 0;
-      listener.forwardZ.value = 1;
-      listener.upX.value = 0;
-      listener.upY.value = -1;
-      listener.upZ.value = 0;
-    },
-    createAudioCtx: function() {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      return new AudioContext();
+
+    suspend: function() {
+      this.audioContext.suspend();
     },
 
     playAudio: function() {
@@ -96,14 +75,14 @@ export default {
       const sourceNode = this.audioContext.createBufferSource();
       
       this.setupAudio(sourceUrl, sourceNode)
-      .then(sourceNode.connect(this.createGain()).connect(this.createReverb())).then(sourceNode.start())
+      .then(this.gainNode.gain.setValueAtTime(0.00001, 0))
+      .then(sourceNode.connect(this.createReverb()).connect(this.gainNode)).then(sourceNode.start())
       .then(this.gainNode.gain.exponentialRampToValueAtTime(1, 0.3));
+
     },
     createGain: function() {
-      const gainNode = this.audioContext.createGain();
-      gainNode.gain.setValueAtTime(0.00001, 0);
-      this.gainNode = gainNode;
-      return gainNode;
+      this.gainNode.gain.setValueAtTime(0.00001, 0);
+      return this.gainNode;
     },
     createReverb: function() {
       const index = Math.floor(Math.random() * this.sampleSize);
