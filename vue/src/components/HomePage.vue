@@ -24,7 +24,7 @@
         Articles
       </router-link>
       <router-link :to="{ name: 'newstory'}">
-        New Story
+        Share
       </router-link>
     </div>
     
