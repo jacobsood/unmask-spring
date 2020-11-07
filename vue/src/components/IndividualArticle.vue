@@ -43,7 +43,7 @@ export default {
     }
   },
   methods: {
-    like(){
+    like(){ // method run on like icon click
       if(this.heart == 0){
         this.heart++;
       } else {
