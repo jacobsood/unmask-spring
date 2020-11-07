@@ -25,6 +25,16 @@
         <el-button type="text" @click="dialogVisible = false">OK</el-button>
       </span>
     </el-dialog>
+    <el-dialog
+      title="WELCOME"
+      :visible.sync="loginVisible"
+      width="30%"
+      >
+      <span>WELCOME BACK {{form.username}}</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="text" @click="backToHome">OK</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -49,6 +59,7 @@ import qs from 'qs'
           ]
         },
         dialogVisible: false,
+        loginVisible:false,
         status:null
       }
     },
@@ -72,12 +83,21 @@ import qs from 'qs'
                                 this.dialogVisible = true;
                                 return false;
                             }else{
-                                alert("login success")
-                                this.$router.push("/home");
+                                this.loginVisible = true
                                 this.$cookies.set("loginStatus", response.data["loginStatus"])
                                 this.$cookies.set("userEmail", response.data["userEmail"])
                                 this.$cookies.set("userID", response.data["userID"])
                                 this.$cookies.set("username", response.data["username"])
+                                const secounds = 3
+                                let num = 0
+                                const timer = setInterval(() => {
+                                  if(num < secounds) {
+                                    num++
+                                  }else {
+                                    clearInterval(timer)
+                                    this.$router.push("/home");
+                                  }
+                                }, 1000)
                                 //$cookies.get(keyName)  // return value         
                             }
                     })
@@ -90,6 +110,9 @@ import qs from 'qs'
         },
         signup(){
             window.location.href="http://localhost:8080/signup"
+        },
+        backToHome(){
+            this.$router.push("/home");
         }
     }
   }
