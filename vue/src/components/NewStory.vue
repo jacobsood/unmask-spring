@@ -28,20 +28,18 @@
       </router-link>
     </div>
     
-    <form class="article-form">
+    <form class="article-form" @submit.prevent="publish">
         <h1 id="page-title">New Story</h1>
         <label for="new-title">Title</label>
-        <textarea id="new-title" rows="10" />
+        <textarea id="new-title" rows="10" v-model="titleData" />
 
         <label for="new-text">Text</label>
-        <textarea id="new-text" rows="10" />
+        <textarea id="new-text" rows="10" v-model="textData" />
 
         <label for="new-tag">Tag</label>
-        <textarea id="new-tag" rows="10" />
+        <textarea id="new-tag" rows="10" v-model="tagData" />
         <button id="publish-button">Publish</button>
     </form>
-
-    <!-- Article was here -->
     <observer @intersect="intersecting"></observer>
   </div>
 </template>
@@ -53,14 +51,19 @@ export default {
   name: 'NewStory',
   data: function() {
     return {
-      
+        //variables connected to input fields
+      titleData: "",
+      textData: "",
+      tagData: ""
     }
   },
   components: {
     Observer
   },
   methods: {
-    
+    publish(){ //method run on button click
+        console.log(this.titleData, this.textData, this.tagData);
+    }
   },
   computed: {
     
