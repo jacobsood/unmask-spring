@@ -20,6 +20,7 @@
 
 	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+
 		<property name="url" value="jdbc:mysql://mydatabase.c2dr8slcio43.us-east-1.rds.amazonaws.com/unmask" />
 		<property name="username" value="jacobsood" />
 		<property name="password" value="unmaskelec" />
@@ -34,6 +35,7 @@
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
+				<prop key="show_sql">true</prop>
 			</props>
 		</property>
 	</bean>
@@ -42,6 +44,7 @@
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+
 
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<tx:annotation-driven proxy-target-class="true"/>

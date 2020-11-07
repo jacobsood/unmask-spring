@@ -15,6 +15,11 @@ public class CommentTest{
         comment.setCommentID(testCommentID);
         assertEquals(testCommentID, comment.getCommentID(), "Comment ID not set correctly");
     }
+    public void testSetAndGetArticleID(){
+        long testArticleID = 42257421;
+        comment.setCommentID(testArticleID);
+        assertEquals(testArticleID, comment.getArticleID(),"Article ID not set correctly");
+    }
     public void testSetAndGetAuthorID(){
         long testAuthorID = 95837154;
         comment.setCommentID(testAuthorID);
@@ -22,9 +27,9 @@ public class CommentTest{
     }
     public void testSetAndGetCommentContent(){
         String testCommentContent = "Comment 78468374 by User 95837154 on Article 95837154";
-        assertNull(comment.getText());
-        comment.setText(testCommentContent);
-        assertEquals(testCommentContent, comment.getText(), "Comment content not set correctly");
+        assertNull(comment.getCommentContent());
+        comment.setCommentContent(testCommentContent);
+        assertEquals(testCommentContent, comment.getCommentContent(), "Comment content not set correctly");
     }
     public void testSetAndGetUpVoteCount(){
         int testUpVoteCount = 33;

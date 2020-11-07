@@ -1,15 +1,16 @@
 package au.usyd.elec5619.domain;
 
+import org.hibernate.annotations.Cascade;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Article")
@@ -22,7 +23,7 @@ public class Article implements Serializable {
   
     @Id
     @GeneratedValue
-    private long article_id;
+    private long id;
 
     @NotNull
     private String title;
@@ -31,51 +32,42 @@ public class Article implements Serializable {
 
     @NotNull
     @Column(name = "created_by_admin")
-    private boolean createdByAdmin = true;
+    private boolean createdByAdmin;
 
     @NotNull
     private String text;
 
     private String country;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "article")
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Comment> comments = new ArrayList<Comment>();
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-    @Fetch(value = FetchMode.SUBSELECT)
+    @ManyToMany
     @JoinTable(
-        name = "Article_Tag",
+        name = "article_tag",
         joinColumns = @JoinColumn(name = "article_id"),
         inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-    private List<Tag> tags = new ArrayList<Tag>();
+    private List<Tag> tags;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
     @JoinTable(
-        name = "UserFavourite",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "article_id")
+            name = "UserFavourite",
+            joinColumns = @JoinColumn(name = "article_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<User> favouritedBy = new ArrayList<User>();
+    private Set<User> favouritedBy = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL}) // to avoid no session error
     @JoinTable(
-        name = "UserHistory",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "article_id")
+            name = "UserHistory",
+            joinColumns = @JoinColumn(name = "article_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+
     )
-    private List<User> viewedBy = new ArrayList<User>();
+    private Set<User> viewedBy = new HashSet<>();
 
 
-    public List<User> getUsersFavouritedBy() {
-        return favouritedBy;
-    }
 
     public long getId() {
-        return article_id;
+        return id;
     }
     
     public String getTitle() {
@@ -98,20 +90,16 @@ public class Article implements Serializable {
         return country;
     }
 
-    public List<User> getUsersViewedBy() {
-        return viewedBy;
+    public Set<User> getUsersViewedBy() {
+        return  viewedBy;
     }
 
     public List<Tag> getTags() {
         return tags;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
     public void setId(long id) {
-        this.article_id = id;
+        this.id = id;
     } 
 
     public void setTitle(String title) {
@@ -138,15 +126,36 @@ public class Article implements Serializable {
         this.tags = tags;
     }
 
-    public void setUsersViewedBy(List<User> viewedBy) {
+    public void setUsersViewedBy(Set<User> viewedBy) {
         this.viewedBy = viewedBy;
     }
 
-    public void setUsersFavouritedBy(List<User> favouritedBy) {
+
+    public Set<User> getFavouritedBy() {
+        return  favouritedBy;
+    }
+
+    public void setFavouritedBy(Set<User> favouritedBy) {
         this.favouritedBy = favouritedBy;
     }
-    
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+
+    @Override
+    public int hashCode() {
+        // TODO Auto-generated method stub
+        //return name.hashCode();
+        return (int) id;
     }
+    @Override
+    public boolean equals(Object obj) {
+        // TODO Auto-generated method stub
+        if(obj instanceof Article) {
+            Article article = (Article) obj;
+            if(this.id == article.id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

@@ -1,0 +1,48 @@
+.form-group{
+    margin: 0 0;
+}
+.md-form{
+    margin: 5px 0 0 0;
+}
+.modal-body{
+    padding:2rem 1rem;
+}
+.help-block.error {
+    margin-bottom: 5px;
+}
+.has-error label{
+    color: #ff3547 !important;
+}
+.has-error input.form-control{
+    border-bottom-color: #ff3547 !important;
+}
+.messages{
+    padding-left: 0px;
+}
+.modal-backdrop {
+    opacity: 0 !important;
+    filter: alpha(opacity=0) !important;
+}
+.profileButton {
+    float: right;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    color: #222;
+    background: #fff;
+}
+body.dark-theme {
+    color: #eee;
+    background: #121212;
+}
+
+a {
+    color: #0033cc;
+}
+body.dark-theme a {
+    color: #809fff;
+}

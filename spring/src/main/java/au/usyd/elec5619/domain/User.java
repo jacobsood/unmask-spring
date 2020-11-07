@@ -1,24 +1,25 @@
 package au.usyd.elec5619.domain;
 
+
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
 @Table(name = "User")
 public class User implements Serializable {
-    /**
-     *
-     */
-    private static final long serialVersionUID = -2485483117804868283L;
-
-    @GeneratedValue
-    private long user_id;
 
     @Id
+    @GeneratedValue
+    @Column(nullable = false,unique = true)
+    private long id;
+
+
+    @Column(nullable = false,unique = true)
     private String username;
 
     @NotNull
@@ -27,37 +28,33 @@ public class User implements Serializable {
     @NotNull
     private String password ;
 
-    @NotNull
-    private Boolean freeze;
 
     private String email;
 
-    @NotNull
-    @Column(name = "login_status")
-    private Boolean loginStatus;
 
-    @ManyToMany(mappedBy = "favouritedBy")
-    private List<Article> favouriteArticles = new ArrayList<Article>();
+    @ManyToMany(mappedBy = "favouritedBy",fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+    private Set<Article> favouriteArticles = new LinkedHashSet<>();
 
-    @ManyToMany(mappedBy = "viewedBy")
-    private List<Article> history = new ArrayList<Article>();
+    @ManyToMany(mappedBy = "viewedBy",fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+    private Set<Article> history = new LinkedHashSet<>();
 
-    public User() { }
+
+
+    public User(){
+
+    }
+    public User(String username, String password,String email){
+        super();
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
     public User(String username, String salt, String password,String email){
+        super();
         this.username = username;
         this.salt = salt;
         this.password = password;
-        this.freeze = false;
         this.email = email;
-        this.loginStatus = false;
-    }
-
-    public List<Article> getFavouriteArticle() {
-        return favouriteArticles;
-    }
-
-    public void setFavouriteArticle(List<Article> favouriteArticles) {
-        this.favouriteArticles = favouriteArticles;
     }
 
     public String getSalt() {
@@ -92,37 +89,65 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public Boolean getLoginStatus() {
-        return loginStatus;
-    }
-
-    public void setLoginStatus(Boolean loginStatus) {
-        this.loginStatus = loginStatus;
-    }
-
-    public Boolean getFreeze() {
-        return freeze;
-    }
-
-    public void setFreeze(Boolean freeze) {
-        this.freeze = freeze;
-    }
-
-
     public long getId() {
-        return user_id;
+        return id;
     }
 
     public void setId(long id) {
-        this.user_id = id;
+        this.id = id;
     }
 
-    public List<Article> getViewedArticles() {
-        return history;
+    public Set<Article> getFavouriteArticles() {
+        return  favouriteArticles;
     }
 
-    public void setViewedArticles(List<Article> history) {
+    public void setFavouriteArticles(Set<Article> favouriteArticles) {
+        this.favouriteArticles = favouriteArticles;
+    }
+
+    public Set<Article> getHistory() {
+        return  history;
+    }
+
+    public void setHistory(Set<Article> history) {
         this.history = history;
     }
 
+    public Set<Article> getHistory(int maxNum) {
+        int length = history.size();
+        if (length<maxNum){
+            return  history;
+        }else{
+            List<Article> linkedHashSetList = new ArrayList<Article>(history);
+            return (LinkedHashSet<Article>) linkedHashSetList.subList(length-maxNum,length);
+        }
+    }
+
+    public Set<Article> getFavouriteArticles(int maxNum) {
+        int length = favouriteArticles.size();
+        if (length<maxNum){
+            return  favouriteArticles;
+        }else{
+            List<Article> linkedHashSetList = new ArrayList<Article>(favouriteArticles);
+            return (LinkedHashSet<Article>) linkedHashSetList.subList(length-maxNum,length);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        // TODO Auto-generated method stub
+        //return name.hashCode();
+        return (int) id;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        // TODO Auto-generated method stub
+        if(obj instanceof User) {
+            User user = (User) obj;
+            if(this.id == user.id) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

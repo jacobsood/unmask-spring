@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name = "Comment")
@@ -21,39 +19,46 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue
     @Column(name="comment_id")
-    private long comment_id;
+    private long commentID;
 
-    @ManyToOne
-    @JoinColumn(name="article_id")
-    private Article article;
+    @Column(name="article_id")
+    private long articleID;
 
-    @Column(name="user_id")
-    private long user_id;
+    @Column(name="author_id")
+    private long authorID;
 
-    private String text;
+    @Column(name="comment_content")
+    private String commentContent;
 
     @Column(name="up_vote_count")
     private int upVoteCount;
 
     public long getCommentID() {
-        return comment_id;
+        return commentID;
     }
-    public void setCommentID(long comment_id) {
-        this.comment_id = comment_id;
+    public void setCommentID(long commentID) {
+        this.commentID = commentID;
+    }
+
+    public long getArticleID() {
+        return articleID;
+    }
+    public void setArticleID(long articleID) {
+        this.articleID = articleID;
     }
 
     public long getAuthorID() {
-        return user_id;
+        return authorID;
     }
-    public void setAuthorID(long user_id) {
-        this.user_id = user_id;
+    public void setAuthorID(long authorID) {
+        this.authorID = authorID;
     }
 
-    public String getText() {
-        return text;
+    public String getCommentContent() {
+        return commentContent;
     }
-    public void setText(String text) {
-        this.text = text;
+    public void setCommentContent(String commentContent) {
+        this.commentContent = commentContent;
     }
 
     public int getUpVoteCount() {

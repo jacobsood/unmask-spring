@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,16 +15,16 @@ public class Tag implements Serializable {
     private static final long serialVersionUID = 507208535532864149L;
 
     @Id
-    private String tag_id;
+    private String id;
 
     @ManyToMany(mappedBy = "tags")
-    private List<Article> articles = new ArrayList<Article>();
+    private List<Article> articles;
 
     public String getId() {
-        return tag_id;
+        return id;
     }
 
-    public void setId(String tag_id) {
-        this.tag_id = tag_id;
+    public void setId(String id) {
+        this.id = id;
     } 
 }

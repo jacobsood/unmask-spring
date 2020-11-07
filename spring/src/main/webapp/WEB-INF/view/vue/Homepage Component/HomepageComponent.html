@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!-- Home page component
+including:
+- sign in/up
+- like or dislike
+- user profile
+-->
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta name="keywords" content="Money Laundering, Tax Evasion, Corruption, Politics, Injustices, Greed">
+
+        <title>Unmask - Stories Untold</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/homepageComponent.css">
+
+    </head>
+    <body>
+        <!-- ###################### Likes button begin ######################-->
+        <button id="likebtn" name="likebtn" type="button" class="btn btn-link likeButton shadow-none" style="display: none;">
+            <i class="far fa-thumbs-up fa-6x"></i>
+        </button>
+        <!-- ###################### Profile modal begin ######################-->
+        <button name="profileButton" id="profileButton" type="button" class="btn btn-link profileButton shadow-none btn-lg"
+                data-toggle="modal" data-target="#profileHeightModalRight" style="display: none;">
+            <i id="userIcon" class="far fa-user-circle fa-3x my-3"></i>
+            <p>Username</p>
+        </button>
+        <div class="modal fade right" id="profileHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-full-height modal-right" role="document"> <!-- change width here-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title w-100 col-sm-6" id="profileModalLabel">User Profile</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body border-bottom" id="readingHistoryList">
+                        <div class="card shadow-none" style="width: auto;">
+                            <div class="card-title form-inline">
+                                <h5 class="font-weight-bold mb-3 col-sm-6">Reading History</h5>
+                                <button type="button" class="btn btn-link mb-2 col-sm-5 text-right" data-toggle="modal" id="detailedHistoryTrigger" data-target="#detailedHistory">
+                                    <a href="#!" class="card-link font-weight-bold">SEE ALL</a>
+                                </button>
+                            </div>
+                            <ul class="list-group list-group-flush" id="readingList">
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-body" id="likeArticleList">
+                        <div class="card shadow-none" style="width: auto;">
+                            <div class="card-title form-inline">
+                                <h5 class="font-weight-bold mb-3 col-sm-6">Likes</h5>
+                                <button type="button" class="btn btn-link mb-2 col-sm-5 text-right" id="detailedLikesTrigger" data-toggle="modal" data-target="#detailedLike">
+                                    <a href="#!" class="card-link font-weight-bold">SEE ALL</a>
+                                </button>
+                            </div>
+                            <ul class="list-group list-group-flush" id="likeList">
+                                <!--add add favourite here here-->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-red" onclick="window.location.href='/signout'">Log out</button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#resetHeightModalRight">Reset Password</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ###################### Detailed reading history ######################-->
+        <div class="modal fade right" id="detailedHistory" tabindex="-1" role="dialog" aria-labelledby="detailedHistoryModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-full-height modal-right" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title w-100" id="detailedHistoryModalLabel">Reading History</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" >
+                        <ul class="list-group list-group-flush" id="detailedHistoryList">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ###################### Detailed likes ######################-->
+        <div class="modal fade right" id="detailedLike" tabindex="-1" role="dialog" aria-labelledby="detailedLikeModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-full-height modal-right" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title w-100" id="detailedLikeModalLabel">Likes</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" >
+                        <ul class="list-group list-group-flush" id="detailedLikeList">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ###################### Reset password begin ######################-->
+        <div class="modal fade" id="resetHeightModalRight" tabindex="-1"  role="dialog" aria-labelledby="resetModalLabel"
+             aria-hidden="false">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <h4 class="modal-title w-100" id="resetModalLabel">Reset Password</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="resetForm" class="form-horizontal" novalidate>
+                    <div class="modal-body mx-4" id="resetPassword">
+                            <div class="form-group row mb-0">
+                                <div class="col-sm-12 md-form px-0">
+                                    <input id="oldPassword" class="form-control"  type="password" name="oldPassword">
+                                    <label class="control-label" for="oldPassword">Old Password</label>
+                                </div>
+                                <div class="col-sm-6 messages">
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <div class="col-sm-12 md-form px-0">
+                                    <input id="newPassword" class="form-control" type="password" name="newPassword">
+                                    <label for="newPassword" class="control-label">New Password</label>
+                                </div>
+                                <div class="col-sm-6 messages " ></div>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <div class="col-sm-12 md-form px-0">
+                                    <input id="confirmNewPassword" class="form-control" type="password" name="confirmNewPassword">
+                                    <label for="confirmNewPassword" class="control-label">Confirm New Password</label>
+                                </div>
+                                <div class="col-sm-6 messages " ></div>
+                            </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="submit" class="btn btn-dark" >Confirm</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- ###################### Login button ######################-->
+        <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myLoginModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <form id="loginForm" class="form-horizontal" novalidate>
+                            <div class="form-group row mb-0">
+                                <div class="col-sm-12 md-form px-0">
+                                    <input id="username" class="form-control" type="text" name="username">
+                                    <label class="control-label" for="username">Username</label>
+                                </div>
+                                <div class="col-sm-6 messages">
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <div class="col-sm-12 md-form px-0">
+                                    <input id="password" class="form-control" type="password" name="password">
+                                    <label for="password" class="control-label">Password</label>
+                                </div>
+                                <div class="col-sm-6 messages " ></div>
+                            </div>
+                            <div class="form-group row">
+                                <div class=" pt-3 d-flex ">
+                                    <button type="submit" class="btn btn-dark" >SIGN IN</button>
+                                </div>
+                                <div class=" pt-3 d-flex " >
+
+                                    <a href="/signup" class="btn btn-red">SIGN UP</a>
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button name="loginButton" id="loginButton" type="button" class="btn btn-blue-grey" data-toggle="modal" data-target="#modalLoginForm">
+            SIGN IN
+        </button>
+        <!-- ###################### Like button and profile test ######################-->
+        <div class="article">
+            <h4 id="articleID" class="articleID" name = "articleID">1</h4>
+            <h4 id="title" class="title" name = "title">title</h4>
+            <h4 id="audio_url" class="audio_url" name = "audio_url">audio_url</h4>
+            <h4 id="source" class="source" name = "source">source</h4>
+            <h4 id="text" class="text" name = "text">text</h4>
+            <h4 id="country" class="country" name = "country">country</h4>
+            <h4 id="likeStatus" class="likeStatus" name = "likeStatus">false</h4>
+        </div>
+    <!--################################################################################-->
+        <!-- Validate tooltips -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+        <!-- validate.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <!-- custom scripts -->
+        <script type="text/javascript" src="js/homepageComponents.js"></script>
+
+    </body>
+</html>

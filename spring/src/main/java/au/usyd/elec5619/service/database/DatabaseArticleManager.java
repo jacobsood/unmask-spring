@@ -1,7 +1,6 @@
 package au.usyd.elec5619.service.database;
 
 import au.usyd.elec5619.domain.Article;
-import au.usyd.elec5619.domain.Comment;
 import au.usyd.elec5619.service.Idatabase.ArticleManager;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Service(value = "ArticleManager")
 @Transactional
 public class DatabaseArticleManager implements ArticleManager {
 
@@ -28,15 +27,6 @@ public class DatabaseArticleManager implements ArticleManager {
         this.sessionFactory.getCurrentSession().save(article);
     }
 
-    @Override
-    public void addCommentToArticle(long id, Comment comment) {
-        Article article = getArticleById(id);
-        List<Comment> comments = article.getComments();
-        comments.add(comment);
-        article.setComments(comments);
-        updateArticle(article);
-    }
-
     // READ
 
     @Override
@@ -48,7 +38,19 @@ public class DatabaseArticleManager implements ArticleManager {
 
     @Override
     public Article getArticleById(long id) {
-        return (Article) this.sessionFactory.getCurrentSession().get(Article.class, id);
+        return this.sessionFactory.getCurrentSession().get(Article.class, id);
+    }
+
+    // Many to many relationship
+    @Override
+    public List<Article> getArticlesByTag(String tag) {
+        String hql =
+                    "FROM Article as a " +
+                    "JOIN a.tags AS at " +
+                    "WHERE at.id = :tag";
+        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("tag", tag);
+        List<Article> articleList = queryList.getResultList();
+        return articleList;
     }
 
     @Override

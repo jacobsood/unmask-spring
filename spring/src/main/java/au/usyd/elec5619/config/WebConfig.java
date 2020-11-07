@@ -19,7 +19,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     registry.addResourceHandler("/vue/**").addResourceLocations("/WEB-INF/view/vue/");
-    registry.addResourceHandler("/jsp/**").addResourceLocations("/WEB-INF/view/");
+    registry.addResourceHandler("/jsp/**").addResourceLocations("/WEB-INF/view/jsp/");
   }
 
   @Bean

@@ -24,17 +24,14 @@ var commentDiv = new Vue({
     el: '#comment-div',
     data: {
         showDialog: false,
-        commentList: [],
+        commentList: [
+            {id:0, authorID:111, content:'comment 1'},
+            {id:1, authorID:222, content:'comment 2'},
+            {id:2, authorID:333, content:'comment 3'},
+        ],
         currentComment: {},
     },
-    created: function(){
-        this.commentList = [
-               {id:0, authorName:'Author 1', content:'comment 1'},
-               {id:1, authorName:'Author 2', content:'comment 2'},
-               {id:2, authorName:'Author 3', content:'comment 3'},
-           ];
-        this.currentComment = this.commentList[0];
-    },
+    created: function(){    this.currentComment = this.commentList[0];    },
     methods: {
         previousComment: function(){
             if(this.currentComment.id==0){

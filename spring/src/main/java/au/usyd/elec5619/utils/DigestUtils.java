@@ -2,6 +2,7 @@ package au.usyd.elec5619.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 /**
  * MD5 or SHA encryption
@@ -9,7 +10,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class DigestUtils {
 	
-	public static final String MD5 = "MD5", SHA1 = "SHA-1", SHA256 = "SHA-256"; 
+	public static final String MD5 = "MD5", SHA1 = "SHA-1", SHA256 = "SHA-256";
+	private static int saltLength = 16;
 
 	public static String digest(String mess, String method) {
 		MessageDigest md;
@@ -39,5 +41,21 @@ public class DigestUtils {
 
 	public static String sha256Digest(String mess) {
 		return digest(mess, SHA256);
+	}
+
+	public static String randomString() {
+		String base = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~!@#$%^&*()_+=<>/,./;'[]{}|\\\\";
+		int length = base.length();
+
+		char[] buff = new char[saltLength];
+		Random r = new Random();
+		for(int i = 0; i < saltLength; i++) {
+			buff[i] = base.charAt(r.nextInt(length));
+		}
+		return new String(buff);
+	}
+
+	public static int getSaltLength() {
+		return saltLength;
 	}
 }
