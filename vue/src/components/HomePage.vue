@@ -2,7 +2,7 @@
   <div id="list" class="home-page">
     <header>
       <router-link :to="{ name: 'landing'}">
-        <h4>Unmask - Stories Untold</h4>  
+        <h4>Unmask - <span>Stories Untold</span></h4>  
       </router-link>
     </header>
     <div class="left-side-bar side-bar">
@@ -25,12 +25,11 @@
       </router-link>
     </div>
     <template v-for="repeat in infiniteCounter">
-    <div :key="repeat" class="article">
+    <div :key="repeat">
       <IndividualArticle
         v-for="article in articles"
         v-bind:key="`${article.id}_${repeat}`"
         v-bind:article="article"
-        class="individual-article"
       ></IndividualArticle>
     </div>
     </template>
@@ -80,6 +79,10 @@ header {
   padding: 5px 0 5px 0;
   top: 0;
   width: 100%;
+
+  span {
+    color: red;
+  }
 }
 
 .side-bar {
@@ -114,17 +117,4 @@ header {
   font-family: "CustomY78";
   width: 100%;
 }
-
-.article {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  font-size: 2em;
-}
-
-.individual-article {
-  min-height: 100vh;
-  min-width: 100vw;
-}
-
 </style>

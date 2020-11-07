@@ -1,8 +1,16 @@
 <template>
-  <div class="article-container">
-    <PollyAudio></PollyAudio>
-    <h1>{{ article.title }}</h1>
-    <p>{{ article.text }}</p>
+  <div class="article-template">
+    <div class="article-container">
+      <PollyAudio v-bind:text="article.text"></PollyAudio>
+      <h1 class=title>{{ article.title }}</h1>
+      <p class="author">{{ article.source }}</p>
+      <p class="country">{{ article.country }}</p>
+      <p class="tags">
+        <template v-for="tag in article.tags">
+          <span :key="tag">{{ tag }}</span>
+        </template>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -24,20 +32,41 @@ export default {
 <style scoped lang='scss'>
 @import "~@/assets/scss/_typo.scss";
 
-.article-page {
-  font-family: "CustomY78";
-  margin-left: 5%;
-  margin-right: 5%;
-}
-
-.article-container {
-  border: 2px solid red;
+.article-template {
   display: flex;
-  justify-content: center;
   align-items: center;
-  
-  h1 {
-    font-size: 2em;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100%;
+  font-size: 2em;
+  border: 2px solid red;
+
+  .article-container {
+    width: 60vw;
+    min-height: 50vh;
+
+    border: 2px solid red;
+    text-align: center;
+
+    h1 {
+      font-size: 8vh;
+    }
+    
+    .title, .author {
+      background: none;
+      position: relative;
+      left: -50%;
+      top: -100%;
+    }
+
+    .country {
+      background: none;
+      position: relative;
+      right: -40%;
+      transform: rotate(-90deg);
+    }
+
+
   }
 }
 </style>

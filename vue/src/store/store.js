@@ -39,7 +39,6 @@ export const store = new Vuex.Store({
   
   mutations: {    
     setArticles(state, axiosResponse) {
-      console.log(axiosResponse);
       state.articles = axiosResponse;
     },
   },

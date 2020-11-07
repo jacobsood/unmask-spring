@@ -1,57 +1,74 @@
 <template>
-    <div></div>
+    <div>
+      <play-observer @intersect="play"></play-observer>
+      <stop-observer @intersect="pause"></stop-observer>
+    </div>
 </template>
 
 <script>
 import axios from 'axios'
+import AWS from 'aws-sdk'
+import PlayObserver from './PollyPlayObserver';
+import StopObserver from './PollyStopObserver';
 
 export default {
   name: 'PollyAudio',
   data: function() {
     return {
-      playDelay: 3000,
-      interval: undefined,
-      audiosPlaying: 0,
-      maxAudioPlaying: 3,
+      playDelay: 800,
       reverbIndex: 0,
       audioContext: undefined,
       reverbSamples: [ 
         'https://hrithviksood.s3-ap-southeast-2.amazonaws.com/unmask/audio/ReverbSample/customReverb.wav',
         'https://hrithviksood.s3-ap-southeast-2.amazonaws.com/unmask/audio/ReverbSample/customReverb2.wav',
       ],
-      quadrant: {
-        FIRST: {
-          xPos: Math.floor(Math.random() * 11) * 100,
-          yPos: Math.floor(Math.random() * 11) * 100,
-          zPos: Math.floor(Math.random() * 11) * 100,
-        },
-        SECOND: {
-          xPos: Math.floor(Math.random() * 11) * -100,
-          yPos: Math.floor(Math.random() * 11) * -100,
-          zPos: Math.floor(Math.random() * 11) * 100,
-        },
-        THIRD: {
-          xPos: Math.floor(Math.random() * 11) * -100,
-          yPos: Math.floor(Math.random() * 11) * 100,
-          zPos: Math.floor(Math.random() * 11) * -100,
-        },
-        FOURTH: {
-          xPos: Math.floor(Math.random() * 11) * 100,
-          yPos: Math.floor(Math.random() * 11) * -100,
-          zPos: Math.floor(Math.random() * 11) * -100,
-        }
+      polly: new AWS.Polly({apiVersion: '2016-06-10'}),
+      speechParams: {
+        OutputFormat: "mp3",
+        SampleRate: "16000",
+        Text: this.text,
+        TextType: "text",
+        VoiceId: "Matthew"
       },
-      quadrantIndex: 0,
+      genUrl: undefined,
+      gainNode: undefined,
     };
   },
-  mounted: function() {
-    this.setup();
-    window.setTimeout(this.playAudio, this.playDelay);
+  components: {
+    PlayObserver,
+    StopObserver
+  },
+  props: {
+    text: {
+      type: String,
+    }
   },
   methods: {
-    setup: function() {
+
+    play: function() {
+      if (typeof this.audioContext !== 'undefined') {
+        this.audioContext.resume();
+        return;
+      }
+
       this.audioContext = this.createAudioCtx();
       this.createListener();
+
+      // Initialize the Amazon Cognito credentials provider
+      AWS.config.region = 'ap-southeast-2'; 
+      AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'ap-southeast-2:54e6603d-a856-4480-990b-5600925b04fb'});
+
+      var polly_signer = new AWS.Polly.Presigner(this.speechParams, this.polly);
+      polly_signer.getSynthesizeSpeechUrl(this.speechParams, (error, url) => {
+        this.genUrl = url;
+        console.log(url);
+        window.setTimeout(this.playAudio, this.playDelay);
+      });
+    },
+
+    pause: function() {
+      this.gainNode.gain.exponentialRampToValueAtTime(0.00001, 1.3);
+      // this.audioContext.suspend();
     },
     
     createListener: function() {
@@ -72,64 +89,28 @@ export default {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       return new AudioContext();
     },
+
     playAudio: function() {
-      clearInterval(this.interval);
-      
-      const sourceUrl = this.$store.getters.getRecordings();
+      const sourceUrl = this.genUrl;
       console.log(sourceUrl);
       const sourceNode = this.audioContext.createBufferSource();
       
       this.setupAudio(sourceUrl, sourceNode)
-      .then(sourceNode.connect(this.createGain(1)).connect(this.createPanner())).then(sourceNode.start());
-      
-      // update play delay to be between 12-16 seconds
-      this.playDelay = (Math.random() * (17 - 12) + 12) * 1000;
-      this.interval = window.setInterval(this.playAudio, this.playDelay);
+      .then(sourceNode.connect(this.createGain()).connect(this.createReverb())).then(sourceNode.start())
+      .then(this.gainNode.gain.exponentialRampToValueAtTime(1, 0.3));
     },
-    createGain: function(volume) {
+    createGain: function() {
       const gainNode = this.audioContext.createGain();
-      gainNode.gain.value = volume;
+      gainNode.gain.setValueAtTime(0.00001, 0);
+      this.gainNode = gainNode;
       return gainNode;
     },
     createReverb: function() {
       const index = Math.floor(Math.random() * this.sampleSize);
       var reverbUrl = this.reverbSamples[index];
       const reverbNode = this.audioContext.createConvolver();
-      this.setupAudio(reverbUrl, reverbNode).then(reverbNode.connect(this.getPanner()));
+      this.setupAudio(reverbUrl, reverbNode).then(reverbNode.connect(this.audioContext.destination));
       return reverbNode;
-    },
-    createPanner: function() {
-      var panner = this.audioContext.createPanner();
-      panner.panningModel = 'HRTF';
-      panner.distanceModel = 'linear';
-      
-      const currentQuad = this.currentQuadrant;
-      let xPos = currentQuad.xPos;
-      let yPos = currentQuad.yPos;
-      let zPos = currentQuad.zPos;
-      this.quadrantIndex = this.quadrantIndex >= 3 ? 0 : ++this.quadrantIndex;
-      
-      panner.setPosition(xPos, yPos, zPos);
-      
-      
-      var analyser = this.audioContext.createAnalyser();
-      var distortion = this.audioContext.createWaveShaper();
-      var biquadFilter = this.audioContext.createBiquadFilter();
-      
-      // connect the nodes together
-      
-      analyser.connect(distortion);
-      distortion.connect(biquadFilter);
-      biquadFilter.connect(panner);
-      
-      // Manipulate the Biquad filter
-      
-      biquadFilter.type = "lowshelf";
-      biquadFilter.frequency.setValueAtTime(1000, this.audioContext.currentTime);
-      
-      
-      panner.connect(this.audioContext.destination);
-      return analyser;
     },
     setupAudio: async function(url, node) {
       axios.get(url, { responseType: 'arraybuffer' }).then(response => {
@@ -139,13 +120,10 @@ export default {
       });
     }
   },
+
   computed: {
     sampleSize: function() {
       return this.reverbSamples.length;
-    },
-    currentQuadrant: function() {
-      const quads = ['FIRST', 'SECOND', 'FOURTH', 'THIRD'];
-      return this.quadrant[quads[this.quadrantIndex]];
     },
   },
 }
