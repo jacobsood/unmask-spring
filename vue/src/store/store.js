@@ -109,8 +109,8 @@ export const store = new Vuex.Store({
   
   actions: {
     async setData({commit}) {      
-      let articleResponse = await axios().get('/articles/');
-      commit('setArticles', articleResponse.data)
+      let articleResponse = await axios().get('articles/');
+      commit('setArticles', articleResponse.data);
     },
   },
 });
