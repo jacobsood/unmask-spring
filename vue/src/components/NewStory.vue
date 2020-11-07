@@ -1,5 +1,5 @@
 <template>
-  <div id="list" class="home-page">
+  <div id="list" class="new-story">
     <header>
       <router-link :to="{ name: 'landing'}">
         <h4>Unmask - <span>Stories Untold</span></h4>  
@@ -23,48 +23,47 @@
       <router-link :to="{ name: 'landing'}">
         Articles
       </router-link>
-      <router-link :to="{ name: 'newstory'}">
+      <router-link :to="{ name: 'landing'}">
         New Story
       </router-link>
     </div>
     
-    <template v-for="repeat in infiniteCounter">
-    <div :key="repeat">
-      <IndividualArticle
-        v-for="article in articles"
-        v-bind:key="`${article.id}_${repeat}`"
-        v-bind:article="article"
-      ></IndividualArticle>
-    </div>
-    </template>
+    <form class="article-form">
+        <h1 id="page-title">New Story</h1>
+        <label for="new-title">Title</label>
+        <textarea id="new-title" rows="10" />
+
+        <label for="new-text">Text</label>
+        <textarea id="new-text" rows="10" />
+
+        <label for="new-tag">Tag</label>
+        <textarea id="new-tag" rows="10" />
+        <button id="publish-button">Publish</button>
+    </form>
+
+    <!-- Article was here -->
     <observer @intersect="intersecting"></observer>
   </div>
 </template>
 
 <script>
 import Observer from './Observer';
-import IndividualArticle from './IndividualArticle';
 
 export default {
-  name: 'HomePage',
+  name: 'NewStory',
   data: function() {
     return {
-      infiniteCounter: 1,
+      
     }
   },
   components: {
-    Observer,
-    IndividualArticle,
+    Observer
   },
   methods: {
-    intersecting: function() {
-      this.infiniteCounter++;
-    },
+    
   },
   computed: {
-    articles: function() {
-      return this.$store.getters.getArticles;
-    },
+    
   },
 }
 </script>
@@ -117,8 +116,49 @@ header {
   right: 0;
 }
 
-.home-page {
-  font-family: "CustomY78";
-  width: 100%;
+.new-story {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60vw;
+    min-height: 70vh;
+    font-family: "Lucida Console", Courier, monospace;
+    font-size: 1rem;
 }
+
+.article-form {
+    width: 40vw;
+    align-items: center;
+    justify-content: center;
+}
+#new-title{
+    background-color: rgb(41, 40, 40);
+    width: 40vw;
+    max-height: 2vw;
+    font-size: 1rem;
+}
+#new-text {
+    background-color: rgb(41, 40, 40);
+    width: 40vw;
+    min-height: 20vw;
+    font-size: 1rem;
+}
+#new-tag {
+    background-color: rgb(41, 40, 40);
+    max-height: 2vw;
+    width: 20vw;
+}
+#publish-button {
+    background-color: rgb(41, 40, 40);
+    margin-left: 35vw;
+    width: 5vw;
+    height: 2vw;
+    font-size: 1rem;
+}
+#page-title{
+    text-align: center;
+    font-family: "CustomY78";
+}
+
+
 </style>
