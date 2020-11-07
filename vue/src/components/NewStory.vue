@@ -32,9 +32,6 @@ export default {
       tagData: ""
     }
   },
-  components: {
-    Observer
-  },
   methods: {
     publish(){ //method run on button click
         console.log(this.titleData, this.textData, this.tagData);
