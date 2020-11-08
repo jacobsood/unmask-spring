@@ -7,13 +7,13 @@
         <p><router-link class="author" :to="{ name: 'author', params: { author: slugify(article.source) } }">{{ article.source }}</router-link></p>
       </div>
       <p class="country"><router-link :to="{ name: 'country', params: { country: slugify(article.country) } }">{{ article.country }}</router-link></p>
-      <p class="tags">
+      <div class="tags">
         <template v-for="tag in article.tags">
           <router-link :key="tag.id" :to="{ name: 'tag', params: { tag: slugify(tag.tag) } }" >
             <span :key="tag.id">{{ tag.tag }}</span>
           </router-link>
         </template>
-      </p>
+      </div>
       <div class="typedjs">
         <vue-typed-js :startDelay="1000" :typeSpeed="50" :strings="[article.text]" :loop="true">
           <p class="typing"></p>
@@ -153,10 +153,11 @@ a {
       z-index: 2;
     }
     .tags {
+      text-align: center;
       background: none;
       position: relative;
-      width: 60vh;
-      right: -92vh;
+      width: 35vw;
+      left: 40vw;
       top: 2vh;
       span {
         margin: 0 1% 0 1%;
