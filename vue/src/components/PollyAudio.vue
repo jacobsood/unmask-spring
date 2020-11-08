@@ -60,8 +60,8 @@ export default {
 
     pause: function() {
       if (typeof this.gainNode !== 'undefined') {
-        this.gainNode.gain.exponentialRampToValueAtTime(0.000001, 0.6);
-        window.setTimeout(this.suspend, 1800);
+        this.gainNode.gain.exponentialRampToValueAtTime(0.000001, 1);
+        window.setTimeout(this.suspend, 1000);
       }
     },
 
@@ -77,7 +77,7 @@ export default {
       this.setupAudio(sourceUrl, sourceNode)
       .then(this.gainNode.gain.setValueAtTime(0.00001, 0))
       .then(sourceNode.connect(this.createReverb()).connect(this.gainNode)).then(sourceNode.start())
-      .then(this.gainNode.gain.exponentialRampToValueAtTime(1, 0.3));
+      .then(this.gainNode.gain.exponentialRampToValueAtTime(1, 2));
 
     },
     createGain: function() {
