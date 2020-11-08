@@ -47,7 +47,7 @@ public class DatabaseArticleManager implements ArticleManager {
         String hql =
                     "FROM Article as a " +
                     "JOIN a.tags AS at " +
-                    "WHERE at.tag_id = :tag";
+                    "WHERE at.tag = :tag";
         TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("tag", tag);
         List<Article> articleList = queryList.getResultList();
         return articleList;
