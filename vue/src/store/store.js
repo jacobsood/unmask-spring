@@ -38,9 +38,6 @@ export const store = new Vuex.Store({
     setArticles(state, axiosResponse) {
       state.articles = axiosResponse;
     },
-    setLikeStatus(state, axiosResponse) {
-      state.likeStatus = axiosResponse;
-    },
   },
   
   actions: {
