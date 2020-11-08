@@ -53,7 +53,7 @@ public class ArticleController {
 
     @GetMapping(value = "/by/users")
     public List<Article> getArticlesCreatedByUsers() {
-        return articleManager.getArticlesByUsers();
+        return articleManager.getStories();
     }
 
     @GetMapping(value = "/by/{source}")

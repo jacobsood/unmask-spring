@@ -42,7 +42,7 @@ public class Article implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date = new Date();
 
-    @OneToMany(mappedBy="article")
+    @OneToMany(mappedBy="article", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Comment> comments;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })

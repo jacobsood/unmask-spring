@@ -110,7 +110,7 @@ public class DatabaseArticleManager implements ArticleManager {
     }
 
     @Override
-    public List<Article> getArticlesByUsers() {
+    public List<Article> getStories() {
         String hql = 
                     "FROM Article " +
                     "WHERE NOT created_by_admin";

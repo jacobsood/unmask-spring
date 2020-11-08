@@ -23,9 +23,11 @@ public interface ArticleManager {
 
     public List<Article> getArticlesByAdmin();
 
-    public List<Article> getArticlesByUsers();
+    public List<Article> getStories();
 
     public List<Article> getArticlesBySource(String source);
+
+    
 
     // UPDATE
 
