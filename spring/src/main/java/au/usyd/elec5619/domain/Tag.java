@@ -16,16 +16,28 @@ public class Tag implements Serializable {
     private static final long serialVersionUID = 507208535532864149L;
 
     @Id
-    private String id;
+    private long id;
+
+    @NotNull
+    @Column(unique = true)
+    private String tag;
 
     @ManyToMany(mappedBy = "tags")
     private Set<Article> articles;
 
-    public String getTag() {
+    public long getId() {
         return id;
     }
 
-    public void setTag(String id) {
+    public void setId(long id) {
         this.id = id;
     } 
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 }
