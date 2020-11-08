@@ -24,9 +24,7 @@ public interface ArticleManager {
     public List<Article> getStories();
 
     public List<Article> getArticlesBySource(String source);
-
     
-
     // UPDATE
 
     public void updateArticle(Article article);
