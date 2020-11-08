@@ -10,16 +10,23 @@ import LoginPage from './components/LoginPage.vue'
 Vue.use(VueRouter)
 
 export const router = new VueRouter({
-    mode: 'history',
+    mode: "history",
     routes: [
-        { name: 'landing', path: '/', component: LandingPage },
-        { name: 'home', path: '/home', component: HomePage },
-        { name: 'tag', path: '/home/:tag', component: HomePage },
-        { name: 'country', path: '/home/:country', component: HomePage },
-        { name: 'article', path: '/home/:tag/:article', component: IndividualArticle },
-        { name: 'favourite', path: '/user/favourite', component: FavouritePage },
-        { name: 'preference', path: '/user/:id/preference', component: PreferencePage },
-        { name: 'login', path: '/login', component: LoginPage },
-        { path: '*', redirect: { name: 'landing' } },
-    ]
-});
+      { name: "landing", path: "/", component: LandingPage },
+      { name: "home", path: "/articles", component: HomePage },
+      { name: "tag", path: "/articles/tag/:tag", component: HomePage },
+      { name: "country", path: "/articles/country/:country", component: HomePage },
+      { name: "author", path: "/articles/author/:author", component: HomePage },
+      { name: "search", path: "/articles/:search", component: HomePage },
+      { name: "adminAddedArticles", path: "/articles/:addedBtAdmin", component: HomePage},
+      { name: "history", path: "/user/:id/history", component: HistoryPage },
+      { name: "newstory", path: "/newstory", component: NewStory },
+      {
+        name: "preference",
+        path: "/user/:id/preference",
+        component: PreferencePage,
+      },
+      { name: "login", path: "/login", component: LoginPage },
+      { path: "*", redirect: { name: "landing" } },
+    ],
+  });
