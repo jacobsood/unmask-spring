@@ -34,7 +34,7 @@
 
 <script>
 import PollyAudio from './PollyAudio';
-//import qs from 'qs'
+import qs from 'qs'
 export default {
   name: 'IndividualArticle',
   components: {
@@ -53,51 +53,51 @@ export default {
       type: Object,
     }
   },
-  // created:async function(){
-  //   if (this.$cookies.get("loginStatus")=="200"){
-  //     this.loginStatus=true
-  //   }else{
-  //     console.log(1)
-  //     return
-  //   }
-  //   var params = {
-  //       articleID: this.article.id,
-  //       username: this.$cookies.get("username")
-  //     }
+  mounted:async function(){
+    if (this.$cookies.get("loginStatus")=="200"){
+      this.loginStatus=true
+    }else{
+      console.log(1)
+      return
+    }
+    var params = {
+        articleID: this.article.id,
+        username: this.$cookies.get("username")
+      }
       
-  //    var res = await this.$axios.post(
-  //               "/api/checkLikeStatus",
-  //               qs.stringify(params)
-  //               ).then((response)=>{
-  //                   return response.data
-  //               })
-  //     if (res==true){
-  //       this.heart=true
+     var res = await this.$axios.post(
+                "/api/checkLikeStatus",
+                qs.stringify(params)
+                ).then((response)=>{
+                    return response.data
+                })
+      if (res==true){
+        this.heart=true
         
-  //     }else{
-  //       this.heart=false
-  //     }
-  // },
+      }else{
+        this.heart=false
+      }
+  },
   methods: {
-    // async like(){ // method run on like icon click
-    //   var params = {
-    //     articleID: this.article.id,
-    //     username: this.$cookies.get("username")
-    //   }
+    async like(){ // method run on like icon click
+      var params = {
+        articleID: this.article.id,
+        username: this.$cookies.get("username")
+      }
 
-    //   var res = await this.$axios.post(
-    //     "/api/likeArticle",
-    //     qs.stringify(params)
-    //   ).then((response)=>{
-    //     return response.data
-    //   });
+      var res = await this.$axios.post(
+        "/api/likeArticle",
+        qs.stringify(params)
+      ).then((response)=>{
+        return response.data
+      });
 
-    //   if (res==true){
-    //     this.heart=true
-    //   }else{
-    //     this.heart=false;
-    //   }
-    // },
+      if (res==true){
+        this.heart=true
+      }else{
+        this.heart=false;
+      }
+    },
 
     slugify: function(keyword) {
       keyword = keyword.replace(" ", "-");

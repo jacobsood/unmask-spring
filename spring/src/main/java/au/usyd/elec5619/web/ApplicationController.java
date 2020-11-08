@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class ApplicationController {
-    @GetMapping("/") 
+    @GetMapping("/home")
     public String home(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         //return "/vue/Homepage Component/HomepageComponent.html";
         //return "/vue/main.html";
