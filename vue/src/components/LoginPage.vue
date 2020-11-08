@@ -160,18 +160,19 @@ import qs from 'qs'
 .form-tiem-title{
   font-size: 1em;
   letter-spacing: .3em;
+  font-family: 'CustomY78';
 }
 
 </style>
 <style lang='scss'>
 .el-dialog__title{
-  font-family: CustomY78;
+  font-family: 'CustomY78';
   font-size: 2em;
   letter-spacing: .15em;
   color:red !important;
 }
 .el-dialog__body{
-  font-family: CustomY78;
+  font-family: 'CustomY78';
   font-size: 1em;
   letter-spacing: .15em;
 }
