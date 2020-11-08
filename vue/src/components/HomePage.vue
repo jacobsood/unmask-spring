@@ -1,5 +1,5 @@
 <template>
-  <div id="list" class="home-page">
+  <div class="home-page">
     <header>
       <router-link :to="{ name: 'landing'}">
         <h4>Unmask - <span>Stories Untold</span></h4>  
@@ -44,6 +44,7 @@
 <script>
 import Observer from './Observer';
 import IndividualArticle from './IndividualArticle';
+import _ from 'lodash'
 
 export default {
   name: 'HomePage',
@@ -60,10 +61,57 @@ export default {
     intersecting: function() {
       this.infiniteCounter++;
     },
+    reverseSlug: function(keyword) {
+      return keyword.split('-').join(' ');
+    }
   },
   computed: {
     articles: function() {
-      return this.$store.getters.getArticles;
+      let articles = this.$store.getters.getArticles;
+      let articlesToReturn = undefined;
+
+      let tagFilter = this.$route.params.tag;
+      let countryFilter = this.$route.params.country;
+      let authorFilter = this.$route.params.author;
+      let searchFilter = this.$route.params.search;
+      let adminAddedFilter = this.$route.params.createdByAdmin;
+
+      // List articles/stories based on tag
+      if (typeof tagFilter !== "undefined")
+        articlesToReturn = _.filter(articles, (article) => article.tags.includes(this.reverseSlug(tagFilter)));
+
+      // List articles/stories based on country
+      else if (typeof countryFilter !== "undefined")
+        articlesToReturn = _.filter(articles, { 'country': this.reverseSlug(countryFilter) });
+
+      // List articles/stories based on author/source
+      else if (typeof authorFilter !== "undefined") 
+        articlesToReturn = _.filter(articles, { 'source': this.reverseSlug(authorFilter) });
+
+      // List articles/stories based on search keyword
+      else if (typeof searchFilter !== "undefined") {
+        articlesToReturn= _.filter(articles, (article) => {
+          searchFilter = this.reverseSlug(searchFilter);
+          // check if searched keyword is a country
+          if (article.country === searchFilter) return true;
+          // check if searched keyword is an author/source
+          if (article.source === searchFilter) return true;
+          // check if searched keyword is a title
+          if (article.title === searchFilter) return true;
+          // check if searched keyword is a tag
+          if (article.tags.includes(searchFilter)) return true;
+          // keyword not found
+          return false;
+        });
+      }
+
+      // list articles added by admins, i.e. not stories added by users
+      else if (typeof adminAddedFilter !== "undefined") 
+        articlesToReturn = _.filter(articles, { 'createdByAdmin': true })
+
+      // Return the relevant articles
+      if (typeof articlesToReturn !== "undefined" && articlesToReturn.length !== 0) return articlesToReturn;
+      return articles;
     },
   },
 }
@@ -83,6 +131,7 @@ header {
   padding: 5px 0 5px 0;
   top: 0;
   width: 100%;
+  z-index: 2;
 
   span {
     color: red;
@@ -92,7 +141,7 @@ header {
 .side-bar {
   height: 100%;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   overflow: hidden;
   text-orientation: upright;
