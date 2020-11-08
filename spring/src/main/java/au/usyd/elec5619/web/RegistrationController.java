@@ -44,7 +44,7 @@ public class RegistrationController {
             System.out.println(t);
         }
         // todo: add to cookie
-        return "redirect:/";
+        return "redirect:http://localhost:8081";
 
 
     }

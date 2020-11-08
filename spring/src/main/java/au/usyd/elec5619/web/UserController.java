@@ -125,7 +125,7 @@ public class UserController {
             response.addCookie(userEmailCookie);
         }
         // return to the homepage
-        return "redirect:/";
+        return "redirect:http://localhost:8081";
         //return "/vue/Homepage Component/HomepageComponent.html";
 
     }

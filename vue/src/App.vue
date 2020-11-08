@@ -12,28 +12,6 @@ export default {
 </script>
 
 <style lang='scss'>
-* { 
-  box-sizing: box-border;
-  margin: 0;
-  padding: 0;
-  color: white;
-  background: black;
+@import "~@/assets/scss/_themes.scss";
 
-  &::selection {
-    color: red;
-  }
-}
-
-body {
-  min-height: 100vh;
-  line-height: 1.3;
-
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 </style>
