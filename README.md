@@ -26,4 +26,21 @@ Yi Zhong
 
 ## Implementation Tools
 
+Vue.js
+
+Spring
+
+Amazon Polly
+
+RDS (MySQL)
+
 ## Installation & Run
+
+### Spring
+gradle clean build
+Run Tomcat on context '/'
+The port must be 8080
+
+### Vue
+npm install
+npm run serve - make sure port is 8081
