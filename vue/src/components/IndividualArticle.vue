@@ -2,8 +2,10 @@
   <div class="article-template">
     <div class="article-container">
       <PollyAudio v-bind:text="article.text"></PollyAudio>
-      <h1 class=title>{{ article.title }}</h1>
-      <p class="author">{{ article.source }}</p>
+      <div class="info">
+        <h1 class=title>{{ article.title }}</h1>
+        <p class="author">{{ article.source }}</p>
+      </div>
       <p class="country">{{ article.country }}</p>
       <p class="tags">
         <template v-for="tag in article.tags">
@@ -11,7 +13,7 @@
         </template>
       </p>
       <div class="typedjs">
-        <vue-typed-js :strings="[article.text]">
+        <vue-typed-js :startDelay="1000" :typeSpeed="50" :strings="[article.text]" :loop="true">
           <p class="typing"></p>
         </vue-typed-js>
       </div>
@@ -74,41 +76,41 @@ export default {
     text-align: center;
 
     h1 {
-      font-size: 9vh;
+      font-size: 6vh;
     }
 
     p {
       font-size: 3.5vh;
     }
     
-    .title, .author {
-      position: relative;
-      left: -50%;
-      top: 25%;
-    }
-
-    .title {
+    .info {
       background: none;
-    }
-    .author {
+      width: 35vw;
+      height: 30vh;
+      position: relative;
+      left: -17.5vw;
+      top: 25%;
 
-      color: red;
+      .author {
+        color: red;
+      }
     }
 
     .country {
+      width: 15vw;
       font-size: 4vh;
-      background: none;
       position: relative;
-      right: -40%;
+      right: -45vw;
       transform: rotate(-90deg);
-      top: -42%;
+      top: -33vh;
     }
 
     .tags {
       background: none;
       position: relative;
-      right: -50%;
-      top: 30%;
+      width: 60vh;
+      right: -92vh;
+      top: 2vh;
       span {
         padding: 0 0.5% 0 0.5%;
       }
@@ -122,17 +124,19 @@ export default {
 
     .typedjs {
       background: none;
+      z-index: 1;
       position: relative;
       transform: rotate(-20deg);
-      left: 15%;
-      top: -30%;
-      width: 70%;
-      height: 60%;
-    }
+      left: 26vh;
+      top: -23vh;
+      width: 40vw;
+      height: 20vh;
+      overflow: hidden;
 
-    .typing {
-      font-family: GTSectraFine;
-      font-size: 2.5vh;
+      .typing {
+        font-family: GTSectraFine;
+        font-size: 2.5vh;
+      }
     }
   }
 }
