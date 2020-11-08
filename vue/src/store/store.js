@@ -10,7 +10,7 @@ export const store = new Vuex.Store({
     test_articles: [
       {
         id: 213412,
-        title: "hello",
+        title: "Money Laundering in South America",
         tags: ["Tag1", "Tag2", "Tag3"],
         country: "Australia",
         source: "ABC", 
