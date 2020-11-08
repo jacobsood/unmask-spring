@@ -13,13 +13,6 @@ class TagTest {
     }
 
     @Test
-    void testSetAndGetId() {
-        long id = 132142142L;
-        tag.setId(id);
-        assertEquals(id, tag.getId());
-    }
-
-    @Test
     void testSetAndGetTag() {
         String testTag = "Money Laundering";
         assertNull(tag.getTag());

@@ -103,7 +103,7 @@ public class DatabaseArticleManager implements ArticleManager {
     public List<Article> getArticlesByAdmin() {
         String hql = 
                     "FROM Article " +
-                    "WHERE isStory";
+                    "WHERE isStory is true";
         TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class);
         List<Article> articleList = queryList.getResultList();
         return articleList;
@@ -113,7 +113,7 @@ public class DatabaseArticleManager implements ArticleManager {
     public List<Article> getStories() {
         String hql = 
                     "FROM Article " +
-                    "WHERE NOT isStory";
+                    "WHERE isStory is false";
         TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class);
         List<Article> articleList = queryList.getResultList();
         return articleList;
