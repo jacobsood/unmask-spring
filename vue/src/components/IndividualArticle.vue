@@ -20,7 +20,7 @@
         </vue-typed-js>
       </div>
       <!-- Like button -->
-      <div v-if="loginStatus">
+      <div v-if="this.$cookies.get('loginStatus')=='200'">
         <svg v-if="heart" @click="like" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
         </svg>
@@ -34,7 +34,7 @@
 
 <script>
 import PollyAudio from './PollyAudio';
-//import qs from 'qs'
+import qs from 'qs'
 export default {
   name: 'IndividualArticle',
   components: {
@@ -43,7 +43,7 @@ export default {
 
   data() {
     return {
-      heart: true,
+      heart: false,
       loginStatus:false
     }
   },
@@ -53,51 +53,26 @@ export default {
       type: Object,
     }
   },
-  // created:async function(){
-  //   if (this.$cookies.get("loginStatus")=="200"){
-  //     this.loginStatus=true
-  //   }else{
-  //     console.log(1)
-  //     return
-  //   }
-  //   var params = {
-  //       articleID: this.article.id,
-  //       username: this.$cookies.get("username")
-  //     }
-      
-  //    var res = await this.$axios.post(
-  //               "/api/checkLikeStatus",
-  //               qs.stringify(params)
-  //               ).then((response)=>{
-  //                   return response.data
-  //               })
-  //     if (res==true){
-  //       this.heart=true
-        
-  //     }else{
-  //       this.heart=false
-  //     }
-  // },
   methods: {
-    // async like(){ // method run on like icon click
-    //   var params = {
-    //     articleID: this.article.id,
-    //     username: this.$cookies.get("username")
-    //   }
+    async like(){ // method run on like icon click
+      var params = {
+        articleID: this.article.id,
+        username: this.$cookies.get("username")
+      }
 
-    //   var res = await this.$axios.post(
-    //     "/api/likeArticle",
-    //     qs.stringify(params)
-    //   ).then((response)=>{
-    //     return response.data
-    //   });
+      var res = await this.$axios.post(
+        "/api/likeArticle",
+        qs.stringify(params)
+      ).then((response)=>{
+        return response.data
+      });
 
-    //   if (res==true){
-    //     this.heart=true
-    //   }else{
-    //     this.heart=false;
-    //   }
-    // },
+      if (res==true){
+        this.heart=true
+      }else{
+        this.heart=false;
+      }
+    },
 
     slugify: function(keyword) {
       keyword = keyword.replace(" ", "-");
