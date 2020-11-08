@@ -6,6 +6,7 @@ import IndividualArticle from './components/IndividualArticle.vue'
 import HistoryPage from './components/HistoryPage.vue'
 import PreferencePage from './components/PreferencePage.vue'
 import LoginPage from './components/LoginPage.vue'
+import AdminPage from './components/AdminPage.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,7 @@ export const router = new VueRouter({
         { name: 'history', path: '/user/:id/history', component: HistoryPage },
         { name: 'preference', path: '/user/:id/preference', component: PreferencePage },
         { name: 'login', path: '/login', component: LoginPage },
+        { name: 'admin', path: '/admin', component: AdminPage },
         { path: '*', redirect: { name: 'landing' } },
     ]
 });
