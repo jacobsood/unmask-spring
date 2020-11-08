@@ -5,7 +5,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: `http://unmask.hrithviksood.me`,
+        target: `http://localhost:8080/app`,
         ws: true,
         changeOrigin: true,
         pathRewrite: {
