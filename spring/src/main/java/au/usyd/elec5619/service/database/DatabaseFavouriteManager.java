@@ -45,7 +45,11 @@ public class DatabaseFavouriteManager implements FavouriteManager {
     @Override
     public boolean addFavourite(String username, Article article) {
         boolean status;
+        if (article==null || username==null){
+            return false;
+        }
         User user = userManager.getUserByUsername(username);
+
         Set<User> favouritedBy = article.getFavouritedBy();
         if (!favouritedBy.contains(user)){
             favouritedBy.add(user);
@@ -55,7 +59,6 @@ public class DatabaseFavouriteManager implements FavouriteManager {
             status = false;
         }
         article.setFavouritedBy(favouritedBy);
-        article.setUsersViewedBy(favouritedBy);
 
         this.sessionFactory.getCurrentSession().merge(article);
         return status;

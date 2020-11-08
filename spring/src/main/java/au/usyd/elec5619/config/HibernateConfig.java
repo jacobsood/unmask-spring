@@ -50,6 +50,7 @@ public class HibernateConfig {
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         hibernateProperties.setProperty("show_sql","true");
+        hibernateProperties.setProperty("hibernate.event.merge.entity_copy_observer","allow");
         return hibernateProperties;
     }
 }

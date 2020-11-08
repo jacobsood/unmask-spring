@@ -29,6 +29,7 @@
 
 <script>
 import PollyAudio from './PollyAudio';
+import qs from 'qs'
 export default {
   name: 'IndividualArticle',
   components: {
@@ -36,7 +37,8 @@ export default {
   },
   data() {
     return {
-      heart: 0
+      heart: false,
+      loginStatus:false
     }
   },
   props: {
@@ -44,13 +46,47 @@ export default {
       type: Object,
     }
   },
-  methods: {
-    like(){ // method run on like icon click
-      if(this.heart == 0){
-        this.heart++;
-      } else {
-        this.heart = 0;
+  created:async function(){
+    if (this.$cookies.get("loginStatus")=="200"){
+      this.loginStatus=true
+    }
+    var params = {
+        articleID: this.article.id,
+        username: this.$cookies.get("username")
       }
+      
+     var res = await this.$axios.post(
+                "/api/checkLikeStatus",
+                qs.stringify(params)
+                ).then((response)=>{
+                    return response.data
+                })
+      console.log(res)
+      if (res){
+        this.heart=true
+        console.log(1)
+      }else{
+        this.heart=false
+      }
+  },
+  methods: {
+    async like(){ // method run on like icon click
+      var params = {
+        articleID: this.article.id,
+        username: this.$cookies.get("username")
+      }
+      var res = await this.$axios.post(
+            "/api/likeArticle",
+            qs.stringify(params)
+            ).then((response)=>{
+                return response.data
+            })
+      if (res){
+        this.heart=true
+      }else{
+        this.heart=false;
+      }
+
     }
   }
 }
@@ -58,7 +94,6 @@ export default {
 
 <style scoped lang='scss'>
 @import "~@/assets/scss/_typo.scss";
-
 .article-template {
   display: flex;
   align-items: center;
@@ -67,14 +102,11 @@ export default {
   min-width: 100%;
   font-size: 2em;
   border: 2px solid red;
-
   .article-container {
     width: 60vw;
-    height: 50vh;
-
+    min-height: 50vh;
     border: 2px solid red;
     text-align: center;
-
     h1 {
       font-size: 6vh;
     }
@@ -138,6 +170,9 @@ export default {
         font-size: 2.5vh;
       }
     }
+  }
+  .bi {
+    margin-left: 10px;
   }
 }
 </style>
