@@ -30,58 +30,58 @@
         <lable for="input-fields">Article ID</lable>
         <textarea
           v-bind:class="{
-            'input-fields': !idrror,
+            'input-fields': !idError,
             'error-input-fields': idError,
           }"
           rows="10"
-          v-model="idInput"
+          v-model="id"
         />
         <lable for="input-fields">Title</lable>
         <textarea
           v-bind:class="{
             'input-fields': !titleError,
-            'error-input-fields': titleError,
+            'error-input-title': titleError,
           }"
           rows="10"
-          v-model="titleInput"
+          v-model="title"
         />
         <lable for="input-fields">Source</lable>
         <textarea
           v-bind:class="{
             'input-fields': !sourceError,
-            'error-input-fields': sourceError,
+            'error-input-source': sourceError,
           }"
           rows="10"
-          v-model="sourceInput"
+          v-model="source"
         />
         <lable for="input-fields">Country</lable>
         <textarea
           v-bind:class="{
             'input-fields': !countryError,
-            'error-input-fields': CountryError,
+            'error-input-country': CountryError,
           }"
           rows="10"
-          v-model="countryInput"
+          v-model="country"
         />
         <lable for="new-text">Text</lable>
         <textarea
           v-bind:class="{
             'input-fields': !textError,
-            'error-input-fields': textError,
+            'error-input-text': textError,
           }"
           rows="10"
-          v-model="contentInput"
+          v-model="content"
         />
-        <lable for="input-fields">is This a Story?</lable>
-        <textarea
-          v-bind:class="{
-            'input-fields': !storyError,
-            'error-input-fields': storyError,
-          }"
-          rows="10"
-          v-model="booleanInput"
-        />
-        <button v-on:click="createArticle = false">Confirm</button>
+        <lable for="input-fields">Is this a Story?</lable>
+        <select class="selection_box" v-model="isStory">
+          <option disabled value="">Please select one</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+        <button v-on:click="addNewArticle">Check</button>
+        <button v-on:click="submit">Confirm</button>
+        <button v-on:click="createArticle = flase">Cancle</button>
       </form>
     </div>
   </div>
@@ -89,27 +89,34 @@
 
 <script>
 export default {
+  // import axios from 'axios',
+
   name: "AdminPage",
   components: {},
   data: function () {
     return {
+      //button control
       showArticle: false,
       createArticle: false,
+      back: false,
       //input fields
-      id: "",
-      title: "",
-      source: "",
-      content: "",
-      country: "",
-      isStory: "",
+      new_articles: {
+        id: "",
+        title: "",
+        source: "",
+        text: "",
+        country: "",
+        isStory: "",
+      },
 
-      //Errorm
+      //Error
       titleError: false,
       sourceError: false,
       textError: false,
       storyError: false,
       idError: false,
       countryError: false,
+      errorExists: true,
     };
   },
 
@@ -124,8 +131,59 @@ export default {
       this.showArticle = true;
     },
 
+    submit() {
+      //here should be the post() to API
+      this.createArticle = false;
+
+      // alert("put to database");
+      // if (this.new_articles != "") {
+      //   $axios.post("https://unmask.hrithviksood.me/articles/"),
+      //     {
+      //       id: this.id,
+      //       title: this.title,
+      //       source: this.source,
+      //       text: this.text,
+      //       country: this.country,
+      //       isStory: this.isStory,
+      //     };
+      // }
+    },
+
     addNewArticle() {
-      //confirm creation
+      //check creation
+      if (this.title.length < 3) {
+        this.titleError = true;
+      } else {
+        this.titleError = false;
+        this.errorExists = true;
+      }
+
+      if (this.source.length < 3) {
+        this.sourceError = true;
+      } else {
+        this.sourceError = false;
+        this.errorExists = true;
+      }
+
+      if (this.text.length < 10) {
+        this.textError = true;
+      } else {
+        this.errorExists = true;
+        this.textError = false;
+      }
+
+      if (this.country.length < 5) {
+        this.countryError = true;
+      } else {
+        this.titleError = false;
+        this.errorExists = true;
+      }
+
+      if (this.errorExists) {
+        alert("There may be some errors in the submit form");
+      } else {
+        alert("clear to submit");
+      }
     },
   },
 };
@@ -176,13 +234,5 @@ button:hover {
 }
 .editbox {
   background: #262829;
-}
-
-.input-fields {
-  background-color: rgb(41, 40, 40);
-  width: 40vw;
-  max-height: 2vw;
-  font-size: 1rem;
-  display: block;
 }
 </style>
