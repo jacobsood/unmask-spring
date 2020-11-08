@@ -4,12 +4,16 @@
       <PollyAudio v-bind:text="article.text"></PollyAudio>
       <div class="info">
         <h1 class=title>{{ article.title }}</h1>
-        <p class="author">{{ article.source }}</p>
+        
+          <p class="author"><router-link :to="{ name: 'author', params: { author: slugify(article.source) } }">{{ article.source }}</router-link></p>
+        
       </div>
-      <p class="country">{{ article.country }}</p>
+      <p class="country"><router-link :to="{ name: 'country', params: { country: slugify(article.country) } }">{{ article.country }}</router-link></p>
       <p class="tags">
         <template v-for="tag in article.tags">
-          <span :key="tag">{{ tag }}</span>
+          <router-link :key="tag" :to="{ name: 'tag', params: { tag: slugify(tag) } }" >
+            <span :key="tag">{{ tag }}</span>
+          </router-link>
         </template>
       </p>
       <div class="typedjs">
@@ -34,16 +38,19 @@ export default {
   components: {
     PollyAudio,
   },
+
   data() {
     return {
       heart: 0
     }
   },
+
   props: {
     article: {
       type: Object,
     }
   },
+
   methods: {
     like(){ // method run on like icon click
       if(this.heart == 0){
@@ -51,6 +58,9 @@ export default {
       } else {
         this.heart = 0;
       }
+    },
+    slugify(keyword) {
+      return keyword.split(' ').join('-');
     }
   }
 }
@@ -58,6 +68,10 @@ export default {
 
 <style scoped lang='scss'>
 @import "~@/assets/scss/_typo.scss";
+
+a {
+  text-decoration: none;
+}
 
 .article-template {
   display: flex;
@@ -112,14 +126,8 @@ export default {
       right: -92vh;
       top: 2vh;
       span {
-        padding: 0 0.5% 0 0.5%;
+        margin: 0 1% 0 1%;
       }
-    }
-
-    .bi {
-      position: relative;
-      right: -65%;
-      top: 66vh;
     }
 
     .typedjs {
