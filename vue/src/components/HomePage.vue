@@ -5,21 +5,23 @@
         <h4>Unmask - <span>Stories Untold</span></h4>  
       </router-link>
     </header>
-    <div class="left-side-bar side-bar">
-      <router-link :to="{ name: 'landing'}" v-if="login">
+    <div class="left-side-bar side-bar" v-if="login">
+      <router-link :to="{ name: 'landing'}">
         Preference
       </router-link>
-      <router-link :to="{ name: 'favourite'}" v-if="login"> 
+      <router-link :to="{ name: 'favourite'}"> 
         Favourite
       </router-link>
-      <router-link to="" v-if="login" @click.native="logout"> 
-        LOGOUT
+      <router-link to="" @click.native="logout"> 
+        Sign Out
       </router-link>
-      <router-link :to="{ name: 'login'}" v-else> 
-        LOGIN
-      </router-link>
-      
     </div>
+    <div class="left-side-bar side-bar" v-else>
+      <router-link :to="{ name: 'login'}"> 
+        Login
+      </router-link>
+    </div>
+
     <div class="right-side-bar side-bar">
       <router-link :to="{ name: 'landing'}">
         Stories
@@ -30,14 +32,17 @@
       <router-link :to="{ name: 'landing'}">
         Articles
       </router-link>
+      <router-link :to="{ name: 'newstory'}">
+        Share
+      </router-link>
     </div>
+
     <template v-for="repeat in infiniteCounter">
-    <div :key="repeat" class="article">
+    <div :key="repeat">
       <IndividualArticle
         v-for="article in articles"
         v-bind:key="`${article.id}_${repeat}`"
         v-bind:article="article"
-        class="individual-article"
       ></IndividualArticle>
     </div>
     </template>
@@ -58,17 +63,19 @@ export default {
       login:false,
     }
   },
+
   components: {
     Observer,
     IndividualArticle,
 
   },
-  created:function(){
-      let loginStatus = this.$cookies.get("loginStatus")
-      if (loginStatus=="200"){
-        this.login=true;
-      }
-    },
+
+  created:function() {
+    let loginStatus = this.$cookies.get("loginStatus")
+    if (loginStatus=="200"){
+      this.login=true;
+    }
+  },
   methods: {
     intersecting: function() {
       this.infiniteCounter++;
@@ -86,6 +93,7 @@ export default {
       this.$router.push("/landing");
     }
   },
+
   computed: {
     articles: function() {
       let articles = this.$store.getters.getArticles;
@@ -192,17 +200,4 @@ header {
   font-family: "CustomY78";
   width: 100%;
 }
-
-.article {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  font-size: 2em;
-}
-
-.individual-article {
-  min-height: 100vh;
-  min-width: 100vw;
-}
-
 </style>
