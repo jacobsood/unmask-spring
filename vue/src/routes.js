@@ -18,7 +18,7 @@ export const router = new VueRouter({
     { name: "country", path: "/articles/country/:country", component: HomePage },
     { name: "author", path: "/articles/author/:author", component: HomePage },
     { name: "search", path: "/articles/:search", component: HomePage },
-    { name: "adminAddedArticles", path: "/articles/:addedBtAdmin", component: HomePage},
+    { name: "adminAddedArticles", path: "/articles/:createdByAdmin", component: HomePage},
     { name: "history", path: "/user/:id/history", component: HistoryPage },
     { name: "newstory", path: "/newstory", component: NewStory },
     {
