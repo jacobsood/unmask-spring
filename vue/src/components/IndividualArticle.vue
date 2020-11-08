@@ -4,7 +4,7 @@
       <PollyAudio v-bind:text="article.text"></PollyAudio>
       <div class="info">
         <h1 class=title>{{ article.title }}</h1>
-        <p class="author"><router-link :to="{ name: 'author', params: { author: slugify(article.source) } }">{{ article.source }}</router-link></p>
+        <p><router-link class="author" :to="{ name: 'author', params: { author: slugify(article.source) } }">{{ article.source }}</router-link></p>
       </div>
       <p class="country"><router-link :to="{ name: 'country', params: { country: slugify(article.country) } }">{{ article.country }}</router-link></p>
       <p class="tags">
@@ -53,28 +53,28 @@ export default {
       type: Object,
     }
   },
-  created:async function(){
-    if (this.$cookies.get("loginStatus")=="200"){
-      this.loginStatus=true
-    }
-    var params = {
-        articleID: this.article.id,
-        username: this.$cookies.get("username")
-      }
+  // created:async function(){
+  //   if (this.$cookies.get("loginStatus")=="200"){
+  //     this.loginStatus=true
+  //   }
+  //   var params = {
+  //       articleID: this.article.id,
+  //       username: this.$cookies.get("username")
+  //     }
       
-     var res = await this.$axios.post(
-                "/api/checkLikeStatus",
-                qs.stringify(params)
-                ).then((response)=>{
-                    return response.data
-                })
-      if (res==true){
-        this.heart=true
+  //    var res = await this.$axios.post(
+  //               "/api/checkLikeStatus",
+  //               qs.stringify(params)
+  //               ).then((response)=>{
+  //                   return response.data
+  //               })
+  //     if (res==true){
+  //       this.heart=true
         
-      }else{
-        this.heart=false
-      }
-  },
+  //     }else{
+  //       this.heart=false
+  //     }
+  // },
   methods: {
     async like(){ // method run on like icon click
       var params = {
@@ -146,6 +146,7 @@ a {
       right: -45vw;
       transform: rotate(-90deg);
       top: -33vh;
+      z-index: 2;
     }
     .tags {
       background: none;
