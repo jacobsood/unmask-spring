@@ -56,6 +56,9 @@ export default {
   // created:async function(){
   //   if (this.$cookies.get("loginStatus")=="200"){
   //     this.loginStatus=true
+  //   }else{
+  //     console.log(1)
+  //     return
   //   }
   //   var params = {
   //       articleID: this.article.id,

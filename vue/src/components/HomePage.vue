@@ -70,12 +70,12 @@ export default {
 
   },
 
-  // created:function() {
-  //   let loginStatus = this.$cookies.get("loginStatus")
-  //   if (loginStatus=="200"){
-  //     this.login=true;
-  //   }
-  // },
+  created:function() {
+    let loginStatus = this.$cookies.get("loginStatus")
+    if (loginStatus=="200"){
+      this.login=true;
+    }
+  },
   methods: {
     intersecting: function() {
       this.infiniteCounter++;
