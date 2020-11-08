@@ -53,28 +53,28 @@ export default {
       type: Object,
     }
   },
-  created:async function(){
-    if (this.$cookies.get("loginStatus")=="200"){
-      this.loginStatus=true
-    }
-    var params = {
-        articleID: this.article.id,
-        username: this.$cookies.get("username")
-      }
+  // created:async function(){
+  //   if (this.$cookies.get("loginStatus")=="200"){
+  //     this.loginStatus=true
+  //   }
+  //   var params = {
+  //       articleID: this.article.id,
+  //       username: this.$cookies.get("username")
+  //     }
       
-     var res = await this.$axios.post(
-                "/api/checkLikeStatus",
-                qs.stringify(params)
-                ).then((response)=>{
-                    return response.data
-                })
-      if (res==true){
-        this.heart=true
+  //    var res = await this.$axios.post(
+  //               "/api/checkLikeStatus",
+  //               qs.stringify(params)
+  //               ).then((response)=>{
+  //                   return response.data
+  //               })
+  //     if (res==true){
+  //       this.heart=true
         
-      }else{
-        this.heart=false
-      }
-  },
+  //     }else{
+  //       this.heart=false
+  //     }
+  // },
   methods: {
     async like(){ // method run on like icon click
       var params = {
