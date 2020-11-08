@@ -22,7 +22,7 @@
     </div>
 
     <div v-else>
-      <button v-on:click="showArticle = true">Article</button>
+      <button v-on:click="listOut">Article</button>
     </div>
 
     <div class="createArticle" v-if="createArticle == true">
@@ -89,12 +89,11 @@
 
 <script>
 export default {
-  // import axios from 'axios',
-
   name: "AdminPage",
   components: {},
   data: function () {
     return {
+      articles: null,
       //button control
       showArticle: false,
       createArticle: false,
@@ -120,15 +119,15 @@ export default {
     };
   },
 
-  computed: {
-    articles() {
-      return this.$store.state.articles;
-    },
-  },
-
   methods: {
     listOut() {
       this.showArticle = true;
+      this.$axios
+        .get("https://unmask.hrithviksood.me/articles/")
+        .then(function (response) {
+          this.articles = response.body;
+          console.log(this.articles);
+        });
     },
 
     submit() {
@@ -234,5 +233,16 @@ button:hover {
 }
 .editbox {
   background: #262829;
+}
+
+.input-fields {
+  background-color: rgb(41, 40, 40);
+  width: 40vw;
+  max-height: 2vw;
+  font-size: 1rem;
+  display: block;
+}
+.selection_box {
+  background-color: #6c7986;
 }
 </style>
