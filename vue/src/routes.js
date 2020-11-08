@@ -25,7 +25,7 @@ export const router = new VueRouter({
     { name: "newstory", path: "/newstory", component: NewStory },
     {
       name: "preference",
-      path: "/user/:id/preference",
+      path: "/user/preference",
       component: PreferencePage,
     },
     { name: "login", path: "/login", component: LoginPage },

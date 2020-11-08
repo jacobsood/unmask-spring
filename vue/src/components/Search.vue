@@ -1,7 +1,7 @@
 <template>
   <div v-click-outside="goToPreviousPage" class="search">
     <input v-model="filter" placeholder="Search">
-    <router-link :to="{ name: 'search', params: { 'search': filter } }"><span>Search</span></router-link>
+    <p @click="search">Search</p>
   </div>
 </template>
 
@@ -20,6 +20,13 @@ export default {
   methods: {
     goToPreviousPage: function() {
         router.push({ name: "home" });
+    },
+    slugify: function(keyword) {
+      keyword = keyword.replace(" ", "-");
+      return keyword;
+    },
+    search: function() {
+        router.push({ name: "search", params: { 'search': this.slugify(this.filter) } });
     }
   },
 }
@@ -32,9 +39,10 @@ export default {
 a {
     text-decoration: none;
 }
-span {
+p {
     color: red;
     margin: 5%;
+    cursor: pointer;
 }
 .search {
     text-align: center;

@@ -133,7 +133,9 @@ export default {
           // check if searched keyword is a title
           if (article.title === searchFilter) return true;
           // check if searched keyword is a tag
-          if (article.tags.includes(searchFilter)) return true;
+          for (var i = 0; i < article.tags.length; i++) {
+            if (article.tags[i].tag === searchFilter) return true;
+          }
           // keyword not found
           return false;
         });
