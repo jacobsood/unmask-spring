@@ -23,13 +23,13 @@
     </div>
 
     <div class="right-side-bar side-bar">
-      <router-link :to="{ name: 'landing'}">
+      <router-link :to="{ name: 'adminAddedArticles', params: { 'createdByAdmin': false } }">
         Stories
       </router-link>
       <router-link :to="{ name: 'landing'}">
         Search
       </router-link>
-      <router-link :to="{ name: 'landing'}">
+      <router-link :to="{ name: 'adminAddedArticles', params: { 'createdByAdmin': true } }">
         Articles
       </router-link>
       <router-link :to="{ name: 'newstory'}">
@@ -136,7 +136,7 @@ export default {
 
       // list articles added by admins, i.e. not stories added by users
       else if (typeof adminAddedFilter !== "undefined") 
-        articlesToReturn = _.filter(articles, { 'createdByAdmin': true })
+        articlesToReturn = _.filter(articles, { 'createdByAdmin': adminAddedFilter })
 
       // Return the relevant articles
       if (typeof articlesToReturn !== "undefined" && articlesToReturn.length !== 0) return articlesToReturn;
