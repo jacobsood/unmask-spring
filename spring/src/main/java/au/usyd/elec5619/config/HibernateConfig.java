@@ -29,12 +29,9 @@ public class HibernateConfig {
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        //dataSource.setUrl("jdbc:mysql://mydatabase.c2dr8slcio43.us-east-1.rds.amazonaws.com/unmask");
-        //dataSource.setUsername("jacobsood");
-        //dataSource.setPassword("unmaskelec");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/springapp");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setUrl("jdbc:mysql://mydatabase.c2dr8slcio43.us-east-1.rds.amazonaws.com/unmask");
+        dataSource.setUsername("jacobsood");
+        dataSource.setPassword("unmaskelec");
         return dataSource;
     }
 
