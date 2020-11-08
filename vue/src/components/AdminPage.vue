@@ -17,7 +17,7 @@
           </div>
         </div>
       </div>
-      <button v-on:click="showArticle = false">Go Back</button>
+      <button v-on:click="goBack()">Go Back</button>
       <button v-on:click="createArticle = true">Create Article</button>
     </div>
 
@@ -26,44 +26,44 @@
     </div>
 
     <div class="createArticle" v-if="createArticle == true">
-      <form @submit.prevent="Confirm">
-        <lable for="input-fields">Article ID</lable>
+      <form @submit.prevent="Confirm" action="/articles">
+        <label for="input-fields">Article ID</label>
         <textarea
           v-bind:class="{
-            'input-fields': !idrror,
+            'input-fields': !idError,
             'error-input-fields': idError,
           }"
           rows="10"
-          v-model="idInput"
+          v-model="id"
         />
-        <lable for="input-fields">Title</lable>
+        <label for="input-fields">Title</label>
         <textarea
           v-bind:class="{
             'input-fields': !titleError,
             'error-input-fields': titleError,
           }"
           rows="10"
-          v-model="titleInput"
+          v-model="title"
         />
-        <lable for="input-fields">Source</lable>
+        <label for="input-fields">Source</label>
         <textarea
           v-bind:class="{
             'input-fields': !sourceError,
             'error-input-fields': sourceError,
           }"
           rows="10"
-          v-model="sourceInput"
+          v-model="source"
         />
-        <lable for="input-fields">Country</lable>
+        <label for="input-fields">Country</label>
         <textarea
           v-bind:class="{
             'input-fields': !countryError,
-            'error-input-fields': CountryError,
+            'error-input-fields': countryError,
           }"
           rows="10"
-          v-model="countryInput"
+          v-model="country"
         />
-        <lable for="new-text">Text</lable>
+        <label for="new-text">Text</label>
         <textarea
           v-bind:class="{
             'input-fields': !textError,
@@ -72,16 +72,20 @@
           rows="10"
           v-model="content"
         />
-        <lable for="input-fields">Is this a Story?</lable>
+        <label for="input-fields">Is this a Story?</label>
         <select class="selection_box" v-model="isStory">
           <option disabled value="">Please select one</option>
           <option>Yes</option>
           <option>No</option>
         </select>
 
-        <button v-on:click="addNewArticle">Check</button>
-        <button v-on:click="submit">Confirm</button>
-        <button v-on:click="createArticle = flase">Cancle</button>
+        <button v-on:click="createArticle = false">Cancel</button>
+        <input
+          type="button"
+          name="button"
+          value="Submit"
+          onclick="window.location.replace('/articles')"
+        />
       </form>
     </div>
   </div>
@@ -94,19 +98,20 @@ export default {
   data: function () {
     return {
       articles: null,
-      //button control
 
+      //button control
       showArticle: false,
       createArticle: false,
       //input fields
       id: "",
+      articleID: "",
       title: "",
       source: "",
       content: "",
       country: "",
       isStory: "",
 
-      //Errorm
+      //Error
       titleError: false,
       sourceError: false,
       textError: false,
@@ -118,32 +123,38 @@ export default {
   },
 
   methods: {
+    goBack() {
+      this.showArticle = false;
+      this.createArticle = false;
+    },
+
     listOut() {
       this.showArticle = true;
       this.$axios
         .get("https://unmask.hrithviksood.me/articles/")
         .then(function (response) {
-          this.articles = response.body;
-          console.log(this.articles);
+          console.log(response.data);
         });
     },
 
-    submit() {
+    async submit() {
       //here should be the post() to API
       this.createArticle = false;
-
-      // alert("put to database");
-      // if (this.new_articles != "") {
-      //   $axios.post("https://unmask.hrithviksood.me/articles/"),
-      //     {
-      //       id: this.id,
-      //       title: this.title,
-      //       source: this.source,
-      //       text: this.text,
-      //       country: this.country,
-      //       isStory: this.isStory,
-      //     };
-      // }
+      if (this.new_articles != "") {
+        this.$axios
+          .post("https://unmask.hrithviksood.me/articles/", {
+            id: "11",
+            article_id: "20",
+            title: "New article",
+            source: "this.source",
+            text: "Who will be the next USA president",
+            country: "AU",
+            isStory: this.isStory,
+          })
+          .then(function (response) {
+            console.log(response);
+          });
+      }
     },
 
     addNewArticle() {
