@@ -30,7 +30,7 @@ export const store = new Vuex.Store({
   },
   
   getters: {
-    getArticles: state  => state.test_articles,
+    getArticles: state  => state.articles,
 
   },
   

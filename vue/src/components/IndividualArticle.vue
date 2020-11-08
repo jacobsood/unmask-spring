@@ -9,8 +9,8 @@
       <p class="country"><router-link :to="{ name: 'country', params: { country: slugify(article.country) } }">{{ article.country }}</router-link></p>
       <p class="tags">
         <template v-for="tag in article.tags">
-          <router-link :key="tag" :to="{ name: 'tag', params: { tag: slugify(tag) } }" >
-            <span :key="tag">{{ tag }}</span>
+          <router-link :key="tag.id" :to="{ name: 'tag', params: { tag: slugify(tag.tag) } }" >
+            <span :key="tag.id">{{ tag.tag }}</span>
           </router-link>
         </template>
       </p>
@@ -34,7 +34,7 @@
 
 <script>
 import PollyAudio from './PollyAudio';
-import qs from 'qs'
+//import qs from 'qs'
 export default {
   name: 'IndividualArticle',
   components: {
@@ -76,28 +76,29 @@ export default {
   //     }
   // },
   methods: {
-    async like(){ // method run on like icon click
-      var params = {
-        articleID: this.article.id,
-        username: this.$cookies.get("username")
-      }
+    // async like(){ // method run on like icon click
+    //   var params = {
+    //     articleID: this.article.id,
+    //     username: this.$cookies.get("username")
+    //   }
 
-      var res = await this.$axios.post(
-        "/api/likeArticle",
-        qs.stringify(params)
-      ).then((response)=>{
-        return response.data
-      });
+    //   var res = await this.$axios.post(
+    //     "/api/likeArticle",
+    //     qs.stringify(params)
+    //   ).then((response)=>{
+    //     return response.data
+    //   });
 
-      if (res==true){
-        this.heart=true
-      }else{
-        this.heart=false;
-      }
-    },
+    //   if (res==true){
+    //     this.heart=true
+    //   }else{
+    //     this.heart=false;
+    //   }
+    // },
 
-    slugify(keyword) {
-      return keyword.split(' ').join('-');
+    slugify: function(keyword) {
+      keyword = keyword.replace(" ", "-");
+      return keyword;
     }
   }
 }

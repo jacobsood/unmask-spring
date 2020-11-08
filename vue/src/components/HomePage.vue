@@ -23,13 +23,13 @@
     </div>
 
     <div class="right-side-bar side-bar">
-      <router-link :to="{ name: 'adminAddedArticles', params: { 'createdByAdmin': false } }">
+      <router-link :to="{ name: 'isStory', params: { 'isStory': false } }">
         Stories
       </router-link>
       <router-link :to="{ name: 'landing'}">
         Search
       </router-link>
-      <router-link :to="{ name: 'adminAddedArticles', params: { 'createdByAdmin': true } }">
+      <router-link :to="{ name: 'isStory', params: { 'isStory': true } }">
         Articles
       </router-link>
       <router-link v-if="login" :to="{ name: 'newstory' }">
@@ -103,11 +103,16 @@ export default {
       let countryFilter = this.$route.params.country;
       let authorFilter = this.$route.params.author;
       let searchFilter = this.$route.params.search;
-      let adminAddedFilter = this.$route.params.createdByAdmin;
+      let isStoryFilter = this.$route.params.isStory;
 
       // List articles/stories based on tag
       if (typeof tagFilter !== "undefined")
-        articlesToReturn = _.filter(articles, (article) => article.tags.includes(this.reverseSlug(tagFilter)));
+        articlesToReturn = _.filter(articles, (article) => {
+          for (var i = 0; i < article.tags.length; i++) {
+            if (article.tags[i].tag === this.reverseSlug(tagFilter)) return true;
+          }
+          return false;
+        });
 
       // List articles/stories based on country
       else if (typeof countryFilter !== "undefined")
@@ -135,8 +140,8 @@ export default {
       }
 
       // list articles added by admins, i.e. not stories added by users
-      else if (typeof adminAddedFilter !== "undefined") 
-        articlesToReturn = _.filter(articles, { 'createdByAdmin': adminAddedFilter })
+      else if (typeof isStoryFilter !== "undefined") 
+        articlesToReturn = _.filter(articles, { 'isStory': isStoryFilter })
 
       // Return the relevant articles
       if (typeof articlesToReturn !== "undefined" && articlesToReturn.length !== 0) return articlesToReturn;
