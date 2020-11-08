@@ -26,11 +26,15 @@ body {
 	position: relative;
 	display: flex;
 	display: -webkit-flex;
+	border:1px solid #b30000;
+}
+.form-v7-content:hover  {
+	border:1px solid red;
 }
 .form-v7-content .form-detail {
     padding: 40px 40px 20px;
 	position: relative;
-	width: 70%;
+	width: 80%;
 	background: black;
 	box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
 	-o-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
@@ -156,9 +160,11 @@ body {
 	font-weight: 700;
 	font-size: 15px;
 	float: left;
+	letter-spacing: .2em;
 }
 .form-v7-content .form-detail .register:hover {
 	border-color: red;
+	letter-spacing: .4em;
 }
 .form-v7-content .form-detail .form-row-last {
     margin-top: 35px;
@@ -204,7 +210,7 @@ body {
 	}
 }
 @media screen and (max-width: 767px) {
-	
+
 }
 
 @media screen and (max-width: 575px) {
