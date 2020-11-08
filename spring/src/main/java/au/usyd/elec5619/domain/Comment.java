@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name = "Comment")
@@ -20,6 +21,9 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue
     private long id;
+
+    @ManyToOne
+    private Article article;
 
     @NotNull
     @Column(name="author_id")
