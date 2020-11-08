@@ -8,14 +8,23 @@
     
     <form class="article-form" @submit.prevent="publish">
         <h1 id="page-title">New Story</h1>
-        <label for="new-title">Title</label>
-        <textarea id="new-title" rows="10" v-model="titleData" />
+
+        <label for="input-fields">Title</label>
+        <textarea class="input-fields" rows="10" v-model="titleData" />
+        <label for="input-fields">Auther</label>
+        <textarea class="input-fields" rows="10" v-model="autherData" />
+        <label for="input-fields">Country</label>
+        <textarea class="input-fields" rows="10" v-model="countryData" />
 
         <label for="new-text">Text</label>
         <textarea id="new-text" rows="10" v-model="textData" />
 
-        <label for="new-tag">Tag</label>
-        <textarea id="new-tag" rows="10" v-model="tagData" />
+        <textarea class="new-tag" rows="10" v-for="(tag, index) in tagData" v-model="tag.tagText" :key="index" />
+        <!-- Plus button -->
+        <svg @click="newTagField" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
         <button id="publish-button">Publish</button>
     </form>
   </div>
@@ -29,12 +38,20 @@ export default {
         //variables connected to input fields
       titleData: "",
       textData: "",
-      tagData: ""
+      //Array of tags
+      tagData: [
+          { tagText: "" },
+      ],
+      autherData: "",
+      countryData: ""
     }
   },
   methods: {
     publish(){ //method run on button click
         console.log(this.titleData, this.textData, this.tagData);
+    },
+    newTagField(){
+        this.tagData.push({ tagText: "" });
     }
   },
   computed: {
@@ -86,7 +103,7 @@ header {
     align-items: center;
     justify-content: center;
 }
-#new-title{
+.input-fields{
     background-color: rgb(41, 40, 40);
     width: 40vw;
     max-height: 2vw;
@@ -98,10 +115,11 @@ header {
     min-height: 20vw;
     font-size: 1rem;
 }
-#new-tag {
+.new-tag {
     background-color: rgb(41, 40, 40);
     max-height: 2vw;
     width: 20vw;
+    margin-left: 5vw;
 }
 #publish-button {
     background-color: rgb(41, 40, 40);
