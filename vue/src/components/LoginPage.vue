@@ -119,7 +119,7 @@ import qs from 'qs'
                     });
         },
         signup(){
-            window.location.href="http://localhost:8080/signup"
+            window.location.href="http://unmask.hrithviksood.me/signup"
         },
         backToHome(){
             this.$router.push("/home");
