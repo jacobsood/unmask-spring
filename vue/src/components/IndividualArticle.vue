@@ -4,7 +4,7 @@
       <PollyAudio v-bind:text="article.text"></PollyAudio>
       <div class="info">
         <h1 class=title>{{ article.title }}</h1>
-          <p class="author"><router-link :to="{ name: 'author', params: { author: slugify(article.source) } }">{{ article.source }}</router-link></p>
+        <p class="author"><router-link :to="{ name: 'author', params: { author: slugify(article.source) } }">{{ article.source }}</router-link></p>
       </div>
       <p class="country"><router-link :to="{ name: 'country', params: { country: slugify(article.country) } }">{{ article.country }}</router-link></p>
       <p class="tags">
