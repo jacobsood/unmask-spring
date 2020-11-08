@@ -32,7 +32,7 @@
       <router-link :to="{ name: 'adminAddedArticles', params: { 'createdByAdmin': true } }">
         Articles
       </router-link>
-      <router-link :to="{ name: 'newstory'}">
+      <router-link v-if="login" :to="{ name: 'newstory' }">
         Share
       </router-link>
     </div>
