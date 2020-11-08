@@ -1,7 +1,6 @@
 package au.usyd.elec5619.domain;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -37,9 +36,6 @@ public class Article implements Serializable {
 
     @NotNull
     private String country;
-
-    @Basic
-    private LocalDateTime date;
 
     @OneToMany(mappedBy="article", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Comment> comments;
