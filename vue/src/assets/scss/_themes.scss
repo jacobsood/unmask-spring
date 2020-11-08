@@ -1,37 +1,46 @@
-*[data-theme='dark'] {
-  box-sizing: box-border;
-  margin: 0;
-  padding: 0;
-  color: white;
-  background: black;
-  &::selection {
-    color: red;
+// *[data-theme='dark'] {
+//   box-sizing: box-border;
+//   margin: 0;
+//   padding: 0;
+//   color: white;
+//   background: black;
+//   &::selection {
+//     color: red;
+//   }
+// }
+
+// *[data-theme='light'] {
+//   box-sizing: box-border;
+//   margin: 0;
+//   padding: 0;
+//   color: black;
+//   background: white;
+//   &::selection {
+//     color: blue;
+//   }
+// }
+
+
+$font-small:small; 
+$font-medium:medium;
+$font-large:large;
+
+
+@mixin fontsize(){
+  [data-theme="normal"] & {
+    font-size: medium;
+  }
+  
+  [data-theme="large"] & {
+    font-size: large;
+  }
+  
+  [data-theme="small"] & {
+    font-size: small;
   }
 }
 
-*[data-theme='light'] {
-  box-sizing: box-border;
-  margin: 0;
-  padding: 0;
-  color: black;
-  background: white;
-  &::selection {
-    color: blue;
-  }
-}
 
-*[data-theme='normal']{
-  font-size: medium;
-
-}
-
-*[data-theme='large']{
-  font-size: large;
-}
-
-*[data-theme='small']{
-  font-size: small;
-}
 
 
 body {

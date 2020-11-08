@@ -12,7 +12,9 @@ export default {
 </script>
 
 <style lang='scss'>
+@import "~@/assets/scss/_themes.scss";
 * { 
+  
   box-sizing: box-border;
   margin: 0;
   padding: 0;
@@ -23,6 +25,7 @@ export default {
   }
 }
 body {
+  @include fontsize();
   min-height: 100vh;
   line-height: 1.3;
   font-family: Avenir, Helvetica, Arial, sans-serif;

@@ -5,24 +5,25 @@
 
       <div id="larger-font">
         <label for="switch">Large Font</label>
-        <input type="checkbox" id="fl-switch" name="lfont" v-on:click="switchLargeFont"/>
+        <input type="checkbox" id="fl-switch" :disabled="box1" name="lfont" @click="switchLargeFont($event)"/>
       </div>
 
       <div id="smaller-font">
         <label for="switch">Small Font</label>
-        <input type="checkbox" id="fs-switch" name="sfont" v-on:click="switchSmallFont"/>
+        <input type="checkbox" id="fs-switch" :disabled="box2" name="sfont" @click="switchSmallFont($event)"/>
       </div>
 
       <div id="normal-font">
         <label for="switch">Default Font</label>
-        <input type="checkbox" id="fn-switch" name="nfont" v-on:click="switchDefaultFont"/>
+        <input type="checkbox" id="fn-switch" :disabled="box3" name="nfont"  @click="switchDefaultFont($event)"/>
       </div>
 
       <!-- Theme -->
-      <div id="theme">
+      <!-- <div id="theme">
         <label for="switch">Theme</label>
         <input type="checkbox" id="switch" name="theme" v-on:click="switchTheme"/>
-      </div>
+      </div> -->
+
 
 
     </form>
@@ -42,69 +43,93 @@ export default {
   name: 'PreferencePage',
   data: function() {
     return {
-      submitted: false
+      submitted: false,
+      box1:false,
+      box2:false,
+      box3:false,
+    }
+  },
+  created:function(){
+    let theme = window.document.documentElement.getAttribute('data-theme');
+    console.log(theme)
+    if (theme=="large"){
+        this.box2 = true;
+        this.box3 = true;
+    }else if (theme=="small"){
+        this.box1 = true;
+        this.box3 = true;
+    }else{
+        this.box1 = true;
+        this.box2 = true;
     }
   },
   methods: {
     //font switch
-    switchLargeFont(){
-      let checkbox = document.querySelector('input[name=lfont]');
-
-      checkbox.addEventListener('change', function() {
-        if(this.checked) {
-          trans()
-          document.documentElement.setAttribute('data-theme', 'large');
-
-        } else {
-          trans()
-          document.documentElement.setAttribute('data-theme', 'normal');
-        }
-      })
-
+    switchLargeFont(event){
+      let status = event.target.checked;
       let trans = () => {
-        document.documentElement.classList.add('transition');
+        window.document.documentElement.classList.add('transition');
         window.setTimeout(() => {
-          document.documentElement.classList.remove('transition')
+          window.document.documentElement.classList.remove('transition')
         }, 1000)
       }
+
+      if (status==true){
+        trans()
+        window.document.documentElement.setAttribute('data-theme', 'large');
+        this.box2 = true;
+        this.box3 = true;
+      }else{
+        trans()
+        window.document.documentElement.setAttribute('data-theme', 'normal');
+        this.box2 = false;
+        this.box3 = false;
+      }
+      
     },
-    switchSmallFont(){
-      let checkbox = document.querySelector('input[name=sfont]');
 
-      checkbox.addEventListener('change', function() {
-        if(this.checked) {
-          trans()
-          document.documentElement.setAttribute('data-theme', 'small');
 
-        } else {
-          trans()
-          document.documentElement.setAttribute('data-theme', 'normal');
-        }
-      })
 
+    switchSmallFont(event){
+      let status = event.target.checked;
       let trans = () => {
-        document.documentElement.classList.add('transition');
+        window.document.documentElement.classList.add('transition');
         window.setTimeout(() => {
-          document.documentElement.classList.remove('transition')
+          window.document.documentElement.classList.remove('transition')
         }, 1000)
       }
+
+      if (status==true){
+        trans()
+        window.document.documentElement.setAttribute('data-theme', 'small');
+        this.box1 = true;
+        this.box3 = true;
+      }else{
+        trans()
+        window.document.documentElement.setAttribute('data-theme', 'normal');
+        this.box1 = false;
+        this.box3 = false;
+      }
     },
-    switchDefaultFont(){
-      let checkbox = document.querySelector('input[name=nfont]');
-
-      checkbox.addEventListener('change', function() {
-        if(this.checked) {
-          trans()
-          document.documentElement.setAttribute('data-theme', 'normal');
-
-        }
-      })
-
+    switchDefaultFont(event){
+      let status = event.target.checked;
       let trans = () => {
-        document.documentElement.classList.add('transition');
+        window.document.documentElement.classList.add('transition');
         window.setTimeout(() => {
-          document.documentElement.classList.remove('transition')
+          window.document.documentElement.classList.remove('transition')
         }, 1000)
+      }
+
+      if (status==true){
+        trans()
+        window.document.documentElement.setAttribute('data-theme', 'normal');
+        this.box1 = true;
+        this.box2 = true;
+      }else{
+        trans()
+        window.document.documentElement.setAttribute('data-theme', 'normal');
+        this.box1 = false;
+        this.box2 = false;
       }
     },
     //theme switch
@@ -141,17 +166,20 @@ export default {
 
 <style scoped lang='scss'>
 @import "~@/assets/scss/_typo.scss";
-@import url("//unpkg.com/element-ui@2.0.5/lib/theme-chalk/index.css");
+@import "~@/assets/scss/_themes.scss";
+//@import url("//unpkg.com/element-ui@2.0.5/lib/theme-chalk/index.css");
 // your style goes in here
 // alternative you can create your own scss file and import it like above
-#user-preference *{
+#user-preference{
+
   box-sizing: border-box;
 }
 #user-preference{
   margin: 20px auto;
   max-width: 500px;
 }
-h3{
+h2{
+
   margin-top: 10px;
 }
 label{
