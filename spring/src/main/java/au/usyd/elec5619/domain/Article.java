@@ -28,8 +28,7 @@ public class Article implements Serializable {
     private String source;
 
     @NotNull
-    @Column(name = "is_story")
-    private boolean isStory;
+    private boolean created_by_admin;
 
     @NotNull
     private String text;
@@ -74,7 +73,7 @@ public class Article implements Serializable {
     }
 
     public boolean getIsStory() {
-        return isStory;
+        return created_by_admin;
     }
   
     public String getSource() {
@@ -105,8 +104,8 @@ public class Article implements Serializable {
         this.title = title;
     }
 
-    public void setIsStory(boolean isStory) {
-        this.isStory = isStory;
+    public void setIsStory(boolean created_by_admin) {
+        this.created_by_admin = created_by_admin;
     }
   
     public void setSource(String source) {
