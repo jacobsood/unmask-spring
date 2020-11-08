@@ -41,18 +41,6 @@ public class DatabaseArticleManager implements ArticleManager {
         return this.sessionFactory.getCurrentSession().get(Article.class, id);
     }
 
-    // Many to many relationship
-    @Override
-    public List<Article> getArticlesByTag(String tag) {
-        String hql =
-                    "FROM Article as a " +
-                    "JOIN a.tags AS at " +
-                    "WHERE at.id = :tag";
-        TypedQuery<Article> queryList = this.sessionFactory.getCurrentSession().createQuery(hql, Article.class).setParameter("tag", tag);
-        List<Article> articleList = queryList.getResultList();
-        return articleList;
-    }
-
     @Override
     public List<Article> getArticlesByCountry(String country) {
         String hql = 

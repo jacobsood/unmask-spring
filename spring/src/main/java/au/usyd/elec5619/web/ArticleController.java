@@ -31,11 +31,6 @@ public class ArticleController {
         return articleManager.getArticleById(id);
     }
 
-    @GetMapping(value = "/tag/{tag}")
-    public List<Article> getArticlesByTag(@PathVariable("tag") String tag) {
-        return articleManager.getArticlesByTag(tag);
-    }
-
     @GetMapping(value = "/country/{country}")
     public List<Article> getArticlesByCountry(@PathVariable("country") String country) {
         return articleManager.getArticlesByCountry(country);
