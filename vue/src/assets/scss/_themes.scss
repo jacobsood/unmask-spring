@@ -20,6 +20,20 @@
   }
 }
 
+*[data-theme='normal']{
+  font-size: medium;
+
+}
+
+*[data-theme='large']{
+  font-size: large;
+}
+
+*[data-theme='small']{
+  font-size: small;
+}
+
+
 body {
   min-height: 100vh;
   line-height: 1.3;
