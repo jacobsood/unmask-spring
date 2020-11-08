@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.persistence.Id;
 
 @Entity
@@ -18,53 +19,44 @@ public class Comment implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name="comment_id")
-    private long commentID;
+    private long id;
 
-    @Column(name="article_id")
-    private long articleID;
-
+    @NotNull
     @Column(name="author_id")
-    private long authorID;
+    private long authorId;
 
-    @Column(name="comment_content")
-    private String commentContent;
+    @NotNull
+    private String text;
 
-    @Column(name="up_vote_count")
-    private int upVoteCount;
+    @NotNull
+    private int votes;
 
-    public long getCommentID() {
-        return commentID;
+    public long getId() {
+        return id;
     }
-    public void setCommentID(long commentID) {
-        this.commentID = commentID;
-    }
-
-    public long getArticleID() {
-        return articleID;
-    }
-    public void setArticleID(long articleID) {
-        this.articleID = articleID;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public long getAuthorID() {
-        return authorID;
-    }
-    public void setAuthorID(long authorID) {
-        this.authorID = authorID;
+    public long getAuthorId() {
+        return authorId;
     }
 
-    public String getCommentContent() {
-        return commentContent;
-    }
-    public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent;
+    public void setAuthorId(long authorId) {
+        this.authorId = authorId;
     }
 
-    public int getUpVoteCount() {
-        return upVoteCount;
+    public String getText() {
+        return text;
     }
-    public void setUpVoteCount(int upVoteCount) {
-        this.upVoteCount = upVoteCount;
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+    public void setVotes(int votes) {
+        this.votes = votes;
     }
 }

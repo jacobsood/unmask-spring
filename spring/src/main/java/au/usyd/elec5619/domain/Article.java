@@ -42,6 +42,9 @@ public class Article implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date = new Date();
 
+    @OneToMany(mappedBy="article")
+    private Set<Comment> comments;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
     @JoinTable(
         name = "article_tag",
