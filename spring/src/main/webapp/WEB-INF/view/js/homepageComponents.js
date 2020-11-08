@@ -4,7 +4,7 @@ window.onload = function(){
     document.getElementById("profileButton").onclick = function(){
         var historylist = null
         $.ajax({
-            url : "/historylist",
+            url : "./historylist",
             type : "get",
             dataType:"json",
             async : false,
@@ -36,7 +36,7 @@ window.onload = function(){
 
         var likelist = null
         $.ajax({
-            url : "/likelist",
+            url : "./likelist",
             type : "post",
             dataType:"json",
             async : false,
@@ -72,7 +72,7 @@ window.onload = function(){
         var articleID = document.getElementById("articleID").innerText;
         var status = null;
         $.ajax({
-            url : "/likeArticle",
+            url : "./likeArticle",
             data: {
                 "articleID":articleID,
                 "username":$.cookie('username'),
@@ -102,7 +102,7 @@ window.onload = function(){
         let articleID = document.getElementById("articleID").innerText;
         let status = null;
         $.ajax({
-            url : "/checkLikeStatus",
+            url : "./checkLikeStatus",
             data: {
                 "articleID":articleID,
                 "username":$.cookie('username'),
@@ -208,7 +208,7 @@ resetform.addEventListener("submit", function(ev) {
     /*initiate the status of old password*/
     var status = true;
     $.ajax({
-        url : '/checkOldPassword',
+        url : './checkOldPassword',
         type : "post",
         data : {
             "username": $.cookie('username'),
@@ -257,7 +257,7 @@ for (var i = 0; i < resetInputs.length; ++i) {
         var component = this;
         if (this.id=="oldPassword"){
             $.ajax({
-                url : '/checkOldPassword',
+                url : './checkOldPassword',
                 type : "post",
                 data : {
                     "username": $.cookie('username'),
@@ -336,7 +336,7 @@ function addError(messages, error) {
 /*Check login status(200:success)*/
 function getLoginStatus() {
     $.ajax({
-        url : '/login',
+        url : './login',
         type : "post",
         data : {
             "username":$("#username").val(),
@@ -369,7 +369,7 @@ function getLoginStatus() {
 /*reset password*/
 function resetPassword() {
     $.ajax({
-        url : '/setNewPassword',
+        url : './setNewPassword',
         type : "post",
         data : {
             "username": $.cookie('username'),
@@ -394,7 +394,7 @@ function resetPassword() {
 document.getElementById("detailedHistoryTrigger").onclick = function () {
     var historylist = null
     $.ajax({
-        url : "/detailedHistoryList",
+        url : "./detailedHistoryList",
         type : "post",
         dataType:"json",
         async : false,
@@ -428,7 +428,7 @@ document.getElementById("detailedHistoryTrigger").onclick = function () {
 document.getElementById("detailedLikesTrigger").onclick = function () {
     var likelist = null
     $.ajax({
-        url : "/detailedLikeList",
+        url : "./detailedLikeList",
         type : "post",
         dataType:"json",
         async : false,
