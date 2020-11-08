@@ -1,15 +1,12 @@
 package au.usyd.elec5619.domain;
 
-import org.hibernate.annotations.Cascade;
-
 import java.io.Serializable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,26 +25,32 @@ public class Article implements Serializable {
     @NotNull
     private String title;
 
+    @NotNull
     private String source;
 
     @NotNull
-    @Column(name = "created_by_admin")
-    private boolean createdByAdmin;
+    @Column(name = "is_story")
+    private boolean isStory;
 
     @NotNull
     private String text;
 
+    @NotNull
     private String country;
 
-    @ManyToMany
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date = new Date();
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
     @JoinTable(
         name = "article_tag",
         joinColumns = @JoinColumn(name = "article_id"),
         inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-    private List<Tag> tags;
+    private Set<Tag> tags = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
     @JoinTable(
             name = "UserFavourite",
             joinColumns = @JoinColumn(name = "article_id"),
@@ -55,7 +58,7 @@ public class Article implements Serializable {
     )
     private Set<User> favouritedBy = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL}) // to avoid no session error
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }) // to avoid no session error
     @JoinTable(
             name = "UserHistory",
             joinColumns = @JoinColumn(name = "article_id"),
@@ -63,8 +66,6 @@ public class Article implements Serializable {
 
     )
     private Set<User> viewedBy = new HashSet<>();
-
-
 
     public long getId() {
         return id;
@@ -74,8 +75,8 @@ public class Article implements Serializable {
         return title;
     }
 
-    public boolean getCreatedByAdmin() {
-        return createdByAdmin;
+    public boolean getIsStory() {
+        return isStory;
     }
   
     public String getSource() {
@@ -94,7 +95,7 @@ public class Article implements Serializable {
         return  viewedBy;
     }
 
-    public List<Tag> getTags() {
+    public Set<Tag> getTags() {
         return tags;
     }
 
@@ -106,8 +107,8 @@ public class Article implements Serializable {
         this.title = title;
     }
 
-    public void setCreatedByAdmin(boolean createdByAdmin) {
-        this.createdByAdmin = createdByAdmin;
+    public void setIsStory(boolean isStory) {
+        this.isStory = isStory;
     }
   
     public void setSource(String source) {
@@ -122,7 +123,7 @@ public class Article implements Serializable {
         this.country = country;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
 
@@ -141,13 +142,10 @@ public class Article implements Serializable {
 
     @Override
     public int hashCode() {
-        // TODO Auto-generated method stub
-        //return name.hashCode();
         return (int) id;
     }
     @Override
     public boolean equals(Object obj) {
-        // TODO Auto-generated method stub
         if(obj instanceof Article) {
             Article article = (Article) obj;
             if(this.id == article.id) {
