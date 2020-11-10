@@ -26,13 +26,14 @@
 
 <script>
 module.exports = {
+    name: "Comments",
     data: function () {
         return {
-            currentComment: {id:0, authorName:'Author 1', content:'comment 1'},
+            currentComment: {id:0, authorName:'Dennis', content:'Hey guys, nice article!'},
             commentList:[
-                {id:0, authorName:'Author 1', content:'comment 1'},
-                {id:1, authorName:'Author 2', content:'comment 2'},
-                {id:2, authorName:'Author 3', content:'comment 3'},
+                {id:0, authorName:'Dennis', content:'Hey guys, nice article!'},
+                {id:1, authorName:'Michael', content:'I seen this before'},
+                {id:2, authorName:'Joanna', content:'People shoud know more about!'},
             ],
         }
     },

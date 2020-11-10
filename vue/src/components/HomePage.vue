@@ -6,7 +6,7 @@
       </router-link>
     </header>
     <div class="left-side-bar side-bar" v-if="login">
-      <router-link :to="{ name: 'landing'}">
+      <router-link :to="{ name: 'preference'}">
         Preference
       </router-link>
       <router-link :to="{ name: 'favourite'}"> 
@@ -26,7 +26,7 @@
       <router-link :to="{ name: 'isStory', params: { 'isStory': false } }">
         Stories
       </router-link>
-      <router-link :to="{ name: 'landing'}">
+      <router-link :to="{ name: 'search'}">
         Search
       </router-link>
       <router-link :to="{ name: 'isStory', params: { 'isStory': true } }">
